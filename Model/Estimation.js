@@ -15,11 +15,11 @@ var schema = new Schema({
     },
     sections: [
         {
-            number: Number,
+            number: String,
             name:String,
             subSections: [
                 {
-                    subNum : Number,
+                    subNum : String,
                     descr : String,
                     estimation: {
                             DB: Number,

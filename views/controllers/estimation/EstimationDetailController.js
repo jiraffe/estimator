@@ -89,9 +89,9 @@ angular.module('estimator')
 
             function recalcSections() {
                 $scope.estimation.sections.forEach(function (el, idx) {
-                    el.number = idx + 1;
+                    el.number = idx + 1 + "";
                     el.subSections.forEach(function (subEl, subIdx) {
-                        subEl.subNum = el.number + (subIdx + 1) * 0.1;
+                        subEl.subNum = el.number + "." + (subIdx + 1);
                     });
                 });
             };
@@ -164,7 +164,7 @@ angular.module('estimator')
                     var sectionNum = item.$parent.section.number - 1;
                     var subSectionNum = item.sub.subNum * 10 % 10;
 
-                    $scope.estimation.sections[sectionNum].subSections.splice(subSectionNum, 1);
+                    $scope.estimation.sections[sectionNum].subSections.splice(subSectionNum - 1, 1);
 
                     recalcSections();
                 }]
