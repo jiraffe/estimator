@@ -1,0 +1,23 @@
+
+<a ui-sref="addProject" role="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-plus"></span></a>
+
+<div class="row">
+    <div class="col-sm-6 col-md-4" ng-repeat="project in projects">
+        <button type="button" class="close"
+                confirm-popup
+                confirm-title="Подтвердите удаление"
+                confirm-text="Подтвердите удаление проекта {{project.key}}"
+                confirm-button="Удалить"
+                cancel-button="Отмена"
+                confirm-method="delete(project.key)">
+            <span aria-hidden="true" uib-tooltip="Удалить" uib-tooltip-placement="left" >&times;</span>
+            <span class="sr-only">Delete</span>
+        </button>
+        <a ui-sref="projectEstimations({key: project.key})" class="thumbnail">
+            <div class="caption">
+                <h2>{{project.key}}</h2>
+                <h4>{{project.name}}</h4>
+            </div>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+.est-table {
+    width: 100%;
+}
+
+.est-table tr {
+    height: 2em;
+}
+
+.est-table-row {
+
+}
+
+.estimation-name {
+    color: white;
+    background-color: #0C343D;
+    height: 3em;
+}
+
+.estimation-name th {
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bold;
+}
+
+.estimation-header {
+    color: white;
+    background-color: #38761D;
+    height: 2em;
+}
+
+.estimation-header th {
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bold;
+}

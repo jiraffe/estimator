@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Estimator</title>
+
+        <base href="/">
+
+        <link rel="stylesheet" media="all" href="libs/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" media="all" href="libs/bootstrap/dist/css/bootstrap-theme.css">
+        <link rel="stylesheet" media="all" href="styles/growl.min.css">
+        <link rel="stylesheet" media="all" href="styles/main.css">
+        <link rel="stylesheet" media="all" href="styles/estimationTable.css">
+        <link rel="stylesheet" media="all" href="libs/angular-bootstrap/ui-bootstrap-csp.css">
+
+        <script src="libs/angular/angular.js"></script>
+        <script src="libs/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script src="libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="libs/angular-bootstrap-contextmenu/contextMenu.js"></script>
+        <script src="libs/angular-cookies/angular-cookies.min.js"></script>
+        <script src="libs/jquery/dist/jquery.min.js"></script>
+        <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="libs/jquery.printElement.js"></script>
+
+        <!-- main -->
+        <script src="app.js"></script>
+        <script src="routes.js"></script>
+
+        <!-- directives -->
+        <script src="directives/growl.js"></script>
+        <script src="directives/confirmPopup.js"></script>
+        <script src="directives/contenteditable.js"></script>
+
+
+        <!-- controllers -->
+
+        <!-- estimations -->
+        <script src="controllers/MainController.js"></script>
+        <script src="controllers/estimation/EstimationsController.js"></script>
+        <script src="controllers/estimation/EstimationDetailController.js"></script>
+        <script src="controllers/estimation/EstimationAddController.js"></script>
+
+        <!-- projects -->
+        <script src="controllers/project/ProjectsController.js"></script>
+        <script src="controllers/project/ProjectEstimationsController.js"></script>
+        <script src="controllers/project/ProjectAddController.js"></script>
+
+        <!-- services -->
+        <script src="services/StorageService.js"></script>
+        <script src="services/BroadcastService.js"></script>
+        <script src="services/StatusService.js"></script>
+
+
+
+    </head>
+    <body ng-app="estimator">
+        <div ui-view=''></div>
+        <growl style="default"></growl>
+    </body>
+</html>

@@ -1,0 +1,69 @@
+
+/* DivTable.com */
+.divTable{
+    display: table;
+    width: 100%;
+    font-family: arial, sans-serif;
+    font-size: 13px;
+}
+.divTableRow {
+    display: table-row;
+    width: inherit;
+}
+.divTableHeading {
+    background-color: #EEE;
+    display: table-header-group;
+}
+.divTableCell, .divTableHead {
+    border: 1px solid #DADADA;
+    display: table-cell;
+    padding: 3px 10px;
+}
+.divTableFoot {
+    background-color: white;
+    display: table-footer-group;
+}
+.divTableBody {
+    display: table-row-group;
+}
+.divTableRowGroup {
+
+}
+.divTableHead {
+    background-color: #38761D;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    color: white;
+}
+.summary {
+    background-color: #0C343D;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    color: white;
+    height: 40px;
+}
+.section {
+    background-color: #ff9900;
+    font-weight: bold;
+    color: white;
+}
+.divEstimation {
+    background-color: #b45f06;
+    font-weight: bold;
+    color: white;
+}
+.sectionNumber {
+    width: 58px;
+}
+.estVal {
+    width: 50px;
+}
+.floatRight {
+    text-align: right;
+}
+
+@media print {
+    .divTableHead,.summary{text-align:center;vertical-align:middle}.divEstimation,.divTableHead,.section,.summary{font-weight:700;color:#fff}.divTable{display:table;width:100%;font-family:arial,sans-serif;font-size:13px}.divTableRow{display:table-row;width:inherit}.divTableHeading{background-color:#EEE;display:table-header-group}.divTableCell,.divTableHead{border:1px solid #DADADA;display:table-cell;padding:3px 10px}.divTableFoot{background-color:#fff;display:table-footer-group}.divTableBody{display:table-row-group}.divTableHead{background-color:#38761D}.summary{background-color:#0C343D;height:40px}.section{background-color:#f90}.divEstimation{background-color:#b45f06}.sectionNumber{width:58px}.estVal{width:50px}.floatRight{text-align:right}
+}

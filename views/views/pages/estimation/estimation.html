@@ -1,0 +1,99 @@
+
+
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="estimation.status" uib-btn-radio="'NEW'" ng-click="changeStatus()">Новая</label>
+        <label class="btn btn-primary" ng-model="estimation.status" uib-btn-radio="'InProgress'" ng-click="changeStatus()">В работе</label>
+        <label class="btn btn-primary" ng-model="estimation.status" uib-btn-radio="'Questions'" ng-click="changeStatus()">Есть вопросы</label>
+        <label class="btn btn-primary" ng-model="estimation.status" uib-btn-radio="'Done'" ng-click="changeStatus()">Готово</label>
+        <label class="btn btn-primary" ng-model="estimation.status" uib-btn-radio="'Sent'" ng-click="changeStatus()">Выслано</label>
+        <label class="btn btn-primary" ng-model="estimation.status" uib-btn-radio="'Approved'" ng-click="changeStatus()">Согласовано</label>
+    </div>
+<div id="estimation">
+    <div class="divTableRow" style="display: table; width: 100%;">
+        <div class="divTableCell summary">{{estimation.summary}}</div>
+    </div>
+    <div class="divTable">
+        <div class="divTableHeading">
+            <div class="divTableRow" context-menu="sectionMenu">
+                <div class="divTableHead sectionNumber">№П</div>
+                <div class="divTableHead sectionNumber">№П/П</div>
+                <div class="divTableHead">Описание</div>
+                <div class="divTableHead estVal">DB</div>
+                <div class="divTableHead estVal">Java</div>
+                <div class="divTableHead estVal">UI</div>
+                <div class="divTableHead estVal">Total</div>
+            </div>
+            <div class="divTableRow divEstimation" context-menu="sectionMenu">
+                <div class="divTableCell"></div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">Анализ и оценка</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell" contenteditable="true" type="number" ng-model="estimation.estimationTime"></div>
+            </div>
+        </div>
+        <div class="divTableBody" ng-repeat="section in estimation.sections">
+            <div class="divTableRow" context-menu="sectionMenu">
+                <div class="divTableCell section sectionNumber">{{section.number}}</div>
+                <div class="divTableCell section sectionNumber">&nbsp;</div>
+                <div class="divTableCell section" contenteditable="true" type="text" ng-model="section.name"></div>
+                <div class="divTableCell section">&nbsp;</div>
+                <div class="divTableCell section estVal">&nbsp;</div>
+                <div class="divTableCell section estVal">&nbsp;</div>
+                <div class="divTableCell section estVal">{{section.total()}}</div>
+            </div>
+            <div class="divTableRow" ng-repeat="sub in section.subSections" context-menu="subSectionMenu">
+                <div class="divTableCell subSection sectionNumber"></div>
+                <div class="divTableCell subSection sectionNumber">{{sub.subNum}}</div>
+                <div class="divTableCell subSection" contenteditable="true" ng-model="sub.descr"></div>
+                <div class="divTableCell subSection estVal" contenteditable="true" type="number" ng-model="sub.estimation.DB" ng-model-setter="convertToNum($value)"></div>
+                <div class="divTableCell subSection estVal" contenteditable="true" type="number" ng-model="sub.estimation.Java"></div>
+                <div class="divTableCell subSection estVal" contenteditable="true" type="number" ng-model="sub.estimation.UI"></div>
+                <div class="divTableCell subSection estVal">{{sub.total()}}</div>
+            </div>
+        </div>
+
+
+        <div class="divTableFoot">
+            <div class="divTableRow"  context-menu="sectionMenu">
+                <div class="divTableCell section sectionNumber">{{estimation.sections.length + 1}}</div>
+                <div class="divTableCell section sectionNumber">&nbsp;</div>
+                <div class="divTableCell section">Иное</div>
+                <div class="divTableCell section ">&nbsp;</div>
+                <div class="divTableCell section estVal">&nbsp;</div>
+                <div class="divTableCell section estVal">&nbsp;</div>
+                <div class="divTableCell section estVal">{{estimation.stabilization + estimation.coordination}}</div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">{{(estimation.sections.length + 1) + ".1"}}</div>
+                <div class="divTableCell">Стабилизация</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell" contenteditable="true" type="number" ng-model="estimation.stabilization"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">{{(estimation.sections.length + 1) + ".2"}}</div>
+                <div class="divTableCell">Координация</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell" contenteditable="true" type="number" ng-model="estimation.coordination"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableHead sectionNumber">&nbsp;</div>
+                <div class="divTableHead sectionNumber">&nbsp;</div>
+                <div class="divTableHead floatRight">Итого</div>
+                <div class="divTableHead estVal">&nbsp;</div>
+                <div class="divTableHead estVal">&nbsp;</div>
+                <div class="divTableHead estVal">&nbsp;</div>
+                <div class="divTableHead estVal">{{estimation.total()}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+    <button ng-click="save()" class="btn btn-success btn-xs">Save</button>
+    <button id="printBtn" ng-click="print()" class="btn btn-success btn-xs">Print</button>

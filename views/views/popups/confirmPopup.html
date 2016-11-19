@@ -1,0 +1,18 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" ng-click="$close();">
+		<span aria-hidden="true" tooltip="Закрыть" tooltip-placement="left" >&times;</span>
+		<span class="sr-only">Close</span>
+	</button>
+	<div class="heading">
+		<h4>{{params.confirmTitle}}</h4>
+	</div>
+</div>
+<div class="modal-body">
+	<div class="confirm_text">{{params.confirmText}}</div>
+</div>
+<div class="modal-footer">
+	<div class="inline pull-right" tooltip="{{params.reasonDisabled}}" tooltip-placement='left' tooltip-enable="{{params.isDisabled}}">
+		<button ng-click="submit();" class="btn btn-default" ng-disabled="{{params.isDisabled}}" >{{buttons.confirmButton}}</button>
+		<button ng-click="cancel();" class="btn btn-primary">{{buttons.cancelButton}}</button>
+	</div>
+</div>
