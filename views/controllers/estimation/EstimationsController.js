@@ -6,14 +6,14 @@
 angular.module('estimator')
     .controller('EstimationsController',
 
-        function($scope, $state, $http, $growl, StatusService) {
+        function($scope, $state, $http, $growl, statuses) {
 
             $scope.params = angular.copy($state.params);
             $scope.projectKey = 'none';
             $scope.estimations = [];
             $scope.filtrations = ['Все'];
             $scope.filter = '';
-            $scope.statuses = StatusService.statuses;
+            $scope.statuses = statuses;
 
             $scope.statusFilter = function(data) {
                 return true;

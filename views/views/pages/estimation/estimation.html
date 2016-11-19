@@ -1,12 +1,12 @@
 
 
     <div class="btn-group">
-        <label class="btn btn-primary" ng-model="estimation.status" uib-btn-radio="'NEW'" ng-click="changeStatus()">Новая</label>
-        <label class="btn btn-primary" ng-model="estimation.status" uib-btn-radio="'InProgress'" ng-click="changeStatus()">В работе</label>
-        <label class="btn btn-primary" ng-model="estimation.status" uib-btn-radio="'Questions'" ng-click="changeStatus()">Есть вопросы</label>
-        <label class="btn btn-primary" ng-model="estimation.status" uib-btn-radio="'Done'" ng-click="changeStatus()">Готово</label>
-        <label class="btn btn-primary" ng-model="estimation.status" uib-btn-radio="'Sent'" ng-click="changeStatus()">Выслано</label>
-        <label class="btn btn-primary" ng-model="estimation.status" uib-btn-radio="'Approved'" ng-click="changeStatus()">Согласовано</label>
+        <label
+                ng-repeat="status in statuses"
+                class="btn btn-primary"
+                ng-model="estimation.status"
+                uib-btn-radio="{{status}}" ng-click="changeStatus()"
+        >{{status.value}}</label>
     </div>
 <div id="estimation">
     <div class="divTableRow" style="display: table; width: 100%;">

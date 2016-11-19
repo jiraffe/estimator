@@ -13,11 +13,13 @@ angular.module('estimator')
         'BroadcastService',
         '$stateParams',
         '$growl',
+        'statuses',
 
-        function ($scope, $state, $http, StorageService, BroadcastService, $stateParams, $growl) {
+        function ($scope, $state, $http, StorageService, BroadcastService, $stateParams, $growl, statuses) {
 
             $scope.params = angular.copy($state.params);
             $scope.estimation = {};
+            $scope.statuses = statuses;
 
             function init() {
                 getEstimation();

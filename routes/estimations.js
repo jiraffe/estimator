@@ -17,30 +17,37 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/statuses', function (req, res, next) {
+
    res.json([
        {
            name: 'NEW',
-           value: 'новая'
+           value: 'новая',
+           style: 'default'
        },
        {
            name: 'InProgress',
-           value: 'В работе'
+           value: 'В работе',
+           style: 'primary'
        },
        {
            name: 'Questions',
-           value: 'Есть вопросы'
+           value: 'Есть вопросы',
+           style: 'warning'
        },
        {
            name: 'Done',
-           value: 'Готова'
+           value: 'Готова',
+           style: 'info'
        },
        {
            name: 'Sent',
-           value: 'Выслана'
+           value: 'Выслана',
+           style: 'danger'
        },
        {
            name: 'Approved',
-           value: 'Согласована'
+           value: 'Согласована',
+           style: 'success'
        }
    ]);
 });

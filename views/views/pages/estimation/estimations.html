@@ -13,8 +13,6 @@
         </select>
     </div>
 
-    {{statuses}}
-
     <table class="table table-hover" ng-show="estimations.length > 0">
         <thead>
             <tr>
@@ -30,12 +28,7 @@
                 <td><a ui-sref="estimation({key: est.key})">{{est.key}}</a></td>
                 <td>{{est.summary}}</td>
                 <td>
-                    <span ng-if="est.status === 'NEW'" class="label label-default">Новая</span>
-                    <span ng-if="est.status === 'InProgress'" class="label label-primary">В работе</span>
-                    <span ng-if="est.status === 'Questions'" class="label label-warning">Есть вопросы</span>
-                    <span ng-if="est.status === 'Done'" class="label label-info">Готово</span>
-                    <span ng-if="est.status === 'Sent'" class="label label-danger">Выслано</span>
-                    <span ng-if="est.status === 'Approved'" class="label label-success">Согласовано</span>
+                    <span class="label label-warning">{{est.status.value}}</span>
                 </td>
                 <td><a ng-if="est.projectKey !== 'none'" ui-sref="projectEstimations({key: est.projectKey})">{{est.projectKey}}</a></td>
                 <td>

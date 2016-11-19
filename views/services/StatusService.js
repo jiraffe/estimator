@@ -8,8 +8,9 @@ angular.module('estimator')
 
             var statuses = [];
 
-            var promise = $http({method:'POST', url:'estimations/statuses'}).then(function (data) {
-                statuses = data;
+            var promise = $http({method:'GET', url:'estimations/statuses'}).then(function (res) {
+                statuses = res.data;
+                return res.data;
             });
 
             return {

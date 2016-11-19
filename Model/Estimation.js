@@ -8,7 +8,11 @@ var schema = new Schema({
     summary: String,
     estimationTime: Number,
     projectKey: String,
-    status: String, // NEW, InProgress, Questions, Done, Sent, Approved
+    status: {
+        name: String,
+        value: String,
+        style: String
+    },
     sections: [
         {
             number: Number,

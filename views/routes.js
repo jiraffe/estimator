@@ -34,8 +34,7 @@ app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
             .state('estimations', {
                 parent: 'base',
                 resolve: {
-                    'StatusServiceData': function (StatusService) {
-                        console.log(StatusService.statuses);
+                    'statuses': function (StatusService) {
                         return StatusService.promise;
                     }
                 },
@@ -53,6 +52,11 @@ app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
                 templateUrl: 'views/pages/estimation/estimation.html',
                 data: {
                     title: 'Оценка'
+                },
+                resolve: {
+                    'statuses': function (StatusService) {
+                        return StatusService.promise;
+                    }
                 }
             })
             .state('projects', {
