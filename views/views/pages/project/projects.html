@@ -10,9 +10,13 @@
                 confirm-button="Удалить"
                 cancel-button="Отмена"
                 confirm-method="delete(project.key)">
-            <span aria-hidden="true" uib-tooltip="Удалить" uib-tooltip-placement="left" >&times;</span>
+            <span uib-tooltip="Удалить" uib-tooltip-placement="left" class="glyphicon glyphicon-remove"></span>
             <span class="sr-only">Delete</span>
         </button>
+        <a ui-sref="editProject({key: project.key})" class="close">
+            <span uib-tooltip="Редактировать" uib-tooltip-placement="left" class="glyphicon glyphicon-pencil"></span>
+            <span class="sr-only">Edit</span>
+        </a>
         <a ui-sref="projectEstimations({key: project.key})" class="thumbnail">
             <div class="caption">
                 <h2>{{project.key}}</h2>

@@ -86,5 +86,14 @@ app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
                     title: 'Создать проект'
                 }
             })
+            .state('editProject', {
+                parent: 'base',
+                url: '/project/edit/:key',
+                controller: 'ProjectAddController',
+                templateUrl: 'views/pages/project/projectAdd.html',
+                data: {
+                    title: 'Редактировать проект'
+                }
+        })
     }
 );

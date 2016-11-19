@@ -15,6 +15,7 @@ angular.module('estimator')
 
             $scope.params = angular.copy($state.params);
             $scope.project = {};
+            $scope.projectKey = $scope.params.key;
 
             $scope.add = function () {
                 $http({
@@ -25,7 +26,21 @@ angular.module('estimator')
                     $growl.addMessage('Success', 'Проект добавлен', 'success');
                     $state.go('projects');
                 });
+            };
+
+            function initEditProject() {
+                $http.get('projects/' + $scope.projectKey)
+                    .success(function (res) {
+                        $scope.project = res[0];
+                    });
             }
+
+            function init() {
+                if($scope.projectKey !== '') {
+                    initEditProject();
+                }
+            }
+            init();
         }
 
     ]);

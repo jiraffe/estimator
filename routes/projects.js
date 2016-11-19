@@ -19,6 +19,18 @@ router.get("/", function (req, res, next) {
     });
 });
 
+router.get("/:key", function (req, res, next) {
+
+    Project.find({key: req.params.key}, function (err, projects) {
+
+        if(err) {
+            res.status(500).send("Couldn't get projects! \r\n" + err);
+        } else {
+            res.json(projects);
+        }
+    });
+});
+
 router.get("/estimations/:key", function (req, res, next) {
 
     Estimation.find({projectKey: req.params.key}, function (err, estimations) {
