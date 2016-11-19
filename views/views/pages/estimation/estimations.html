@@ -30,7 +30,10 @@
         </thead>
         <tbody>
             <tr ng-repeat="est in estimations | filter: statusFilter">
-                <td><a ui-sref="estimation({key: est.key})">{{est.key}}</a></td>
+                <td>
+                    <a ng-if="est.projectKey === 'none'" ui-sref="estimation({key: est.key})">{{est.key}}</a>
+                    <a ng-if="est.projectKey !== 'none'" ui-sref="projectEstimation({key: est.key, projectKey: projectKey})">{{est.key}}</a>
+                </td>
                 <td>{{est.summary}}</td>
                 <td>
                     <span class="label label-{{est.status.style}}">{{est.status.value}}</span>

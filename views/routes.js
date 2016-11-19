@@ -51,7 +51,23 @@ app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
                 controller: 'EstimationDetailController',
                 templateUrl: 'views/pages/estimation/estimation.html',
                 data: {
-                    title: 'Оценка'
+                    title: 'Оценка',
+                    // projectKey: $scope.projectKey
+                },
+                resolve: {
+                    'statuses': function (StatusService) {
+                        return StatusService.promise;
+                    }
+                }
+            })
+            .state('projectEstimation', {
+                parent: 'base',
+                url: 'project/:projectKey/estimation/:key',
+                controller: 'EstimationDetailController',
+                templateUrl: 'views/pages/estimation/estimation.html',
+                data: {
+                    title: 'Оценка',
+                    // projectKey: $scope.projectKey
                 },
                 resolve: {
                     'statuses': function (StatusService) {

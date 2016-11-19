@@ -21,6 +21,8 @@ angular.module('estimator')
             $scope.estimation = {};
             $scope.statuses = statuses;
 
+            console.log($scope.params);
+
             function init() {
                 getEstimation();
             }
@@ -111,7 +113,11 @@ angular.module('estimator')
                     data: $scope.estimation
                 }).success(function (res) {
                     $growl.addMessage('Success', 'Эстимация сохранена', 'success');
-                    $state.go('estimations');
+                    if($scope.params.projectKey) {
+                        $state.go('projectEstimations', {key: $scope.params.projectKey});
+                    } else {
+                        $state.go('estimations');
+                    }
                 });
             };
 
