@@ -11,12 +11,20 @@ angular.module('estimator')
             $scope.params = angular.copy($state.params);
             $scope.projectKey = 'none';
             $scope.estimations = [];
-            $scope.filtrations = ['Все'];
-            $scope.filter = '';
+            $scope.filtrations = [{
+                value: 'Все',
+                name: 'all'
+            }];
+            $scope.filter = $scope.filtrations[0];
             $scope.statuses = statuses;
 
             $scope.statusFilter = function(data) {
-                return true;
+                if($scope.filter.name === 'all') return true;
+                else if($scope.filter.name === data.status.name) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
             function init() {
@@ -46,12 +54,10 @@ angular.module('estimator')
 
             function prepareFiltrations() {
                 $scope.estimations.forEach(function (est) {
-                    console.log($scope.filtrations, est.status, $scope.filtrations.indexOf(est.status) === -1);
                     if( $scope.filtrations.indexOf(est.status) === -1 ) {
                         $scope.filtrations.push(est.status);
                     }
-
-                })
+                });
             }
         }
     );

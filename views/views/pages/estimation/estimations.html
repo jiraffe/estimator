@@ -7,11 +7,16 @@
         Нет оценок
     </div>
 
-    <div>
-        <span>Статус:</span>
-        <select ng-model="filter" ng-options="item for item in filtrations">
-        </select>
-    </div>
+        <label class="col-md-1 control-label" for="status"> Статус: </label>
+        <div class="col-md-2">
+            <select
+                    ng-model="filter"
+                    ng-options="item.value for item in filtrations"
+                    name="status"
+                    id="status"
+                    class="form-control"
+            ></select>
+        </div>
 
     <table class="table table-hover" ng-show="estimations.length > 0">
         <thead>
@@ -24,11 +29,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="est in estimations | filter : statusFilter">
+            <tr ng-repeat="est in estimations | filter: statusFilter">
                 <td><a ui-sref="estimation({key: est.key})">{{est.key}}</a></td>
                 <td>{{est.summary}}</td>
                 <td>
-                    <span class="label label-warning">{{est.status.value}}</span>
+                    <span class="label label-{{est.status.style}}">{{est.status.value}}</span>
                 </td>
                 <td><a ng-if="est.projectKey !== 'none'" ui-sref="projectEstimations({key: est.projectKey})">{{est.projectKey}}</a></td>
                 <td>

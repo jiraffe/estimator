@@ -16,7 +16,11 @@ angular.module('estimator')
             $scope.params = angular.copy($state.params);
             $scope.estimation = {
                 projectKey: $scope.params.projectKey,
-                status: 'NEW'
+                status: {
+                    name: 'NEW',
+                    value: 'новая',
+                    style: 'default'
+                }
             };
 
             $scope.add = function () {
