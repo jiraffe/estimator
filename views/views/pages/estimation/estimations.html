@@ -1,66 +1,90 @@
-<div >
+<div>
 
-    <a ng-if="projectKey === none" ui-sref="addEstimation({projectKey:projectKey})" role="button" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-plus"></span></a>
-    <a ui-sref="addEstimation({projectKey: projectKey})" role="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-plus"></span></a>
+    <a ng-if="projectKey === none" ui-sref="addEstimation({projectKey:projectKey})" role="button"
+       class="btn btn-success btn-xs"><span class="glyphicon glyphicon-plus"></span></a>
+    <a ui-sref="addEstimation({projectKey: projectKey})" role="button" class="btn btn-primary btn-xs"><span
+            class="glyphicon glyphicon-plus"></span></a>
 
     <div ng-show="estimations.length === 0" style="margin: 10px">
         Нет оценок
     </div>
 
-        <label class="col-md-1 control-label" for="status"> Статус: </label>
-        <div class="col-md-2">
-            <select
-                    ng-model="filter"
-                    ng-options="item.value for item in filtrations"
-                    name="status"
-                    id="status"
-                    class="form-control"
-            ></select>
+    <div>
+        <div class="form-group">
+            <div class="">
+                <label class="col-md-1 control-label middle-input-margin" for="status"> Статус: </label>
+                <div class="col-md-2">
+                    <select
+                            ng-model="filter"
+                            ng-options="item.value for item in filtrations"
+                            name="status"
+                            id="status"
+                            class="form-control"
+                    ></select>
+                </div>
+            </div>
         </div>
+
+        <div class="form-group">
+            <div class="centeate-text">
+                <label class="col-md-1 control-label middle-input-margin" for="keyFilter"> Ключ: </label>
+                <div class="col-md-2">
+                    <input
+                            ng-model="search.key"
+                            name="keyFilter"
+                            id="keyFilter"
+                            class="form-control"
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
 
     <table class="table table-hover" ng-show="estimations.length > 0">
         <thead>
-            <tr>
-                <th>Key</th>
-                <th>Описание</th>
-                <th>Статус</th>
-                <th>Проект</th>
-                <th>Действия</th>
-            </tr>
+        <tr>
+            <th>Ключ</th>
+            <th>Описание</th>
+            <th>Статус</th>
+            <th>Проект</th>
+            <th>Действия</th>
+        </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="est in estimations | filter: statusFilter">
-                <td>
-                    <a ng-if="est.projectKey === 'none'" ui-sref="estimation({key: est.key})">{{est.key}}</a>
-                    <a ng-if="est.projectKey !== 'none'" ui-sref="projectEstimation({key: est.key, projectKey: projectKey})">{{est.key}}</a>
-                </td>
-                <td>{{est.summary}}</td>
-                <td>
-                    <span class="label label-{{est.status.style}}">{{est.status.value}}</span>
-                </td>
-                <td><a ng-if="est.projectKey !== 'none'" ui-sref="projectEstimations({key: est.projectKey})">{{est.projectKey}}</a></td>
-                <td>
-                    <button
-                            type="button"
-                            class="btn btn-success btn-xs"
-                            ui-sref="estimation({key: est.key})"
-                            uib-tooltip="Просмотреть">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                    </button>
-                    <button
-                            type="button"
-                            class="btn btn-danger btn-xs"
-                            uib-tooltip="Удалить"
-                            confirm-popup
-                            confirm-title="Подтвердите удаление"
-                            confirm-text="Подтвердите удаление эстимации"
-                            confirm-button="Удалить"
-                            cancel-button="Отмена"
-                            confirm-method="deleteEstimation(est.key)">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </td>
-            </tr>
+        <tr ng-repeat="est in estimations | filter:search:strict">
+            <td>
+                <a ng-if="est.projectKey === 'none'" ui-sref="estimation({key: est.key})">{{est.key}}</a>
+                <a ng-if="est.projectKey !== 'none'"
+                   ui-sref="projectEstimation({key: est.key, projectKey: projectKey})">{{est.key}}</a>
+            </td>
+            <td>{{est.summary}}</td>
+            <td>
+                <span class="label label-{{est.status.style}}">{{est.status.value}}</span>
+            </td>
+            <td><a ng-if="est.projectKey !== 'none'" ui-sref="projectEstimations({key: est.projectKey})">{{est.projectKey}}</a>
+            </td>
+            <td>
+                <button
+                        type="button"
+                        class="btn btn-success btn-xs"
+                        ui-sref="estimation({key: est.key})"
+                        uib-tooltip="Просмотреть">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                </button>
+                <button
+                        type="button"
+                        class="btn btn-danger btn-xs"
+                        uib-tooltip="Удалить"
+                        confirm-popup
+                        confirm-title="Подтвердите удаление"
+                        confirm-text="Подтвердите удаление эстимации"
+                        confirm-button="Удалить"
+                        cancel-button="Отмена"
+                        confirm-method="deleteEstimation(est.key)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
