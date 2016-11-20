@@ -69,14 +69,33 @@ router.post("/", function (req, res, next) {
 
     var estimation = new Estimation(req.body);
 
-    Estimation.findOneAndUpdate({key: estimation.key}, estimation, {upsert:true}, function (err) {
+    if(estimation.id) {
+        updateMeta(req, res, next, estimation);
+    } else {
+        updateEstimation(req, res, next, estimation);
+    }
+});
+
+function updateMeta(req, res, next, estimation) {
+    Estimation.findOneAndUpdate({_id: estimation.id}, estimation, {upsert: true}, function (err) {
         if (err) {
             res.send(err);
         } else {
             res.json({success: true});
         }
     });
-});
+}
+
+function updateEstimation(req, res, next, estimation) {
+
+    Estimation.findOneAndUpdate({key: estimation.key}, estimation, {upsert: true}, function (err) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json({success: true});
+        }
+    });
+}
 
 router.delete('/:key', function (req, res, next) {
 

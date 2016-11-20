@@ -31,18 +31,13 @@ app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
                     title: 'Оценка'
                 }
             })
-            .state('estimations', {
+            .state('editEstimation', {
                 parent: 'base',
-                resolve: {
-                    'statuses': function (StatusService) {
-                        return StatusService.promise;
-                    }
-                },
-                url: '/estimations',
-                controller: 'EstimationsController',
-                templateUrl: 'views/pages/estimation/estimations.html',
+                url: 'project/:projectKey/estimation/:key/edit',
+                controller: 'EstimationAddController',
+                templateUrl: 'views/pages/estimation/estimationAdd.html',
                 data: {
-                    title: 'Список оценок'
+                    title: 'Оценка'
                 }
             })
             .state('estimation', {
@@ -51,8 +46,7 @@ app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
                 controller: 'EstimationDetailController',
                 templateUrl: 'views/pages/estimation/estimation.html',
                 data: {
-                    title: 'Оценка',
-                    // projectKey: $scope.projectKey
+                    title: 'Оценка'
                 },
                 resolve: {
                     'statuses': function (StatusService) {
@@ -66,8 +60,7 @@ app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
                 controller: 'EstimationDetailController',
                 templateUrl: 'views/pages/estimation/estimation.html',
                 data: {
-                    title: 'Оценка',
-                    // projectKey: $scope.projectKey
+                    title: 'Оценка'
                 },
                 resolve: {
                     'statuses': function (StatusService) {
@@ -91,6 +84,11 @@ app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
                 templateUrl: 'views/pages/estimation/estimations.html',
                 data: {
                     title: 'Оценки проекта'
+                },
+                resolve: {
+                    'statuses': function (StatusService) {
+                        return StatusService.promise;
+                    }
                 }
             })
             .state('addProject', {

@@ -12,7 +12,7 @@
     }
 </style>
 
-<div>
+<div ng-init="init()">
 
     <form novalidate class="form-horizontal" role="form" name="addEstimationForm">
         <fieldset>
@@ -38,7 +38,8 @@
             </div>
         </fieldset>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-default" ng-click="add();" ng-disabled="addEstimationForm.$invalid"> Добавить </button>
+            <button ng-hide="editMode" type="submit" class="btn btn-default" ng-click="add();" ng-disabled="addEstimationForm.$invalid"> Добавить </button>
+            <button ng-show="editMode" type="submit" class="btn btn-default" ng-click="add();" ng-disabled="addEstimationForm.$invalid"> Сохранить </button>
         </div>
     </form>
 

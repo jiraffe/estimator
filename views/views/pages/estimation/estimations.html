@@ -46,30 +46,26 @@
             <th>Ключ</th>
             <th>Описание</th>
             <th>Статус</th>
-            <th>Проект</th>
             <th>Действия</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="est in estimations | filter:search:strict">
+        <tr ng-repeat="est in estimations | filter:search | filter:statusFilter">
             <td>
-                <a ng-if="est.projectKey === 'none'" ui-sref="estimation({key: est.key})">{{est.key}}</a>
-                <a ng-if="est.projectKey !== 'none'"
-                   ui-sref="projectEstimation({key: est.key, projectKey: projectKey})">{{est.key}}</a>
+                <a ui-sref="projectEstimation({key: est.key, projectKey: projectKey})">{{est.key}}</a>
             </td>
             <td>{{est.summary}}</td>
             <td>
                 <span class="label label-{{est.status.style}}">{{est.status.value}}</span>
             </td>
-            <td><a ng-if="est.projectKey !== 'none'" ui-sref="projectEstimations({key: est.projectKey})">{{est.projectKey}}</a>
             </td>
             <td>
                 <button
                         type="button"
                         class="btn btn-success btn-xs"
-                        ui-sref="estimation({key: est.key})"
-                        uib-tooltip="Просмотреть">
-                    <span class="glyphicon glyphicon-eye-open"></span>
+                        ui-sref="editEstimation({key: est.key, projectKey: est.projectKey})"
+                        uib-tooltip="Редактировать">
+                    <span class="glyphicon glyphicon-pencil"></span>
                 </button>
                 <button
                         type="button"

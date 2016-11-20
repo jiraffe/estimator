@@ -13,17 +13,33 @@ angular.module('estimator')
         '$state',
         '$http',
         '$growl',
+        'statuses',
 
-        function($scope, $state, $http, $growl) {
+        function($scope, $state, $http, $growl, statuses) {
 
             $scope.params = angular.copy($state.params);
             $scope.projectKey = $state.params.key;
             $scope.estimations = [];
+            $scope.filtrations = [{
+                value: 'Все',
+                name: 'all'
+            }];
+            $scope.filter = $scope.filtrations[0];
+            $scope.statuses = statuses;
 
             function init() {
                 getEstimations();
             }
             init();
+
+            $scope.statusFilter = function(data) {
+                if($scope.filter.name === 'all') return true;
+                else if($scope.filter.name === data.status.name) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
 
             $scope.deleteEstimation = function (key) {
                 $http({
@@ -41,6 +57,22 @@ angular.module('estimator')
                     method: 'GET',
                 }).success(function (res) {
                     $scope.estimations = res;
+                    prepareFiltrations();
+                });
+            }
+
+            function prepareFiltrations() {
+                $scope.estimations.forEach(function (est) {
+
+                    var found = false;
+                    for(var i = 0; i < $scope.filtrations.length; i++) {
+                        if ($scope.filtrations[i].name == est.status.name) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if(!found) $scope.filtrations.push(est.status);
                 });
             }
         }
