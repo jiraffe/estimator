@@ -7,7 +7,8 @@ var Schema = mongoose.Schema;
 
 var schema = new Schema({
     name: String,
-    key: String
+    key: String,
+    estimationModel: [String]
 });
 
 var Project = mongoose.model('Project', schema);

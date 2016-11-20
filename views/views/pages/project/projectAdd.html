@@ -1,11 +1,18 @@
 <style type="text/css">
-    .form-horizontal input.ng-invalid.ng-touched { background-color: #FFCCCC; }
-    .form-horizontal input.ng-valid.ng-touched { background-color: #CCFFCC; }
+    .form-horizontal input.ng-invalid.ng-touched {
+        background-color: #FFCCCC;
+    }
+
+    .form-horizontal input.ng-valid.ng-touched {
+        background-color: #CCFFCC;
+    }
+
     .validationMessage {
         height: 35px;
         text-align: center;
         vertical-align: middle;
     }
+
     .validationMessage div {
         padding-top: 7px;
         text-align: left;
@@ -36,13 +43,41 @@
                     <div ng-show="addProjectForm.name.$error.required">Нужно название</div>
                 </div>
             </div>
+            <h4> Поля эстимации:</h4>
+            <hr/>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="estimationModelEntity"> Добавить поле </label>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="estimationModelEntity"
+                               id="estimationModelEntity" placeholder="Amount">
+                        <div class="input-group-addon">
+                            <a ng-click="addEstimationModelEntity()">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </fieldset>
-        <div class="modal-footer">
-            <button ng-show="projectKey === ''" type="submit" class="btn btn-default" ng-click="add();" ng-disabled="addProjectForm.$invalid"> Добавить </button>
-            <button ng-show="projectKey !== ''" type="submit" class="btn btn-default" ng-click="save();" ng-disabled="addProjectForm.$invalid"> Сохранить </button>
-        </div>
     </form>
-
-
+    <div ng-repeat="entity in project.estimationModel"
+         style="display: inline-block; vertical-align: bottom; margin-right: 10px;">
+        <h4><span class="label label-default">
+            <span>{{entity}}</span>
+            <span uib-tooltip="Удалить" uib-tooltip-placement="left" class="glyphicon glyphicon-remove"
+                  ng-click="removeEstimationModelEntity(entity)"></span>
+            <span class="sr-only">Delete</span>
+        </span></h4>
+    </div>
+    <div class="modal-footer">
+        {{projectKey}}
+        <button ng-show="projectKey === undefined" type="submit" class="btn btn-default" ng-click="add();"
+                ng-disabled="addProjectForm.$invalid"> Добавить
+        </button>
+        <button ng-show="projectKey !== undefined" type="submit" class="btn btn-default" ng-click="save();"
+                ng-disabled="addProjectForm.$invalid"> Сохранить
+        </button>
+    </div>
 
 </div>

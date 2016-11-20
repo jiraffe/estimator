@@ -14,8 +14,12 @@ angular.module('estimator')
         function($scope, $state, $http, $growl) {
 
             $scope.params = angular.copy($state.params);
-            $scope.project = {};
+            $scope.project = {
+                estimationModel: []
+            };
             $scope.projectKey = $scope.params.key;
+            console.log($scope.projectKey);
+            $scope.estimationModelEntity = '';
 
             $scope.add = function () {
                 $http({
@@ -29,10 +33,27 @@ angular.module('estimator')
             };
 
             function initEditProject() {
+                if( ! $scope.projectKey) return;
                 $http.get('projects/' + $scope.projectKey)
                     .success(function (res) {
                         $scope.project = res[0];
                     });
+            }
+
+            $scope.addEstimationModelEntity = function () {
+
+                if($scope.project.estimationModel.indexOf($scope.estimationModelEntity) !== -1) {
+                    $scope.estimationModelEntity = '';
+                    return;
+                }
+
+                $scope.project.estimationModel.push($scope.estimationModelEntity)
+                $scope.estimationModelEntity = '';
+            };
+
+            $scope.removeEstimationModelEntity = function (entity) {
+                var idx = $scope.project.estimationModel.indexOf(entity);
+                $scope.project.estimationModel.splice(idx, 1);
             }
 
             function init() {

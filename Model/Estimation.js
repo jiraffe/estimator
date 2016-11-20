@@ -21,11 +21,12 @@ var schema = new Schema({
                 {
                     subNum : String,
                     descr : String,
-                    estimation: {
-                            DB: Number,
-                            Java: Number,
-                            UI: Number
+                    estimation: [
+                        {
+                            name: String,
+                            value: Number
                         }
+                    ]
                 }
             ]
         }
