@@ -8,7 +8,26 @@ var Schema = mongoose.Schema;
 var schema = new Schema({
     name: String,
     key: String,
-    estimationModel: [String]
+    estimationModel: {
+        fields:[Stirng],
+        estimationTimeNeeded: Boolean,
+        coordination: {
+            isNeeded: Boolean,
+            percentage: Number
+        },
+        stabilisation: {
+            isNeeded: Boolean,
+            percentage: Number
+        },
+        testing: {
+            isNeeded: Boolean,
+            percentage: Number
+        },
+        other: {
+            isNeeded: Boolean,
+            percentage: Number
+        }
+    }
 });
 
 var Project = mongoose.model('Project', schema);

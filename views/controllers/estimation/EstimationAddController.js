@@ -27,8 +27,9 @@ angular.module('estimator')
             $scope.init = function () {
                 if(! $scope.editMode) return;
 
-                $http.get('estimations/' + $scope.params.key).success(function (res) {
-                    $scope.estimation = res;
+                $http.get('projects/' + $scope.params.projectKey + '/estimation/' + $scope.params.key)
+                    .success(function (res) {
+                        $scope.estimation = res[0];
                 })
             };
 
@@ -37,6 +38,10 @@ angular.module('estimator')
                 if( ! $scope.addEstimationForm.$valid) {
                     return;
                 }
+
+                var url = $scope.editMode ?
+                    'projects/' + $scope.params.projectKey + '/estimation/' + $scope.params.key :
+                    'estimations';
 
                 $http({
                     url: 'estimations',

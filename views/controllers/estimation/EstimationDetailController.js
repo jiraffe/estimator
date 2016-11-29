@@ -19,22 +19,29 @@ angular.module('estimator')
 
             $scope.params = angular.copy($state.params);
             $scope.estimation = {};
+            $scope.project = {};
             $scope.statuses = statuses;
 
-            console.log($scope.params);
-
-            function init() {
-                getEstimation();
+            $scope.init = function () {
+                $http.get("projects/" + $scope.params.projectKey)
+                    .then(function (res) {
+                        $scope.project = res;
+                        $scope.esModel = $scope.project.estimationModel;
+                    }).then(getEstimation);
             }
-
-            init();
 
             function getEstimation() {
                 $http({
-                    url: 'estimations/' + $scope.params.key,
+                    url: 'projects/' + $scope.params.projectKey + '/estimation/' + $scope.params.key,
                     method: 'GET',
                 }).success(function (res) {
-                    $scope.estimation = res;
+                    $scope.estimation = res[0];
+                    if(! $scope.estimation.sections ||  $scope.estimation.sections.length === 0) {
+                        $scope.estimation.sections = [];
+                        initTotals();
+                        return;
+                    }
+
                     $scope.estimation.sections.forEach(function (el) {
                         el.subSections.forEach(function (el) {
                             if (el.estimation === undefined) {
@@ -49,18 +56,28 @@ angular.module('estimator')
             function initTotals() {
                 reinitTotals();
                 $scope.estimation.total = function () {
+
                     var total = 0;
-                    $scope.estimation.sections.forEach(function (sec) {
-                        total += sec.total();
-                    });
                     total += ($scope.estimation.coordination || 0) +
                         ($scope.estimation.stabilization || 0) +
                         ($scope.estimation.estimationTime || 0);
+
+                    if(! $scope.estimation.sections ||  $scope.estimation.sections.length === 0)
+                        return total;
+
+                    $scope.estimation.sections.forEach(function (sec) {
+                        total += sec.total();
+                    });
+
                     return total;
                 }
             }
 
             function reinitTotals() {
+
+                if(! $scope.estimation.sections ||  $scope.estimation.sections.length === 0)
+                    return;
+
                 $scope.estimation.sections.forEach(function (sec) {
                     sec.total = getSectionTotal(sec);
                 });
@@ -108,7 +125,7 @@ angular.module('estimator')
 
             $scope.save = function () {
                 $http({
-                    url: 'estimations',
+                    url: 'projects/' + $scope.params.projectKey + '/estimation/' + $scope.params.key,
                     method: 'POST',
                     data: $scope.estimation
                 }).success(function (res) {
@@ -123,7 +140,9 @@ angular.module('estimator')
 
             $scope.sectionMenu = [
                 ['Добавить секцию', function () {
-                    var sectionNum = $scope.estimation.sections.length + 1;
+                    var sectionNum = ($scope.estimation.sections && $scope.estimation.sections.length > 0) ?
+                    $scope.estimation.sections.length + 1 :
+                    1;
                     $scope.estimation.sections.push({
                         number: sectionNum,
                         subSections: [
@@ -174,7 +193,7 @@ angular.module('estimator')
                 var DocumentContainer = document.getElementById('estimation');
                 var WindowObject = window.open('', 'PrintWindow', 'width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes');
                 WindowObject.document.writeln('<!DOCTYPE html>');
-                WindowObject.document.writeln('<html><head><title></title>');
+                WindowObject.document.writeln('<html><head><title>' + $scope.estimation.key + '</title>');
                 WindowObject.document.writeln('<link rel="stylesheet" type="text/css" href="styles/estimationTable.css">');
                 WindowObject.document.writeln('</head><body>')
 
@@ -184,8 +203,6 @@ angular.module('estimator')
 
                 WindowObject.document.close();
                 WindowObject.focus();
-                //WindowObject.print();
-                //WindowObject.close();
             }
         }
 

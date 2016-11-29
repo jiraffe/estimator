@@ -5,7 +5,6 @@ var express = require('express');
 var router = express.Router();
 var Estimation = require('../Model/Estimation');
 var Project = require('../Model/Project');
-var mongoose = require('../lib/mongoose');
 
 router.get("/", function (req, res, next) {
 
@@ -65,5 +64,47 @@ router.delete("/:key", function (req, res, next) {
         }
     })
 });
+
+router.get('/:projectKey/estimation/:estimationKey', function (req, res, next) {
+    Estimation.find({key: req.params.estimationKey, projectKey: req.params.projectKey}, function (err, estimation) {
+
+        if(err) {
+            res.status(500).send("Couldn't get estimation! \r\n" + err);
+        } else {
+            res.json(estimation);
+        }
+    });
+});
+
+router.post('/:projectKey/estimation/:estimationKey', function (req, res, next) {
+    var estimation = new Estimation(req.body);
+
+    if(estimation.id) {
+        updateMeta(req, res, next, estimation);
+    } else {
+        updateEstimation(req, res, next, estimation);
+    }
+});
+
+function updateMeta(req, res, next, estimation) {
+    Estimation.findOneAndUpdate({_id: estimation.id}, estimation, {upsert: true}, function (err) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json({success: true});
+        }
+    });
+}
+
+function updateEstimation(req, res, next, estimation) {
+
+    Estimation.findOneAndUpdate({key: estimation.key}, estimation, {upsert: true}, function (err) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json({success: true});
+        }
+    });
+}
 
 module.exports = router;

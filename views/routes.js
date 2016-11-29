@@ -108,6 +108,6 @@ app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
                 data: {
                     title: 'Редактировать проект'
                 }
-        })
+            })
     }
 );

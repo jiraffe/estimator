@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Estimation = require('../Model/Estimation');
-var mongoose = require('../lib/mongoose');
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
 
     Estimation.find({}, function (err, estimations) {
