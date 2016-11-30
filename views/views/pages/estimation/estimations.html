@@ -47,16 +47,17 @@
             </td>
             </td>
             <td>
-                <button
+                <md-button
                         type="button"
-                        class="btn btn-success btn-xs"
+                        class="md-icon-button"
                         ui-sref="editEstimation({key: est.key, projectKey: est.projectKey})"
                         uib-tooltip="Редактировать">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-                <button
+                    <md-icon md-font-set="material-icons"
+                             ng-style="{color: 'green', 'font-size':'17px', height:'17px'}">mode_edit</md-icon>
+                </md-button>
+                <md-button
                         type="button"
-                        class="btn btn-danger btn-xs"
+                        class="md-icon-button"
                         uib-tooltip="Удалить"
                         confirm-popup
                         confirm-title="Подтвердите удаление"
@@ -64,8 +65,9 @@
                         confirm-button="Удалить"
                         cancel-button="Отмена"
                         confirm-method="deleteEstimation(est.key)">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </button>
+                    <md-icon md-font-set="material-icons"
+                             ng-style="{color: 'red', 'font-size':'17px', height:'17px'}">clear</md-icon>
+                </md-button>
             </td>
         </tr>
         </tbody>

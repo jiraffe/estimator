@@ -1,22 +1,19 @@
 'use strict';
 
 angular.module('estimator')
-	.directive('confirmPopup', function($uibModal) {
+	.directive('confirmPopup', function($mdDialog) {
 		return {
 			restrict: 'A',
-			link: function($scope, $elem, $attrs) {
+			link: function($scope, $elem) {
 				var action = 'click';
 				if ($scope.change) {
 					action = 'change';		
 				}
 				$elem.on(action, function () {
-					var size = $scope.size || 'sm';
 
-					$uibModal.open({
+					$mdDialog.show({
 						templateUrl: '/views/popups/confirmPopup.html',
-						size: size,
 						controller: 'ConfirmPopupCtrl',
-						backdrop: 'static',
 						resolve: {
 							params: function () {
 								return {
@@ -54,7 +51,7 @@ angular.module('estimator')
 			}
 		};
 	})
-	.controller('ConfirmPopupCtrl', function ($scope, params, buttons) {
+	.controller('ConfirmPopupCtrl', function ($scope, params, buttons, $mdDialog) {
 
 
 		$scope.params = angular.copy(params);
@@ -67,21 +64,19 @@ angular.module('estimator')
 		$scope.params.confirmText = $scope.params.confirmText || 'Подтвердите действие';		
 		$scope.params.isDisabled = $scope.params.isDisabled || false;
 		$scope.params.reasonDisabled = $scope.params.reasonDisabled || $scope.params.confirmTitle;
-		$scope.params.paramForConfirm= $scope.params.paramForConfirm;
-		$scope.params.paramForCancel =  $scope.params.paramForCancel;
 
-		$scope.submit = function () {
+		$scope.execute = function () {
 			if($scope.params.confirmMethod) {
 				$scope.params.confirmMethod();
-			}				
-			$scope.$close();
+			}
+			$mdDialog.hide();
 		};
 
 		$scope.cancel = function() {
 			if($scope.params.cancelMethod) {
 				$scope.params.cancelMethod();
-			}			
-			$scope.$close();
+			}
+			$mdDialog.cancel();
 		};
 
 
