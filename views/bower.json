@@ -24,6 +24,9 @@
     "bower": "*",
     "install": "^1.0.4",
     "ng-contextmenu": "^0.7.2",
-    "angular-bootstrap-contextmenu": "^0.9.9"
+    "angular-bootstrap-contextmenu": "^0.9.9",
+    "angular-material": "*",
+    "angular-animate": "*",
+    "angular-aria": "*"
   }
 }

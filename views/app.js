@@ -1,4 +1,12 @@
-var app = angular.module('estimator', ['ui.router', 'growl', 'ngCookies', 'ui.bootstrap', 'ui.bootstrap.contextMenu']);
+var app = angular.module('estimator', [
+    'ui.router',
+    'ngAnimate',
+    'ngAria',
+    'growl',
+    'ngCookies',
+    'ui.bootstrap',
+    'ui.bootstrap.contextMenu',
+    'ngMaterial']);
 var ip = undefined;
 var debug = true;
 var urlPrefix = debug ? 'http://127.0.0.1:3000/' : 'http://192.168.1.60:3000/';

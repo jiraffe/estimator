@@ -1,82 +1,122 @@
-<style type="text/css">
-    .form-horizontal input.ng-invalid.ng-touched {
-        background-color: #FFCCCC;
-    }
+<div ng-init="init();" layout="column" ng-cloak>
 
-    .form-horizontal input.ng-valid.ng-touched {
-        background-color: #CCFFCC;
-    }
+    <md-content layout-padding>
 
-    .validationMessage {
-        height: 35px;
-        text-align: center;
-        vertical-align: middle;
-    }
+        <form name="addProjectForm">
+            <legend>Создание проекта:</legend>
 
-    .validationMessage div {
-        padding-top: 7px;
-        text-align: left;
-    }
-</style>
 
-<div>
-
-    <form novalidate class="form-horizontal" role="form" name="addProjectForm">
-        <fieldset>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="key"> JIRA-key </label>
-                <div class="col-md-2">
-                    <input id="key" name="key" class="form-control" ng-model="project.key" required>
+            <md-input-container class="md-block">
+                <label>jira-ключ</label>
+                <input id="key" required name="key" ng-model="project.key">
+                <div ng-messages="addProjectForm.key.$error">
+                    <div ng-message="required">Нужен ключ проекта.</div>
                 </div>
-                <div class="validationMessage" ng-show="addProjectForm.$submitted || addProjectForm.key.$touched">
-                    <div ng-show="addProjectForm.key.$error.required">Нужен ключ проекта</div>
-                </div>
-            </div>
+            </md-input-container>
 
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="name"> Имя </label>
-                <div class="col-md-6">
-                    <input id="name" type="text" name="name" class="form-control" ng-model="project.name" required>
+            <md-input-container class="md-block">
+                <label>Имя</label>
+                <input required id="name" name="name" ng-model="project.name">
+                <div ng-messages="addProjectForm.name.$error">
+                    <div ng-message="required">Нужно имя проекта.</div>
                 </div>
-                <div class="validationMessage" ng-show="addProjectForm.$submitted || addProjectForm.name.$touched">
-                    <div ng-show="addProjectForm.name.$error.required">Нужно название</div>
-                </div>
-            </div>
-            <h4> Поля эстимации:</h4>
+            </md-input-container>
+
+            <h3>Модель эстимации:</h3>
             <hr/>
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="estimationModelEntity"> Добавить поле </label>
-                <div class="col-md-2">
-                    <div class="input-group">
-                        <input type="text" class="form-control" ng-model="estimationModelEntity"
-                               id="estimationModelEntity" placeholder="Amount">
-                        <div class="input-group-addon">
-                            <a ng-click="addEstimationModelEntity()">
-                                <span class="glyphicon glyphicon-ok"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-    </form>
-    <div ng-repeat="entity in project.estimationModel"
-         style="display: inline-block; vertical-align: bottom; margin-right: 10px;">
-        <h4><span class="label label-default">
-            <span>{{entity}}</span>
-            <span uib-tooltip="Удалить" uib-tooltip-placement="left" class="glyphicon glyphicon-remove"
-                  ng-click="removeEstimationModelEntity(entity)"></span>
-            <span class="sr-only">Delete</span>
-        </span></h4>
-    </div>
-    <div class="modal-footer">
-        <button ng-show="projectKey === undefined" type="submit" class="btn btn-default" ng-click="add();"
-                ng-disabled="addProjectForm.$invalid"> Добавить
-        </button>
-        <button ng-show="projectKey !== undefined" type="submit" class="btn btn-default" ng-click="save();"
-                ng-disabled="addProjectForm.$invalid"> Сохранить
-        </button>
-    </div>
 
+            <h4 class="md-title">Поля эстимации:</h4>
+            <md-chips
+                    class="custom-chips"
+                    ng-model="project.estimationModel.fields"
+                    placeholder="Введите имя поля"
+                    secondary-placeholder="+Поле"
+                    md-enable-chip-edit="true">
+                <md-chip-template>
+                    <span>{{$chip}}</span>
+                </md-chip-template>
+                <button md-chip-remove class="md-primary estFieldBtn">
+                    <md-icon md-font-set="material-icons">close</md-icon>
+                </button>
+            </md-chips>
+
+
+            <div layout-gt-xs="row">
+                <md-input-container>
+                    <md-switch
+                            aria-label="Координация"
+                            id="enableCoord"
+                            ng-model="project.estimationModel.coordination.isNeeded">
+                        Координация
+                    </md-switch>
+                </md-input-container>
+
+                <md-input-container ng-show="project.estimationModel.coordination.isNeeded" class="inputWithSwich">
+                    <label>Процент от разработки</label>
+                    <input type="number" id="coordPercentage" name="coordPercentage"
+                           ng-model="project.estimationModel.coordination.value">
+                </md-input-container>
+            </div>
+
+            <div layout-gt-xs="row">
+                <md-input-container>
+                    <md-switch
+                            aria-label="Стабилизация"
+                            id="enableStab"
+                            ng-model="project.estimationModel.stabilisation.isNeeded">
+                        Стабилизация
+                    </md-switch>
+                </md-input-container>
+
+                <md-input-container ng-show="project.estimationModel.stabilisation.isNeeded" class="inputWithSwich">
+                    <label>Процент от разработки</label>
+                    <input type="number" id="stabPercentage" name="stabPercentage"
+                           ng-model="project.estimationModel.stabilisation.value">
+                </md-input-container>
+            </div>
+
+            <div layout-gt-xs="row">
+                <md-input-container>
+                    <md-switch
+                            aria-label="Тестирование"
+                            id="enableTesting"
+                            ng-model="project.estimationModel.testing.isNeeded">
+                        Тестирование
+                    </md-switch>
+                </md-input-container>
+
+                <md-input-container ng-show="project.estimationModel.testing.isNeeded" class="inputWithSwich">
+                    <label>Процент от разработки</label>
+                    <input type="number" id="testingCoord" name="testingCoord"
+                           ng-model="project.estimationModel.testing.value">
+                </md-input-container>
+            </div>
+
+            <div layout-gt-xs="row">
+                <md-input-container>
+                    <md-switch
+                            aria-label="Другое"
+                            id="otherCoordLabel"
+                            ng-model="project.estimationModel.other.isNeeded">
+                        Другое
+                    </md-switch>
+                </md-input-container>
+
+                <md-input-container ng-show="project.estimationModel.other.isNeeded" class="inputWithSwich">
+                    <label>Процент от разработки</label>
+                    <input type="number" id="otherCoord" name="otherCoord"
+                           ng-model="project.estimationModel.other.value">
+                </md-input-container>
+            </div>
+        </form>
+
+        <div class="modal-footer">
+            <md-button ng-show="projectKey === undefined" type="submit" class="md-raised md-primary" ng-click="add();"
+                       ng-disabled="addProjectForm.$invalid"> Добавить
+            </md-button>
+            <md-button ng-show="projectKey !== undefined" type="submit" class="md-raised md-primary" ng-click="save();"
+                       ng-disabled="addProjectForm.$invalid"> Сохранить
+            </md-button>
+        </div>
+    </md-content>
 </div>

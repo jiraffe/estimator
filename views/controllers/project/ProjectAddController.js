@@ -11,15 +11,34 @@ angular.module('estimator')
         '$http',
         '$growl',
 
-        function($scope, $state, $http, $growl) {
+        function ($scope, $state, $http, $growl) {
 
+            var clearEstimationModel = {
+                fields: [],
+                estimationTimeNeeded: true,
+                coordination: {
+                    isNeeded: true,
+                    percentage: 0
+                },
+                stabilisation: {
+                    isNeeded: true,
+                    percentage: 0
+                },
+                testing: {
+                    isNeeded: true,
+                    percentage: 0
+                },
+                other: {
+                    isNeeded: true,
+                    percentage: 0
+                }
+            };
             $scope.params = angular.copy($state.params);
             $scope.project = {
-                estimationModel: []
+                estimationModel: clearEstimationModel
             };
             $scope.projectKey = $scope.params.key;
             console.log($scope.projectKey);
-            $scope.estimationModelEntity = '';
 
             $scope.add = function () {
                 $http({
@@ -32,36 +51,20 @@ angular.module('estimator')
                 });
             };
 
-            function initEditProject() {
-                if( ! $scope.projectKey) return;
+            $scope.initEditProject = function () {
+                if ( ! $scope.projectKey) return;
                 $http.get('projects/' + $scope.projectKey)
                     .success(function (res) {
                         $scope.project = res[0];
+                        $scope.estimationModel = $scope.project.estimationModel || clearEstimationModel;
                     });
-            }
-
-            $scope.addEstimationModelEntity = function () {
-
-                if($scope.project.estimationModel.indexOf($scope.estimationModelEntity) !== -1) {
-                    $scope.estimationModelEntity = '';
-                    return;
-                }
-
-                $scope.project.estimationModel.push($scope.estimationModelEntity)
-                $scope.estimationModelEntity = '';
             };
 
-            $scope.removeEstimationModelEntity = function (entity) {
-                var idx = $scope.project.estimationModel.indexOf(entity);
-                $scope.project.estimationModel.splice(idx, 1);
-            }
-
-            function init() {
-                if($scope.projectKey !== '') {
-                    initEditProject();
+            $scope.init = function () {
+                if ($scope.projectKey !== '') {
+                    $scope.initEditProject();
                 }
             }
-            init();
         }
 
     ]);
