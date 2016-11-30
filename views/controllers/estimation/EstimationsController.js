@@ -15,10 +15,12 @@ angular.module('estimator')
                 value: 'Все',
                 name: 'all'
             }];
+
             $scope.filter = $scope.filtrations[0];
             $scope.statuses = statuses;
 
             $scope.statusFilter = function(data) {
+                console.log(data, $scope.filter);
                 if($scope.filter.name === 'all') return true;
                 else if($scope.filter.name === data.status.name) {
                     return true;

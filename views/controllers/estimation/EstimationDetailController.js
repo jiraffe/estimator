@@ -20,12 +20,13 @@ angular.module('estimator')
             $scope.params = angular.copy($state.params);
             $scope.estimation = {};
             $scope.project = {};
+            $scope.esModel = {};
             $scope.statuses = statuses;
 
             $scope.init = function () {
                 $http.get("projects/" + $scope.params.projectKey)
                     .then(function (res) {
-                        $scope.project = res;
+                        $scope.project = res.data[0];
                         $scope.esModel = $scope.project.estimationModel;
                     }).then(getEstimation);
             }
@@ -38,80 +39,10 @@ angular.module('estimator')
                     $scope.estimation = res[0];
                     if(! $scope.estimation.sections ||  $scope.estimation.sections.length === 0) {
                         $scope.estimation.sections = [];
-                        initTotals();
                         return;
                     }
-
-                    $scope.estimation.sections.forEach(function (el) {
-                        el.subSections.forEach(function (el) {
-                            if (el.estimation === undefined) {
-                                el.estimation = {};
-                            }
-                        });
-                    });
-                    initTotals();
                 });
             }
-
-            function initTotals() {
-                reinitTotals();
-                $scope.estimation.total = function () {
-
-                    var total = 0;
-                    total += ($scope.estimation.coordination || 0) +
-                        ($scope.estimation.stabilization || 0) +
-                        ($scope.estimation.estimationTime || 0);
-
-                    if(! $scope.estimation.sections ||  $scope.estimation.sections.length === 0)
-                        return total;
-
-                    $scope.estimation.sections.forEach(function (sec) {
-                        total += sec.total();
-                    });
-
-                    return total;
-                }
-            }
-
-            function reinitTotals() {
-
-                if(! $scope.estimation.sections ||  $scope.estimation.sections.length === 0)
-                    return;
-
-                $scope.estimation.sections.forEach(function (sec) {
-                    sec.total = getSectionTotal(sec);
-                });
-            }
-
-            function getSectionTotal(section) {
-                section.subSections.forEach(function (sub) {
-                    sub.total = getSubsectionTotal(sub);
-                });
-
-                return function () {
-                    var total = 0;
-                    section.subSections.forEach(function (sub) {
-                        total += sub.total();
-                    });
-
-                    return total;
-                }
-            }
-
-            function getSubsectionTotal(sub) {
-                return function () {
-                    return (sub.estimation.DB || 0) + (sub.estimation.Java || 0) + (sub.estimation.UI || 0);
-                }
-            }
-
-            function recalcSections() {
-                $scope.estimation.sections.forEach(function (el, idx) {
-                    el.number = idx + 1 + "";
-                    el.subSections.forEach(function (subEl, subIdx) {
-                        subEl.subNum = el.number + "." + (subIdx + 1);
-                    });
-                });
-            };
 
             $scope.changeStatus = function () {
                 $http({
@@ -156,12 +87,10 @@ angular.module('estimator')
                             }
                         ]
                     });
-                    reinitTotals();
                 }],
                 null,
                 ['Удалить секцию', function (item) {
                     $scope.estimation.sections.splice(item.section.number - 1, 1);
-                    recalcSections();
                 }]
             ];
 
@@ -169,14 +98,8 @@ angular.module('estimator')
                 ['Добавить под-секцию', function (item) {
                     var sectionNum = item.$parent.section.number - 1;
                     $scope.estimation.sections[sectionNum].subSections.push({
-                        estimation: {
-                            DB: undefined,
-                            Java: undefined,
-                            UI: undefined
-                        }
+                        estimation: []
                     });
-                    reinitTotals();
-                    recalcSections();
                 }],
                 null,
                 ['Удалить под-секцию', function (item) {
@@ -184,8 +107,6 @@ angular.module('estimator')
                     var subSectionNum = item.sub.subNum * 10 % 10;
 
                     $scope.estimation.sections[sectionNum].subSections.splice(subSectionNum - 1, 1);
-
-                    recalcSections();
                 }]
             ];
 

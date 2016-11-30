@@ -38,15 +38,14 @@ angular.module('estimator')
                 estimationModel: clearEstimationModel
             };
             $scope.projectKey = $scope.params.key;
-            console.log($scope.projectKey);
 
-            $scope.add = function () {
+            $scope.upsert = function () {
                 $http({
                     url: 'projects',
                     method: 'POST',
                     data: $scope.project
                 }).success(function (res) {
-                    $growl.addMessage('Success', 'Проект добавлен', 'success');
+                    $growl.addMessage('Success', 'Проект сохранён', 'success');
                     $state.go('projects');
                 });
             };

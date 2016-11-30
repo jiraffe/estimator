@@ -111,10 +111,10 @@
         </form>
 
         <div class="modal-footer">
-            <md-button ng-show="projectKey === undefined" type="submit" class="md-raised md-primary" ng-click="add();"
+            <md-button ng-show="projectKey === undefined" type="submit" class="md-raised md-primary" ng-click="upsert();"
                        ng-disabled="addProjectForm.$invalid"> Добавить
             </md-button>
-            <md-button ng-show="projectKey !== undefined" type="submit" class="md-raised md-primary" ng-click="save();"
+            <md-button ng-show="projectKey !== undefined" type="submit" class="md-raised md-primary" ng-click="upsert();"
                        ng-disabled="addProjectForm.$invalid"> Сохранить
             </md-button>
         </div>

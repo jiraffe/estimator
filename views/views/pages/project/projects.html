@@ -1,27 +1,31 @@
+<md-button ui-sref="addProject" class="md-fab md-mini" md-colors="{background: 'green'}" aria-label="Добавить">
+    <md-icon md-font-set="material-icons">add</md-icon>
+</md-button>
 
-<a ui-sref="addProject" role="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-plus"></span></a>
 
-<div class="row">
-    <div class="col-sm-6 col-md-4" ng-repeat="project in projects">
-        <button type="button" class="close"
-                confirm-popup
-                confirm-title="Подтвердите удаление"
-                confirm-text="Подтвердите удаление проекта {{project.key}}"
-                confirm-button="Удалить"
-                cancel-button="Отмена"
-                confirm-method="delete(project.key)">
-            <span uib-tooltip="Удалить" uib-tooltip-placement="left" class="glyphicon glyphicon-remove"></span>
-            <span class="sr-only">Delete</span>
-        </button>
-        <a ui-sref="editProject({key: project.key})" class="close">
-            <span uib-tooltip="Редактировать" uib-tooltip-placement="left" class="glyphicon glyphicon-pencil"></span>
-            <span class="sr-only">Edit</span>
-        </a>
-        <a ui-sref="projectEstimations({key: project.key})" class="thumbnail">
-            <div class="caption">
-                <h2>{{project.key}}</h2>
-                <h4>{{project.name}}</h4>
-            </div>
-        </a>
+<md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="50" layout="column">
+
+        <md-card ng-repeat="project in projects">
+            <a ui-sref="projectEstimations({key: project.key})">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{project.key}}</span>
+                        <span class="md-subhead">{{project.name}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+            </a>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button confirm-popup
+                           confirm-title="Подтвердите удаление"
+                           confirm-text="Подтвердите удаление проекта {{project.key}}"
+                           confirm-button="Удалить"
+                           cancel-button="Отмена"
+                           confirm-method="delete(project.key)">Удалить
+                </md-button>
+                <md-button ui-sref="editProject({key: project.key})">Редактировать</md-button>
+            </md-card-actions>
+        </md-card>
+
     </div>
-</div>
+</md-content>
