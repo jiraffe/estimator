@@ -6,7 +6,7 @@
 angular.module('estimator')
     .controller('EstimationsController',
 
-        function($scope, $state, $http, $growl, statuses) {
+        function($scope, $state, $http, statuses, $toast) {
 
             $scope.params = angular.copy($state.params);
             $scope.projectKey = 'none';
@@ -39,7 +39,7 @@ angular.module('estimator')
                     url: 'estimations/' + key,
                     method: 'DELETE',
                 }).success(function (res) {
-                    $growl.addMessage('Success', 'Эстимация удалена', 'success');
+                    $toast({message: 'Эстимация удалена', theme:'success'});
                     getEstimations();
                 });
             };

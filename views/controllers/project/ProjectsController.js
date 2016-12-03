@@ -9,11 +9,11 @@ angular.module('estimator')
         '$scope',
         '$http',
         '$state',
-        '$growl',
         'StorageService',
         'BroadcastService',
+        '$toast',
 
-        function($scope, $http, $state, $growl, StorageService, BroadcastService) {
+        function($scope, $http, $state, StorageService, BroadcastService, $toast) {
 
             $scope.params = angular.copy($state.params);
             $scope.projects = [];
@@ -34,7 +34,7 @@ angular.module('estimator')
                     url: 'projects/' + projectKey
                 }).success(function (res) {
                     if(res.success) {
-                        $growl.addMessage('Success', 'Проект удалён', 'success');
+                        $toast({message: 'Проект удалён', theme:'success'});
                         getProjects();
                     }
                 })

@@ -47,3 +47,19 @@
     margin-top: 35px;
     margin-left: 30px;
 }
+
+.success-toast-theme .md-toast-content {
+    background-color: #339933;
+    font-weight: bold;
+}
+
+.error-toast-theme .md-toast-content {
+    background-color: #800000;
+    font-weight: bold;
+}
+
+.warning-toast-theme .md-toast-content {
+    background-color: #FFCC00;
+    color: black;
+    font-weight: bold;
+}

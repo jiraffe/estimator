@@ -9,9 +9,9 @@ angular.module('estimator')
         '$scope',
         '$state',
         '$http',
-        '$growl',
+        '$toast',
 
-        function ($scope, $state, $http, $growl) {
+        function ($scope, $state, $http, $toast) {
 
             var clearEstimationModel = {
                 fields: [],
@@ -45,7 +45,7 @@ angular.module('estimator')
                     method: 'POST',
                     data: $scope.project
                 }).success(function (res) {
-                    $growl.addMessage('Success', 'Проект сохранён', 'success');
+                    $toast({message: 'Проект сохранён', theme:'success'});
                     $state.go('projects');
                 });
             };

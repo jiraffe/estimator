@@ -12,10 +12,10 @@ angular.module('estimator')
         'StorageService',
         'BroadcastService',
         '$stateParams',
-        '$growl',
+        '$toast',
         'statuses',
 
-        function ($scope, $state, $http, StorageService, BroadcastService, $stateParams, $growl, statuses) {
+        function ($scope, $state, $http, StorageService, BroadcastService, $stateParams, $toast, statuses) {
 
             $scope.params = angular.copy($state.params);
             $scope.estimation = {};
@@ -50,7 +50,7 @@ angular.module('estimator')
                     method: 'POST',
                     data: $scope.estimation
                 }).success(function (res) {
-                    $growl.addMessage('Success', 'Статус изменён', 'success');
+                    $toast({message: 'Статус изменён', theme:'success'});
                 });
             }
 
@@ -79,11 +79,7 @@ angular.module('estimator')
                         subSections: [
                             {
                                 subNum: sectionNum + 0.1,
-                                estimation: {
-                                    DB: undefined,
-                                    Java: undefined,
-                                    UI: undefined
-                                }
+                                estimation: []
                             }
                         ]
                     });

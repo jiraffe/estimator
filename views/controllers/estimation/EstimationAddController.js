@@ -9,9 +9,9 @@ angular.module('estimator')
         '$scope',
         '$state',
         '$http',
-        '$growl',
+        '$toast',
 
-        function($scope, $state, $http, $growl) {
+        function($scope, $state, $http, $toast) {
 
             $scope.params = angular.copy($state.params);
             $scope.editMode = !!$scope.params.key;
@@ -49,7 +49,7 @@ angular.module('estimator')
                     data: $scope.estimation
                 }).success(function (res) {
                     var message = $scope.editMode ? 'Эстимация сохранена' : 'Эстимация добавлена';
-                    $growl.addMessage('Success', message, 'success');
+                    $toast({message: message, theme:'success'});
                     $state.go('projectEstimations', {key: $scope.params.projectKey});
                 });
             }
