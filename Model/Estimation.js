@@ -6,7 +6,14 @@ var schema = new Schema({
 
     key: String,
     summary: String,
+
     estimationTime: Number,
+
+    coordination: Number,
+    stabilisation: Number,
+    testing: Number,
+    other: Number,
+
     projectKey: String,
     status: {
         name: String,
@@ -21,12 +28,7 @@ var schema = new Schema({
                 {
                     subNum : String,
                     descr : String,
-                    estimation:
-                        {
-                            DB: Number,
-                            Java: Number,
-                            UI: Number
-                        }
+                    estimation:[Number]
                 }
             ]
         }
