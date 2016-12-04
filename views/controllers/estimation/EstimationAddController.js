@@ -43,6 +43,17 @@ angular.module('estimator')
                     'projects/' + $scope.params.projectKey + '/estimation/' + $scope.params.key :
                     'estimations';
 
+                $scope.estimation.sections = [{
+                    name:undefined,
+                    subSections: [
+                        {
+                            descr : undefined,
+                            estimation:[]
+                        }
+                    ]
+                }];
+
+
                 $http({
                     url: 'estimations',
                     method: 'POST',
