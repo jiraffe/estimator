@@ -7,15 +7,15 @@
                 uib-btn-radio="{{status}}" ng-click="changeStatus()"
         >{{status.value}}</label>
     </div>
-
-    {{esModel.fields}}
-
     <div id="estimation">
+        <!-- описание -->
         <div class="divTableRow" style="display: table; width: 100%;">
             <div class="divTableCell summary">{{estimation.summary}}</div>
         </div>
+        <!-- таблица -->
         <div class="divTable">
             <div class="divTableHeading">
+                <!-- шапка -->
                 <div class="divTableRow" context-menu="sectionMenu">
                     <div class="divTableHead sectionNumber">№П</div>
                     <div class="divTableHead sectionNumber">№П/П</div>
@@ -23,6 +23,7 @@
                     <div ng-repeat="model in esModel.fields" class="divTableHead estVal">{{model}}</div>
                     <div class="divTableHead estVal">Total</div>
                 </div>
+                <!-- Анализ и оценка -->
                 <div class="divTableRow divEstimation" context-menu="sectionMenu">
                     <div class="divTableCell"></div>
                     <div class="divTableCell">&nbsp;</div>
@@ -33,25 +34,28 @@
                 </div>
             </div>
             <div class="divTableBody" ng-repeat="section in estimation.sections">
+                <!-- Секции -->
                 <div class="divTableRow" context-menu="sectionMenu">
                     <div class="divTableCell section sectionNumber">{{section.number}}</div>
                     <div class="divTableCell section sectionNumber">&nbsp;</div>
                     <div class="divTableCell section" contenteditable="true" type="text" ng-model="section.name"></div>
                     <div ng-repeat="model in esModel.fields" class="divTableCell section">&nbsp;</div>
-                    <div class="divTableCell section estVal"></div>
+                    <div class="divTableCell section estVal">{{section.total();}}</div>
                 </div>
+
+                <!-- под-секции -->
                 <div class="divTableRow" ng-repeat="sub in section.subSections" context-menu="subSectionMenu">
                     <div class="divTableCell subSection sectionNumber"></div>
                     <div class="divTableCell subSection sectionNumber">{{sub.subNum}}</div>
                     <div class="divTableCell subSection" contenteditable="true" ng-model="sub.descr"></div>
                     <div
-                            ng-repeat="model in esModel.fields"
+                            ng-repeat="model in esModel.fields track by $index"
                             class="divTableCell subSection"
                             contenteditable="true"
                             type="number"
-                            ng-model="sub.estimation.DB"
+                            ng-model="sub.estimation[$index]"
                             ng-model-setter="convertToNum($value)"></div>
-                    <div class="divTableCell subSection estVal"></div>
+                    <div class="divTableCell subSection estVal">{{sub.total();}}</div>
                 </div>
             </div>
 
@@ -86,7 +90,7 @@
                     <div class="divTableHead sectionNumber">&nbsp;</div>
                     <div class="divTableHead floatRight">Итого</div>
                     <div ng-repeat="model in esModel.fields" class="divTableHead estVal">&nbsp;</div>
-                    <div class="divTableHead estVal"></div>
+                    <div class="divTableHead estVal">{{estimation.total();}}</div>
                 </div>
             </div>
         </div>

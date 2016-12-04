@@ -14,8 +14,9 @@ angular.module('estimator')
         '$stateParams',
         '$toast',
         'statuses',
+        '$q',
 
-        function ($scope, $state, $http, StorageService, BroadcastService, $stateParams, $toast, statuses) {
+        function ($scope, $state, $http, StorageService, BroadcastService, $stateParams, $toast, statuses, $q) {
 
             $scope.params = angular.copy($state.params);
             $scope.estimation = {};
@@ -28,21 +29,51 @@ angular.module('estimator')
                     .then(function (res) {
                         $scope.project = res.data[0];
                         $scope.esModel = $scope.project.estimationModel;
-                    }).then(getEstimation);
-            }
+                    }).then(getEstimation)
+                    .then(initTotals);
+            };
 
             function getEstimation() {
-                $http({
+                return $http({
                     url: 'projects/' + $scope.params.projectKey + '/estimation/' + $scope.params.key,
                     method: 'GET',
-                }).success(function (res) {
-                    $scope.estimation = res[0];
+                }).then(function (res) {
+                    $scope.estimation = res.data[0];
                     if(! $scope.estimation.sections ||  $scope.estimation.sections.length === 0) {
                         $scope.estimation.sections = [];
-                        return;
                     }
                 });
-            }
+            };
+
+            function initTotals() {
+                processSections();
+
+                $scope.estimation.total = function () {
+                    var total = $scope.estimation.estimationTime || 0;
+                    total += $scope.estimation.sections.reduce((a, b) => a + b.total(), 0);
+
+                    return total;
+                }
+            };
+
+            function processSections() {
+                $scope.estimation.sections.forEach(function (section, idx) {
+                    section.idx = idx;
+                    section.subSections.forEach(processSubsection, section);
+                    section.total = function() {
+                        return section.subSections.reduce((a, b) => a + b.total(), 0);
+                    }
+                });
+            };
+
+            function processSubsection(sub, idx) {
+                var section = this;
+                sub.subNum = section.number + '.' + (idx + 1);
+                sub.idx = idx;
+                sub.total = function () {
+                    return sub.estimation.reduce((a, b) => a + b, 0);
+                }
+            };
 
             $scope.changeStatus = function () {
                 $http({
@@ -52,7 +83,7 @@ angular.module('estimator')
                 }).success(function (res) {
                     $toast({message: 'Статус изменён', theme:'success'});
                 });
-            }
+            };
 
             $scope.save = function () {
                 $http({
@@ -60,7 +91,7 @@ angular.module('estimator')
                     method: 'POST',
                     data: $scope.estimation
                 }).success(function (res) {
-                    $growl.addMessage('Success', 'Эстимация сохранена', 'success');
+                    $toast({message: 'Эстимация сохранена', theme: 'success'});
                     if($scope.params.projectKey) {
                         $state.go('projectEstimations', {key: $scope.params.projectKey});
                     } else {
@@ -71,9 +102,11 @@ angular.module('estimator')
 
             $scope.sectionMenu = [
                 ['Добавить секцию', function () {
+
                     var sectionNum = ($scope.estimation.sections && $scope.estimation.sections.length > 0) ?
                     $scope.estimation.sections.length + 1 :
                     1;
+
                     $scope.estimation.sections.push({
                         number: sectionNum,
                         subSections: [
@@ -83,26 +116,31 @@ angular.module('estimator')
                             }
                         ]
                     });
+
+                    initTotals();
                 }],
                 null,
                 ['Удалить секцию', function (item) {
-                    $scope.estimation.sections.splice(item.section.number - 1, 1);
+                    $scope.estimation.sections.splice(item.section.idx, 1);
+                    initTotals();
                 }]
             ];
 
             $scope.subSectionMenu = [
                 ['Добавить под-секцию', function (item) {
-                    var sectionNum = item.$parent.section.number - 1;
-                    $scope.estimation.sections[sectionNum].subSections.push({
+                    var sectionIdx = item.$parent.section.idx;
+                    $scope.estimation.sections[sectionIdx].subSections.push({
                         estimation: []
                     });
+                    initTotals();
                 }],
                 null,
                 ['Удалить под-секцию', function (item) {
-                    var sectionNum = item.$parent.section.number - 1;
-                    var subSectionNum = item.sub.subNum * 10 % 10;
+                    var sectionIdx = item.$parent.section.idx;
+                    var subSectionIdx = item.sub.subNum.idx;
 
-                    $scope.estimation.sections[sectionNum].subSections.splice(subSectionNum - 1, 1);
+                    $scope.estimation.sections[sectionIdx].subSections.splice(subSectionIdx, 1);
+                    initTotals();
                 }]
             ];
 
@@ -120,7 +158,7 @@ angular.module('estimator')
 
                 WindowObject.document.close();
                 WindowObject.focus();
-            }
+            };
         }
 
     ]);
