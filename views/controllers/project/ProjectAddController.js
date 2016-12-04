@@ -16,22 +16,12 @@ angular.module('estimator')
             var clearEstimationModel = {
                 fields: [],
                 estimationTimeNeeded: true,
-                coordination: {
-                    isNeeded: true,
-                    percentage: 0
-                },
-                stabilisation: {
-                    isNeeded: true,
-                    percentage: 0
-                },
-                testing: {
-                    isNeeded: true,
-                    percentage: 0
-                },
-                other: {
-                    isNeeded: true,
-                    percentage: 0
-                }
+                mngmntModel: [
+                    {
+                        name: undefined,
+                        percent: undefined
+                    }
+                ]
             };
             $scope.params = angular.copy($state.params);
             $scope.project = {
@@ -57,6 +47,17 @@ angular.module('estimator')
                         $scope.project = res[0];
                         $scope.estimationModel = $scope.project.estimationModel || clearEstimationModel;
                     });
+            };
+
+            $scope.addMngmntField = function() {
+                $scope.project.estimationModel.mngmntModel.push({
+                    name: undefined,
+                    percent: undefined
+                });
+            };
+
+            $scope.removeMngmntField = function(idx) {
+                $scope.project.estimationModel.mngmntModel.splice(idx, 1);
             };
 
             $scope.init = function () {

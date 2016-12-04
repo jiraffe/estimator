@@ -27,6 +27,7 @@
 
             <h4 class="md-title">Поля эстимации:</h4>
             <md-chips
+                    required
                     class="custom-chips"
                     ng-model="project.estimationModel.fields"
                     placeholder="Введите имя поля"
@@ -40,81 +41,40 @@
                 </button>
             </md-chips>
 
+            <h4 class="md-title">Секции меджмента:</h4>
 
-            <div layout-gt-xs="row">
+            <div layout-gt-xs="row" ng-repeat="field in project.estimationModel.mngmntModel track by $index">
                 <md-input-container>
-                    <md-switch
-                            aria-label="Координация"
-                            id="enableCoord"
-                            ng-model="project.estimationModel.coordination.isNeeded">
-                        Координация
-                    </md-switch>
+                    <label>Название секции</label>
+                    <input type="text" required id="{{'fieldName' + $index}}" name="{{'field' + $index}}"
+                           ng-model="project.estimationModel.mngmntModel[$index].name">
                 </md-input-container>
-
-                <md-input-container ng-show="project.estimationModel.coordination.isNeeded" class="inputWithSwich">
+                <md-input-container>
                     <label>Процент от разработки</label>
-                    <input type="number" id="coordPercentage" name="coordPercentage"
-                           ng-model="project.estimationModel.coordination.value">
+                    <input type="number" required id="{{'fieldValue' + $index}}" name="{{'fieldValue' + $index}}"
+                           ng-model="project.estimationModel.mngmntModel[$index].percent">
+                </md-input-container>
+                <md-input-container>
+                    <md-button class="md-icon-button" ng-click="removeMngmntField($index)">
+                        <md-tooltip>Удалить</md-tooltip>
+                        <md-icon md-font-set="material-icons" style="color:#c00;">close</md-icon>
+                    </md-button>
                 </md-input-container>
             </div>
 
-            <div layout-gt-xs="row">
-                <md-input-container>
-                    <md-switch
-                            aria-label="Стабилизация"
-                            id="enableStab"
-                            ng-model="project.estimationModel.stabilisation.isNeeded">
-                        Стабилизация
-                    </md-switch>
-                </md-input-container>
-
-                <md-input-container ng-show="project.estimationModel.stabilisation.isNeeded" class="inputWithSwich">
-                    <label>Процент от разработки</label>
-                    <input type="number" id="stabPercentage" name="stabPercentage"
-                           ng-model="project.estimationModel.stabilisation.value">
-                </md-input-container>
-            </div>
-
-            <div layout-gt-xs="row">
-                <md-input-container>
-                    <md-switch
-                            aria-label="Тестирование"
-                            id="enableTesting"
-                            ng-model="project.estimationModel.testing.isNeeded">
-                        Тестирование
-                    </md-switch>
-                </md-input-container>
-
-                <md-input-container ng-show="project.estimationModel.testing.isNeeded" class="inputWithSwich">
-                    <label>Процент от разработки</label>
-                    <input type="number" id="testingCoord" name="testingCoord"
-                           ng-model="project.estimationModel.testing.value">
-                </md-input-container>
-            </div>
-
-            <div layout-gt-xs="row">
-                <md-input-container>
-                    <md-switch
-                            aria-label="Другое"
-                            id="otherCoordLabel"
-                            ng-model="project.estimationModel.other.isNeeded">
-                        Другое
-                    </md-switch>
-                </md-input-container>
-
-                <md-input-container ng-show="project.estimationModel.other.isNeeded" class="inputWithSwich">
-                    <label>Процент от разработки</label>
-                    <input type="number" id="otherCoord" name="otherCoord"
-                           ng-model="project.estimationModel.other.value">
-                </md-input-container>
-            </div>
+            <md-button ng-click="addMngmntField();" class="md-fab md-mini" md-colors="{background: 'green'}"
+                       aria-label="Добавить">
+                <md-icon md-font-set="material-icons">add</md-icon>
+            </md-button>
         </form>
 
         <div class="modal-footer">
-            <md-button ng-show="projectKey === undefined" type="submit" class="md-raised md-primary" ng-click="upsert();"
+            <md-button ng-show="projectKey === undefined" type="submit" class="md-raised md-primary"
+                       ng-click="upsert();"
                        ng-disabled="addProjectForm.$invalid"> Добавить
             </md-button>
-            <md-button ng-show="projectKey !== undefined" type="submit" class="md-raised md-primary" ng-click="upsert();"
+            <md-button ng-show="projectKey !== undefined" type="submit" class="md-raised md-primary"
+                       ng-click="upsert();"
                        ng-disabled="addProjectForm.$invalid"> Сохранить
             </md-button>
         </div>

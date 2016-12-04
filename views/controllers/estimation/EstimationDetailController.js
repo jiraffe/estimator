@@ -30,6 +30,7 @@ angular.module('estimator')
                         $scope.project = res.data[0];
                         $scope.esModel = $scope.project.estimationModel;
                     }).then(getEstimation)
+                    .then(prepareManagementSection)
                     .then(initTotals);
             };
 
@@ -43,6 +44,12 @@ angular.module('estimator')
                         $scope.estimation.sections = [];
                     }
                 });
+            };
+
+            function prepareManagementSection() {
+                var mngmntModel = $scope.esModel.mngmntModel;
+                var isNeeded = mngmntModel.some((el) => el.isNeeded === true);
+                console.log(isNeeded);
             };
 
             function initTotals() {

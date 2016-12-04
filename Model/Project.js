@@ -9,24 +9,14 @@ var schema = new Schema({
     name: String,
     key: String,
     estimationModel: {
-        fields:[String],
+        fields: [String],
         estimationTimeNeeded: Boolean,
-        coordination: {
-            isNeeded: Boolean,
-            value: Number
-        },
-        stabilisation: {
-            isNeeded: Boolean,
-            value: Number
-        },
-        testing: {
-            isNeeded: Boolean,
-            value: Number
-        },
-        other: {
-            isNeeded: Boolean,
-            value: Number
-        }
+        mngmntModel: [
+            {
+                name: String,
+                percent: Number
+            }
+        ]
     }
 });
 
