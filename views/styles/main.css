@@ -2,6 +2,14 @@ body {
     background-color: #fafafa;
 }
 
+#estimation {
+    padding: 20px 5%;
+}
+
+#estimationButtons {
+    padding: 0px 5%;
+}
+
 .est-table {
     width: 100%;
 }

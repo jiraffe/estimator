@@ -29,7 +29,7 @@
                     <div class="divTableCell">&nbsp;</div>
                     <div class="divTableCell">Анализ и оценка</div>
                     <div ng-repeat="model in esModel.fields" class="divTableCell">&nbsp;</div>
-                    <div class="divTableCell" contenteditable="true" type="number"
+                    <div class="divTableCell centeate-text" contenteditable="true" type="number"
                          ng-model="estimation.estimationTime"></div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     <div class="divTableCell section sectionNumber">&nbsp;</div>
                     <div class="divTableCell section" contenteditable="true" type="text" ng-model="section.name"></div>
                     <div ng-repeat="model in esModel.fields" class="divTableCell section">&nbsp;</div>
-                    <div class="divTableCell section estVal">{{section.total();}}</div>
+                    <div class="divTableCell section estVal centeate-text">{{section.total();}}</div>
                 </div>
 
                 <!-- под-секции -->
@@ -50,54 +50,51 @@
                     <div class="divTableCell subSection" contenteditable="true" ng-model="sub.descr"></div>
                     <div
                             ng-repeat="model in esModel.fields track by $index"
-                            class="divTableCell subSection"
+                            class="divTableCell subSection centeate-text"
                             contenteditable="true"
                             type="number"
                             ng-model="sub.estimation[$index]"
                             ng-model-setter="convertToNum($value)"></div>
-                    <div class="divTableCell subSection estVal">{{sub.total();}}</div>
+                    <div class="divTableCell subSection estVal centeate-text">{{sub.total();}}</div>
                 </div>
             </div>
 
 
             <div class="divTableFoot">
-                <div class="divTableRow" context-menu="sectionMenu">
-                    <div class="divTableCell section sectionNumber">{{estimation.sections.length + 1}}</div>
+
+                <!-- Секция менеджмента -->
+                <div class="divTableRow">
+                    <div class="divTableCell section sectionNumber">{{estimation.mngmtSection.number}}</div>
                     <div class="divTableCell section sectionNumber">&nbsp;</div>
-                    <div class="divTableCell section">Иное</div>
+                    <div class="divTableCell section">{{estimation.mngmtSection.name}}</div>
                     <div ng-repeat="model in esModel.fields" class="divTableCell section">&nbsp;</div>
-                    <div class="divTableCell section estVal">{{estimation.stabilization + estimation.coordination}}
-                    </div>
+                    <div class="divTableCell section estVal centeate-text">{{estimation.mngmtSection.total()}}</div>
                 </div>
-                <div class="divTableRow">
-                    <div class="divTableCell">&nbsp;</div>
-                    <div class="divTableCell">{{(estimation.sections.length + 1) + ".1"}}</div>
-                    <div class="divTableCell">Стабилизация</div>
-                    <div ng-repeat="model in esModel.fields" class="divTableCell">&nbsp;</div>
-                    <div class="divTableCell" contenteditable="true" type="number"
-                         ng-model="estimation.stabilization"></div>
+
+                <!-- под-секции -->
+                <div class="divTableRow" ng-repeat="sub in estimation.mngmtSection.subSections" context-menu="subSectionMenu">
+                    <div class="divTableCell subSection sectionNumber"></div>
+                    <div class="divTableCell subSection sectionNumber">{{sub.subNum}}</div>
+                    <div class="divTableCell subSection">{{sub.descr}}</div>
+                    <div class="divTableCell subSection" ng-repeat="model in esModel.fields">&nbsp;</div>
+                    <div class="divTableCell subSection estVal centeate-text">{{sub.estimation()}}</div>
                 </div>
-                <div class="divTableRow">
-                    <div class="divTableCell">&nbsp;</div>
-                    <div class="divTableCell">{{(estimation.sections.length + 1) + ".2"}}</div>
-                    <div class="divTableCell">Координация</div>
-                    <div ng-repeat="model in esModel.fields" class="divTableCell">&nbsp;</div>
-                    <div class="divTableCell" contenteditable="true" type="number"
-                         ng-model="estimation.coordination"></div>
-                </div>
+
                 <div class="divTableRow">
                     <div class="divTableHead sectionNumber">&nbsp;</div>
                     <div class="divTableHead sectionNumber">&nbsp;</div>
                     <div class="divTableHead floatRight">Итого</div>
                     <div ng-repeat="model in esModel.fields" class="divTableHead estVal">&nbsp;</div>
-                    <div class="divTableHead estVal">{{estimation.total();}}</div>
+                    <div class="divTableHead estVal centeate-text">{{estimation.total();}}</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <md-button class="md-raised md-warn" ui-sref="projectEstimations({key:project.key})">Назад</md-button>
-    <md-button class="md-raised" md-colors="{background: 'green'}" ng-click="save();">Сохранить</md-button>
-    <md-button class="md-raised md-primary" ng-click="print();">Печать</md-button>
+    <div id="estimationButtons">
+        <md-button class="md-raised md-warn" ui-sref="projectEstimations({key:project.key})">Назад</md-button>
+        <md-button class="md-raised" md-colors="{background: 'green'}" ng-click="save();">Сохранить</md-button>
+        <md-button class="md-raised md-primary" ng-click="print();">Печать</md-button>
+    </div>
 
 </div>

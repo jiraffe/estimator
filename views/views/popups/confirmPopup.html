@@ -8,4 +8,11 @@
 			</md-button>
 		</div>
 	</md-toolbar>
+	<md-dialog-content class="md-dialog-content">
+		<h5>{{params.confirmText}}</h5>
+	</md-dialog-content>
+	<md-dialog-actions>
+		<md-button ng-click="execute()" class="md-primary">{{buttons.confirmButton}}</md-button>
+		<md-button ng-click="cancel()" class="md-primary">{{buttons.cancelButton}}</md-button>
+	</md-dialog-actions>
 </md-dialog>
