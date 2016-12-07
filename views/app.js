@@ -8,7 +8,9 @@ var app = angular.module('estimator', [
     'ngCookies',
     'ui.bootstrap',
     'ui.bootstrap.contextMenu',
-    'ngMaterial']);
+    'ngMaterial',
+    'md.data.table'
+]);
 
 
 app.config([

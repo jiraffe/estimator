@@ -23,53 +23,52 @@
                 <input ng-model="search.key" name="keyFilter" id="keyFilter">
             </md-input-container>
         </div>
-
-
     </div>
 
-    <table class="table table-hover" ng-show="estimations.length > 0">
-        <thead>
-        <tr>
-            <th>Ключ</th>
-            <th>Описание</th>
-            <th>Статус</th>
-            <th>Действия</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="est in estimations | filter:search | filter:statusFilter">
-            <td>
-                <a ui-sref="projectEstimation({key: est.key, projectKey: projectKey})">{{est.key}}</a>
-            </td>
-            <td>{{est.summary}}</td>
-            <td>
-                <span class="label label-{{est.status.style}}">{{est.status.value}}</span>
-            </td>
-            </td>
-            <td>
-                <md-button
-                        type="button"
-                        class="md-icon-button"
-                        ui-sref="editEstimation({key: est.key, projectKey: est.projectKey})"
-                        uib-tooltip="Редактировать">
-                    <md-icon md-font-set="material-icons"
-                             ng-style="{color: 'green', 'font-size':'17px', height:'17px'}">mode_edit</md-icon>
-                </md-button>
-                <md-button
-                        type="button"
-                        class="md-icon-button"
-                        uib-tooltip="Удалить"
-                        confirm-popup
-                        confirm-title="Подтвердите удаление"
-                        confirm-text="Подтвердите удаление эстимации"
-                        confirm-button="Удалить"
-                        cancel-button="Отмена"
-                        confirm-method="deleteEstimation(est.key)">
-                    <md-icon md-font-set="material-icons"
-                             ng-style="{color: 'red', 'font-size':'17px', height:'17px'}">clear</md-icon>
-                </md-button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <md-table-container>
+        <table md-table>
+            <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+            <tr md-row>
+                <th>Ключ</th>
+                <th>Описание</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody md-body>
+            <tr md-row ng-repeat="est in estimations | filter:search | filter:statusFilter">
+                <td md-cell>
+                    <a ui-sref="projectEstimation({key: est.key, projectKey: projectKey})">{{est.key}}</a>
+                </td>
+                <td md-cell >{{est.summary}}</td>
+                <td md-cell>
+                    <span class="label label-{{est.status.style}}">{{est.status.value}}</span>
+                </td>
+                <td md-cell>
+                    <md-button
+                            type="button"
+                            class="md-icon-button"
+                            ui-sref="editEstimation({key: est.key, projectKey: est.projectKey})"
+                            uib-tooltip="Редактировать">
+                        <md-icon md-font-set="material-icons"
+                                 ng-style="{color: 'green', 'font-size':'17px', height:'17px'}">mode_edit</md-icon>
+                    </md-button>
+                    <md-button
+                            type="button"
+                            class="md-icon-button"
+                            uib-tooltip="Удалить"
+                            confirm-popup
+                            confirm-title="Подтвердите удаление"
+                            confirm-text="Подтвердите удаление эстимации"
+                            confirm-button="Удалить"
+                            cancel-button="Отмена"
+                            confirm-method="deleteEstimation(est.key)">
+                        <md-icon md-font-set="material-icons"
+                                 ng-style="{color: 'red', 'font-size':'17px', height:'17px'}">clear</md-icon>
+                    </md-button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </md-table-container>
 </div>

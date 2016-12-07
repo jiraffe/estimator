@@ -27,6 +27,7 @@
     "angular-bootstrap-contextmenu": "^0.9.9",
     "angular-material": "*",
     "angular-animate": "*",
-    "angular-aria": "*"
+    "angular-aria": "*",
+    "angular-material-data-table": "^0.10.9"
   }
 }

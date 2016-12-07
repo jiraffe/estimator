@@ -11,11 +11,12 @@ angular.module('estimator')
         '$http',
         '$toast',
 
-        function($scope, $state, $http, $toast) {
+        function ($scope, $state, $http, $toast) {
 
             $scope.params = angular.copy($state.params);
             $scope.editMode = !!$scope.params.key;
             $scope.estimation = {
+                key: undefined,
                 projectKey: $scope.params.projectKey,
                 status: {
                     name: 'NEW',
@@ -25,34 +26,41 @@ angular.module('estimator')
             };
 
             $scope.init = function () {
-                if(! $scope.editMode) return;
+                if (!$scope.editMode) return;
 
                 $http.get('projects/' + $scope.params.projectKey + '/estimation/' + $scope.params.key)
                     .success(function (res) {
                         $scope.estimation = res[0];
-                })
+                    })
             };
+
+            $scope.$watch(
+                'estimation.key',
+                function (newVal, oldVal) {
+                    if(!newVal) return;
+                    $scope.estimation.key = newVal.replace(/\/{0,}/g, '');
+                }
+            );
 
             $scope.add = function () {
 
-                if( ! $scope.addEstimationForm.$valid) {
+                if (!$scope.addEstimationForm.$valid) {
                     return;
                 }
 
                 var url = $scope.editMode ?
-                    'projects/' + $scope.params.projectKey + '/estimation/' + $scope.params.key :
+                'projects/' + $scope.params.projectKey + '/estimation/' + $scope.params.key :
                     'estimations';
 
                 $scope.estimation.sections = [{
-                    name:undefined,
+                    name: undefined,
                     subSections: [
                         {
-                            descr : undefined,
-                            estimation:[]
+                            descr: undefined,
+                            estimation: []
                         }
                     ]
                 }];
-
 
                 $http({
                     url: 'estimations',
@@ -60,7 +68,7 @@ angular.module('estimator')
                     data: $scope.estimation
                 }).success(function (res) {
                     var message = $scope.editMode ? 'Эстимация сохранена' : 'Эстимация добавлена';
-                    $toast({message: message, theme:'success'});
+                    $toast({message: message, theme: 'success'});
                     $state.go('projectEstimations', {key: $scope.params.projectKey});
                 });
             }
