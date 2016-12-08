@@ -109,5 +109,15 @@ app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
                     title: 'Редактировать проект'
                 }
             })
+
+            //User operations
+            .state('login', {
+                url: '/login',
+                controller: 'LoginController',
+                templateUrl: 'views/pages/user/login.html',
+                data: {
+                    title: 'Войти'
+                }
+            })
     }
 );

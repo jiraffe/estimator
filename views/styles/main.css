@@ -75,3 +75,17 @@ body {
     color: black;
     font-weight: bold;
 }
+
+.loginBox {
+    max-width:  90%;
+    width: 500px
+}
+
+.stretch input  {
+    width: 100%
+}
+
+.mainBtn {
+    width: 100%;
+    height: 50px;
+}

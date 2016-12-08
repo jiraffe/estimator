@@ -1,4 +1,12 @@
-var urlPrefix = window.location.host.indexOf('86.57.161.116') !== -1 ? 'http://86.57.161.116:3000/' : 'http://192.168.1.60:3000/'
+var host = window.location.host;
+var urlPrefix;
+if(host.indexOf('86.57.161.116') !== -1) {
+    urlPrefix = 'http://86.57.161.116:3000/';
+} else if(host.indexOf('192.168.1.60') !== -1) {
+    urlPrefix = 'http://192.168.1.60:3000/';
+} else {
+    urlPrefix = 'http://127.0.0.1:3000/';
+}
 
 var app = angular.module('estimator', [
     'ui.router',
@@ -9,7 +17,8 @@ var app = angular.module('estimator', [
     'ui.bootstrap',
     'ui.bootstrap.contextMenu',
     'ngMaterial',
-    'md.data.table'
+    'md.data.table',
+    'uiRouterStyles'
 ]);
 
 

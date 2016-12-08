@@ -1,0 +1,74 @@
+<div style="padding-top: 10%" layout="column" layout-align="center center" layout-fill="layout-fill">
+    <div class="loginBox md-whiteframe-z1" layout="column" >
+        <md-toolbar>
+            <h2 class="md-toolbar-tools"><span>{{mode}}</span></h2>
+        </md-toolbar>
+
+        <!-- LOGIN -->
+        <md-content class="md-padding" layout="column" ng-show="mode === 'Login'">
+            <md-input-container>
+                <label>Login</label>
+                <input type="text" ng-model="user.login" autocomplete="off"/>
+            </md-input-container>
+            <md-input-container>
+                <label>Password</label>
+                <input type="password" ng-model="user.password" autocomplete="off"/>
+            </md-input-container>
+
+            <div layout="row" layout-align="center center">
+                <md-button class="md-raised md-primary mainBtn" ng-click="login()">Login</md-button>
+            </div>
+            <div layout="row" layout-align="center center" style="padding-top:20px">
+                <md-button md-no-ink="md-no-ink" ng-click="changeMode('Register')">Register</md-button>
+                <div flex="flex"></div>
+                <md-button ng-click="changeMode('Forgot password')" md-no-ink="md-no-ink">Forgot Password</md-button>
+            </div>
+        </md-content>
+
+        <!-- FORGOT PASSWORD -->
+        <md-content class="md-padding" layout="column" ng-show="mode === 'Forgot password'">
+            <md-input-container>
+                <label>Login</label>
+                <input type="text" ng-model="user.login" autocomplete="off"/>
+            </md-input-container>
+
+            <div layout="row" layout-align="center center">
+                <md-button class="md-raised md-primary mainBtn" ng-click="forgotPassword()">Reset password</md-button>
+            </div>
+            <div layout="row" layout-align="center center" style="padding-top:20px">
+                <md-button md-no-ink="md-no-ink" ng-click="changeMode('Register')">Register</md-button>
+                <div flex="flex"></div>
+                <md-button ng-click="changeMode('Login')" md-no-ink="md-no-ink">Login</md-button>
+            </div>
+        </md-content>
+
+        <!-- REGISTER -->
+        <md-content class="md-padding" layout="column" ng-show="mode === 'Register'">
+            <md-input-container>
+                <label>Name</label>
+                <input type="password" ng-model="user.name" autocomplete="off"/>
+            </md-input-container>
+            <md-input-container>
+                <label>Login</label>
+                <input type="text" ng-model="user.login" autocomplete="off"/>
+            </md-input-container>
+            <md-input-container>
+                <label>Password</label>
+                <input type="password" ng-model="user.password" autocomplete="off"/>
+            </md-input-container>
+            <md-input-container>
+                <label>Repeat password</label>
+                <input type="password" ng-model="user.repeatPassword" autocomplete="off"/>
+            </md-input-container>
+
+            <div layout="row" layout-align="center center">
+                <md-button class="md-raised md-primary mainBtn" ng-click="register()">Register</md-button>
+            </div>
+            <div layout="row" layout-align="center center" style="padding-top:20px">
+                <md-button md-no-ink="md-no-ink" ng-click="changeMode('Forgot password')">Forgot password</md-button>
+                <div flex="flex"></div>
+                <md-button ng-click="changeMode('Login')" md-no-ink="md-no-ink">Login</md-button>
+            </div>
+        </md-content>
+    </div>
+</div>

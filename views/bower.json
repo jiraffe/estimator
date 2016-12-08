@@ -28,6 +28,7 @@
     "angular-material": "*",
     "angular-animate": "*",
     "angular-aria": "*",
-    "angular-material-data-table": "^0.10.9"
+    "angular-material-data-table": "^0.10.9",
+    "angular-ui-router-styles": "^1.1.0"
   }
 }
