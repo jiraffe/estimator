@@ -30,6 +30,8 @@ app.config([
 
     function($httpProvider, $animateProvider, $compileProvider) {
 
+        $httpProvider.defaults.withCredentials = true;
+        
         var requestInterceptor = function($q, StorageService){
             return {
                 'request': function (config) {
