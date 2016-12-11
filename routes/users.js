@@ -59,6 +59,9 @@ router.post('/register', function (req, res, next) {
         name: req.body.name,
         email: req.body.email
     });
+    var fp = path.join(__dirname, '../', 'public/users/',user.login,'/');
+    fs.mkdir(fp);
+
     saveUserAndResponse(user, res);
 });
 
@@ -96,6 +99,7 @@ router.get('/logout', function (req, res, next) {
 
 router.get('/profile', passport.mustAuthenticated, function (req, res, next) {
     User.findOne({login: req.session.passport.user}, function (err, user) {
+        if(!user.avatarName) user.avatarName = "../../images/blank_account.png";
         res.json(user);
     });
 });
@@ -111,8 +115,6 @@ router.post('/changeAvatar', passport.mustAuthenticated, function (req, res, nex
 
         var file = req.files.file;
         var fp = path.join(__dirname, '../', 'public/users/',user.login,'/');
-        var stat = fs.statSync(fp);
-        if(!stat.isDirectory)  fs.mkdir(fp);
         file.mv(fp + file.name, function (err) {
             if (err) {
                 res.status(500).send(err);
