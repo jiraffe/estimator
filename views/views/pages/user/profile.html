@@ -1,0 +1,42 @@
+<div ng-init="getUserProfile()">
+    <!--<lf-ng-md-file-input lf-files='files'> </lf-ng-md-file-input>-->
+    <!--<md-button ng-click="changeAvatar()">Change</md-button>-->
+
+
+    <div layout="row" style="padding-top: 5%">
+        <div flex="50" flex-offset="25" class="profileCard">
+            <div class="profileTitle">
+                <div class="userProfileName">{{user.name}}</div>
+                <div style="padding-top: 20px; padding-bottom: 30px">
+                    <div class="userProfile"
+                         style="background-image: url('http://localhost:3000/public/users/{{user.login}}/{{user.avatarName}}')">
+                    </div>
+                </div>
+            </div>
+            <md-content class="md-padding" style="background-color: white" layout="column">
+                <md-input-container>
+                    <label>Имя</label>
+                    <input type="text" name="name" ng-model="user.name" autocomplete="off"/>
+                </md-input-container>
+                <md-input-container>
+                    <label>email</label>
+                    <input type="email" name="email" ng-model="user.email" autocomplete="off" disabled/>
+                </md-input-container>
+                <md-input-container>
+                    <label>Логин</label>
+                    <input type="text" name="login" ng-model="user.login" autocomplete="off" disabled/>
+                </md-input-container>
+                <md-input-container>
+                    <label>Пароль</label>
+                    <input type="password" name="login" ng-model="user.password" autocomplete="off"
+                           placeholder="Измените свой пароль"/>
+                </md-input-container>
+            </md-content>
+            <div layout="row" layout-align="center center">
+                <!--<md-button md-no-ink="md-no-ink" ng-click="changeMode('register')">Регистрация</md-button>-->
+                <div flex="flex"></div>
+                <md-button ng-click="save();">Обновить</md-button>
+            </div>
+        </div>
+    </div>
+</div>

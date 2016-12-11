@@ -18,7 +18,8 @@ var app = angular.module('estimator', [
     'ui.bootstrap.contextMenu',
     'ngMaterial',
     'md.data.table',
-    'uiRouterStyles'
+    'uiRouterStyles',
+    'lfNgMdFileInput'
 ]);
 
 

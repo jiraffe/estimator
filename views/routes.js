@@ -2,7 +2,7 @@
 
 app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
 
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/login');
         $urlRouterProvider.when('/', '/projects');
         /*if(navigator.appVersion.indexOf("MSIE 8.") === -1 && navigator.appVersion.indexOf("MSIE 9.") === -1){
          $locationProvider.html5Mode(true);
@@ -117,6 +117,15 @@ app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
                 templateUrl: 'views/pages/user/login.html',
                 data: {
                     title: 'Войти'
+                }
+            })
+            .state('profile', {
+                parent: 'base',
+                url: '/user/profile',
+                controller: 'UserProfileController',
+                templateUrl: 'views/pages/user/profile.html',
+                data: {
+                    title: 'Профиль пользователя'
                 }
             })
     }

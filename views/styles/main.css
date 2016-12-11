@@ -55,6 +55,7 @@ body {
     color: white;
     fill: white;
 }
+
 .inputWithSwich {
     margin-top: 35px;
     margin-left: 30px;
@@ -77,15 +78,47 @@ body {
 }
 
 .loginBox {
-    max-width:  90%;
+    max-width: 90%;
     width: 500px
 }
 
-.stretch input  {
+.stretch input {
     width: 100%
 }
 
 .mainBtn {
     width: 100%;
-    height: 50px;
+    height: 45px;
+}
+
+.userProfile {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-position: center center;
+    background-size: cover;
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+.userProfileName {
+    font-weight: bold;
+    font-size: 20px;
+    height: 100%;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.profileCard {
+    height: 760px;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 30px;
+}
+
+.profileTitle {
+    width: 100%;
+    background-color: #2f5f8f;
+    color: whitesmoke;
 }

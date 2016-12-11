@@ -4,13 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var HttpError = require('./error').HttpError;
-
+var fileupload = require('express-fileupload');
 var mongoose = require('./lib/mongoose');
 
 var app = express();
 
 app.use(express.static(path.join(__dirname, 'views')));
-
+app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use(fileupload());
 app.use(require('cookie-parser')());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

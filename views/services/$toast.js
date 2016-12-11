@@ -14,7 +14,7 @@ angular.module('estimator')
 
                 $mdToast.show({
                     templateUrl: 'views/popups/toast.html',
-                    hideDelay: opts.delay || 1000,
+                    hideDelay: opts.delay || 2000,
                     position: 'top right',
                     controller: 'ToastController',
                     locals: {message: opts.message},

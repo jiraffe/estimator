@@ -12,6 +12,12 @@ var Schema = mongoose.Schema;
 var schema = new Schema({
 
     name: String,
+    avatarName: String,
+    email: {
+        type: String,
+        unique: true,
+        required: true
+    },
 
     login: {
         type: String,
@@ -35,6 +41,7 @@ var schema = new Schema({
     }
 });
 schema.methods.encryptPassword = function(password) {
+    if(!password) return false;
     return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
 };
 
