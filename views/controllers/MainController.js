@@ -4,9 +4,9 @@ angular.module('estimator')
     .controller('MainController',
         function ($scope, $http, $toast, $state, StorageService, BroadcastService) {
 
+            var blankProfile = '../../images/blank_account.png';
             $scope.params = angular.copy($state.params);
-
-            $scope.user = {};
+            $scope.user = {avatarName: blankProfile};
 
             $scope.logout = function () {
                 $http.get('users/logout')
@@ -22,6 +22,7 @@ angular.module('estimator')
                 $http.get('users/profile')
                     .success(function (res) {
                         $scope.user = res;
+                        if(!res.avatarName) $scope.user.avatarName = blankProfile;
                     })
             };
 

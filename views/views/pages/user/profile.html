@@ -1,15 +1,54 @@
 <div ng-init="getUserProfile()">
-    <lf-ng-md-file-input lf-files='files'> </lf-ng-md-file-input>
-    <md-button ng-click="changeAvatar()">Change</md-button>
 
 
     <div layout="row" style="padding-top: 5%">
         <div flex="50" flex-offset="25" class="profileCard">
             <div class="profileTitle">
                 <div class="userProfileName">{{user.name}}</div>
-                <div style="padding-top: 20px; padding-bottom: 30px">
-                    <div class="userProfile"
-                         style="background-image: url('http://localhost:3000/public/users/{{user.login}}/{{user.avatarName}}')">
+                <div style="width: 100%; display: table">
+                    <div style="display:table-row-group; ">
+                        <div style="width: 25%; display: table-cell;"></div>
+                        <div style="width: 50%; display: table-cell;">
+                            <div ng-if="!picFile && !user.avatarName" class="userProfile"
+                                 style="background-image: url('http://localhost:3000/public/images/blank_account.png')">
+                            </div>
+                            <div ng-if="!picFile && user.avatarName" class="userProfile"
+                                 style="background-image: url('http://localhost:3000/public/users/{{user.login}}/{{user.avatarName}}')">
+                            </div>
+                            <div ng-if="!!picFile">
+                                <img ngf-src="picFile" class="userProfile">
+                            </div>
+                        </div>
+                        <div style="width: 25%; display: table-cell; vertical-align: middle">
+
+                            <md-button class="md-icon-button" aria-label="Добавить" ngf-select="" ng-model="picFile"
+                                       name="file" ngf-accept="'image/*'" style="display: inline-block">
+                                <md-tooltip>Изменить картинку профиля</md-tooltip>
+                                <md-icon md-font-set="material-icons"
+                                         style="
+                                        margin-right: 20px;
+                                        color:white;
+                                        padding-bottom: 24px;
+                                        padding-right: 24px;
+                                        border: 2px solid white;
+                                        border-radius: 50%">
+                                    mode_edit
+                                </md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button" ng-click="changeAvatar()" aria-label="Добавить" ng-show="!!picFile" style="display: inline-block">
+                                <md-tooltip>Изменить картинку профиля</md-tooltip>
+                                <md-icon md-font-set="material-icons"
+                                         style="
+                                        margin-right: 20px;
+                                        color:white;
+                                        padding-bottom: 24px;
+                                        padding-right: 24px;
+                                        border: 2px solid white;
+                                        border-radius: 50%">
+                                    plus
+                                </md-icon>
+                            </md-button>
+                        </div>
                     </div>
                 </div>
             </div>

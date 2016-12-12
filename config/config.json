@@ -1,7 +1,7 @@
 {
   "port": 3000,
   "mongoose": {
-    "uri": "mongodb://localhost/estimator",
+    "uri": "mongodb://127.0.0.1/estimator",
     "options": {
       "server": {
         "socketOptions": {

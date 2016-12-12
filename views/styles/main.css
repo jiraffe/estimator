@@ -109,7 +109,13 @@ body {
     background-size: cover;
     display: block;
     margin: 0 auto;
-    padding-bottom: 50px;
+}
+
+.test {
+    width: 32%;
+    height: 20px;
+    display: inline-block;
+    background-color: #8a6d3b;
 }
 
 .userProfileName {
@@ -117,7 +123,8 @@ body {
     font-size: 20px;
     height: 100%;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .profileCard {
@@ -131,4 +138,5 @@ body {
     width: 100%;
     background-color: #2f5f8f;
     color: whitesmoke;
+    padding-bottom: 25px;
 }

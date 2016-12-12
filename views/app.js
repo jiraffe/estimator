@@ -19,7 +19,7 @@ var app = angular.module('estimator', [
     'ngMaterial',
     'md.data.table',
     'uiRouterStyles',
-    'lfNgMdFileInput'
+    'ngFileUpload'
 ]);
 
 

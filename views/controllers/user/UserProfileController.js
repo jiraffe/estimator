@@ -27,11 +27,9 @@ angular.module('estimator')
                     })
             };
 
-            $scope.changeAvatar = function(){
+            $scope.changeAvatar = function()    {
                 var formData = new FormData();
-                angular.forEach($scope.files,function(obj){
-                    formData.append('file', obj.lfFile);
-                });
+                    formData.append('file', $scope.picFile);
                 $http.post('users/changeAvatar', formData, {
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
@@ -39,6 +37,7 @@ angular.module('estimator')
                     console.log(result);
                     $scope.getUserProfile();
                     $scope.$emit('profileChanged');
+                    $scope.picFile = undefined;
                 },function(err){
                     console.log(err);
                 });

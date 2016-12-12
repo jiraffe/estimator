@@ -30,6 +30,6 @@
     "angular-aria": "*",
     "angular-material-data-table": "^0.10.9",
     "angular-ui-router-styles": "^1.1.0",
-    "lf-ng-md-file-input": "^1.4.8"
+    "ng-file-upload": "^12.2.13"
   }
 }

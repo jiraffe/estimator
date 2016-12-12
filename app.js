@@ -25,9 +25,8 @@ var store = new MongoDBStore(
         collection: 'sessions'
     });
 // Catch errors
-store.on('error', function (error) {
-    assert.ifError(error);
-    assert.ok(false);
+store.on('error', function (err) {
+    console.log(err);
 });
 
 var sessionOpts = {
@@ -35,7 +34,7 @@ var sessionOpts = {
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
     },
-    store: store,
+    //store: store,
     resave: true,
     saveUninitialized: true
 };
