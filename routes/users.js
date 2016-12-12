@@ -59,13 +59,17 @@ router.post('/register', function (req, res, next) {
         name: req.body.name,
         email: req.body.email
     });
-    var fp = path.join(__dirname, '../', 'public/users/',user.login,'/');
-    fs.mkdir(fp);
 
-    saveUserAndResponse(user, res);
+
+    saveUserAndResponse(user, res, function (err, user) {
+        var fp = path.join(__dirname, '../', 'public/users/',user.login,'/');
+        fs.mkdir(fp);
+
+        res.json({success: true});
+    });
 });
 
-function saveUserAndResponse(user, res) {
+function saveUserAndResponse(user, res, next) {
     user.save(function (err) {
         return err
             ?
@@ -74,6 +78,8 @@ function saveUserAndResponse(user, res) {
                 :
                 res.status(500).json({success: false, errors: err.toJSON()})
             :
+            next ?
+                next(err, user) :
             res.json({success: true});
     });
 }
@@ -100,6 +106,11 @@ router.get('/logout', function (req, res, next) {
 router.get('/profile', passport.mustAuthenticated, function (req, res, next) {
     User.findOne({login: req.session.passport.user}, function (err, user) {
         if(!user.avatarName) user.avatarName = "../../images/blank_account.png";
+
+        //TODO: need to find good solution to exclude this fields
+        user.hashedPassword = undefined;
+        user.salt = undefined;
+
         res.json(user);
     });
 });
