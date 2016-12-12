@@ -91,6 +91,16 @@ body {
     height: 45px;
 }
 
+.userMenu {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-position: center center;
+    background-size: cover;
+    display: block;
+    margin: 0 auto;
+}
+
 .userProfile {
     width: 200px;
     height: 200px;

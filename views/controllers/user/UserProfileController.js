@@ -38,6 +38,7 @@ angular.module('estimator')
                 }).then(function(result){
                     console.log(result);
                     $scope.getUserProfile();
+                    $scope.$emit('profileChanged');
                 },function(err){
                     console.log(err);
                 });

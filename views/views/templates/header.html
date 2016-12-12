@@ -9,9 +9,9 @@
 
         <md-menu-bar>
             <md-menu>
-                <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
-                    <md-icon md-font-set="material-icons">person</md-icon>
-                </md-button>
+                <div class="userMenu" ng-click="$mdOpenMenu()"
+                     style="background-image: url('http://localhost:3000/public/users/{{user.login}}/{{user.avatarName}}')">
+                </div>
                 <md-menu-content width="2">
                     <md-menu-item>
                         <md-button ui-sref="profile">Профиль</md-button>
