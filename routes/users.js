@@ -107,10 +107,6 @@ router.get('/profile', passport.mustAuthenticated, function (req, res, next) {
     User.findOne({login: req.session.passport.user}, function (err, user) {
         if(!user.avatarName) user.avatarName = "../../images/blank_account.png";
 
-        //TODO: need to find good solution to exclude this fields
-        user.hashedPassword = undefined;
-        user.salt = undefined;
-
         res.json(user);
     });
 });

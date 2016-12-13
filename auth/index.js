@@ -26,7 +26,7 @@ passport.use(new LocalStrategy({
     },
     function (req, login, password, done) {
 
-        User.findOne({login: login}, function (err, user) {
+        User.findOne({login: login}).select('+hashedPassword +salt').exec(function (err, user) {
             if (err) {
                 done(err);
             } else if (!user) {
