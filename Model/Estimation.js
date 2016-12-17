@@ -18,7 +18,14 @@ var schema = new Schema({
         ]
     },
 
-    estimationTime: Number,
+    analysis: {
+        subSections: [
+            {
+                descr : String,
+                estimation: Number
+            }
+        ]
+    },
 
     coordination: Number,
     stabilisation: Number,

@@ -42,13 +42,25 @@
                     <div class="divTableHead estVal">Total</div>
                 </div>
                 <!-- Анализ и оценка -->
-                <div class="divTableRow divEstimation" context-menu="sectionMenu">
+                <div class="divTableRow divEstimation">
                     <div class="divTableCell"></div>
                     <div class="divTableCell">&nbsp;</div>
                     <div class="divTableCell">Анализ и оценка</div>
                     <div ng-repeat="model in esModel.fields" class="divTableCell">&nbsp;</div>
-                    <div class="divTableCell centeate-text" contenteditable="true" type="number"
-                         ng-model="estimation.estimationTime"></div>
+                    <div class="divTableCell centeate-text">{{estimation.analysis.total()}}</div>
+                </div>
+                <!-- под-секции анализа и оценки -->
+                <div class="divTableRow" context-menu="analysisSubSectionMenu" ng-repeat="sub in estimation.analysis.subSections track by $index">
+                    <div class="divTableCell subSection sectionNumber"></div>
+                    <div class="divTableCell subSection sectionNumber">{{$index + 1}}</div>
+                    <div class="divTableCell subSection" contenteditable="true" ng-model="sub.descr"></div>
+                    <div ng-repeat="model in esModel.fields" class="divTableCell estVal">&nbsp;</div>
+                    <div class="divTableCell subSection estVal centeate-text"
+                         contenteditable="true"
+                         type="number"
+                         ng-model="sub.estimation"
+                         ng-model-setter="convertToNum($value)"
+                    ></div>
                 </div>
             </div>
             <div class="divTableBody" ng-repeat="section in estimation.sections">

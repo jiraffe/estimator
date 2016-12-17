@@ -77,6 +77,15 @@ angular.module('estimator')
                     ]
                 }];
 
+                $scope.estimation.analysis = {
+                    subSections: [
+                        {
+                            descr: undefined,
+                            estimation: undefined
+                        }
+                    ]
+                }
+
                 $http({
                     url: 'estimations',
                     method: 'POST',

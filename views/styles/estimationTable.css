@@ -11,7 +11,7 @@
     width: inherit;
 }
 .divTableHeading {
-    background-color: #EEE;
+    background-color: white;
     display: table-header-group;
 }
 .divTableCell, .divTableHead {
