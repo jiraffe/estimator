@@ -7,6 +7,17 @@ var schema = new Schema({
     key: String,
     summary: String,
 
+    estimationModel: {
+        fields: [String],
+        estimationTimeNeeded: Boolean,
+        mngmntModel: [
+            {
+                name: String,
+                percent: Number
+            }
+        ]
+    },
+
     estimationTime: Number,
 
     coordination: Number,

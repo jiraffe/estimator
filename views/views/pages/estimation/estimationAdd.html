@@ -19,7 +19,31 @@
                     <div ng-message="required">Нужно описание</div>
                 </div>
             </md-input-container>
+
+            <h3>Модель эстимации:</h3>
+            <hr/>
+
+            <md-switch ng-model="estimation.estimationModel.estimationTimeNeeded" aria-label="Switch 1">
+                Учитывание времени эстимации
+            </md-switch>
+
+            <h4 class="md-title">Поля эстимации:</h4>
+            <md-chips
+                    required
+                    class="custom-chips"
+                    ng-model="estimation.estimationModel.fields"
+                    placeholder="Введите имя поля"
+                    secondary-placeholder="+Поле"
+                    md-enable-chip-edit="true">
+                <md-chip-template>
+                    <span>{{$chip}}</span>
+                </md-chip-template>
+                <button md-chip-remove class="md-primary estFieldBtn">
+                    <md-icon md-font-set="material-icons">close</md-icon>
+                </button>
+            </md-chips>
             <div class="modal-footer">
+
                 <md-button class="md-raised md-warn" ui-sref="projectEstimations({key:estimation.projectKey})">Назад</md-button>
                 <md-button class="md-raised md-primary" ng-hide="editMode" ng-click="add();">Добавить</md-button>
                 <md-button class="md-raised md-primary" ng-show="editMode" ng-click="add();">Сохранить</md-button>

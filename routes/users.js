@@ -14,9 +14,6 @@ var userRole;
 var adminRole;
 
 (function () {
-
-    console.log('INIT USER ROUTING ! ! !');
-
     Role.findOne({name:'admin'}, function (err, role) {
         adminRole = role;
     });

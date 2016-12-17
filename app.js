@@ -34,7 +34,7 @@ var sessionOpts = {
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
     },
-    //store: store,
+    store: store,
     resave: true,
     saveUninitialized: true
 };

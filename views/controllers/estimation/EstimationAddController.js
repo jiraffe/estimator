@@ -26,18 +26,33 @@ angular.module('estimator')
             };
 
             $scope.init = function () {
-                if (!$scope.editMode) return;
 
-                $http.get('projects/' + $scope.params.projectKey + '/estimation/' + $scope.params.key)
-                    .success(function (res) {
-                        $scope.estimation = res[0];
-                    })
+                if ($scope.editMode) {
+                    initForEdit();
+                } else {
+                    initForCreate();
+                }
             };
+
+            function initForEdit() {
+                $http.get('projects/' + $scope.params.projectKey + '/estimation/' + $scope.params.key)
+                    .then(function (res) {
+                        $scope.estimation = res.data[0];
+                    });
+            }
+
+            function initForCreate() {
+                $http.get('projects/' + $scope.params.projectKey)
+                    .then(function (res) {
+                        $scope.estimation.estimationModel = res.data[0].estimationModel;
+                    });
+            };
+
 
             $scope.$watch(
                 'estimation.key',
                 function (newVal, oldVal) {
-                    if(!newVal) return;
+                    if (!newVal) return;
                     $scope.estimation.key = newVal.replace(/\/{0,}/g, '');
                 }
             );

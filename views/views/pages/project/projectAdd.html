@@ -25,7 +25,13 @@
             <h3>Модель эстимации:</h3>
             <hr/>
 
+            <md-switch ng-model="project.estimationModel.estimationTimeNeeded" aria-label="Switch 1">
+                Учитывание времени эстимации
+            </md-switch>
+
             <h4 class="md-title">Поля эстимации:</h4>
+            <h6>Можно будет изменить для каждой эстимации в проекте</h6>
+
             <md-chips
                     required
                     class="custom-chips"

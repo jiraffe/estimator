@@ -11,7 +11,7 @@
 
     <div ng-show="estimations.length > 0">
 
-        <div layout-gt-xs="row">
+        <div layout-gt-xs="row" style="padding-left: 25px">
             <md-input-container class="md-block">
                 <label>Статус:</label>
                 <md-select ng-model="filter">
@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <md-table-container>
+    <md-table-container style="padding: 0px 25px">
         <table md-table>
             <thead md-head md-order="query.order" md-on-reorder="getDesserts">
             <tr md-row>
