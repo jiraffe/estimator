@@ -5,6 +5,7 @@
         </h2>
         <span></span>
         <md-button ui-sref="projects">Проекты</md-button>
+        <md-button ui-sref="projects" ng-if="hasAccessLevel(2);">Test</md-button>
         <span flex></span>
 
         <md-menu-bar>

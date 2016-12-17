@@ -2,33 +2,26 @@
 
 angular.module('estimator')
     .controller('MainController',
-        function ($scope, $http, $toast, $state, StorageService, BroadcastService) {
+        function ($scope, $http, $toast, $state, AuthService, USER_ROLES, AUTH_EVENTS) {
 
-            var blankProfile = '../../images/blank_account.png';
             $scope.params = angular.copy($state.params);
-            $scope.user = {avatarName: blankProfile};
+            $scope.user = {};
+            $scope.isAuthorized = AuthService.isAuthorized;
+            $scope.hasAccessLevel = AuthService.hasAccessLevel;
 
             $scope.logout = function () {
-                $http.get('users/logout')
-                    .success(function (res) {
-                        if (res.success) {
-                            $state.go('login');
-                            $toast({message: 'Заходите ещё!', theme: 'success'})
-                        }
+                AuthService.logout()
+                    .then(function () {
+                        $state.go('login');
+                        $toast({message: 'Заходите ещё!', theme: 'success'})
                     });
             };
 
-            $scope.getUserProfile = function () {
-                $http.get('users/profile')
-                    .success(function (res) {
-                        $scope.user = res;
-                        if(!res.avatarName) $scope.user.avatarName = blankProfile;
-                    })
-            };
+            $scope.$on(AUTH_EVENTS.loginSuccess, function (event, data) {
+                $scope.user = AuthService.user;
+            });
 
-            $scope.getUserProfile();
-
-            $scope.$on('profileChanged', function (event, data) {
-                $scope.getUserProfile(); // Данные, которые нам прислали
+            $scope.$on(AUTH_EVENTS.profileLoaded, function (event, data) {
+                $scope.user = data;
             });
         });

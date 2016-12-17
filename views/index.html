@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="estimator">
     <head>
         <title>Estimator</title>
 
@@ -63,12 +63,13 @@
         <script src="services/BroadcastService.js"></script>
         <script src="services/StatusService.js"></script>
         <script src="services/$toast.js"></script>
+        <script src="services/AuthService.js"></script>
+        <script src="services/Session.js"></script>
 
 
 
     </head>
-    <body ng-app="estimator">
+    <body ng-controller="MainController" ng-init="init()">
         <div ui-view=''></div>
-        <growl style="default"></growl>
     </body>
 </html>

@@ -50,9 +50,29 @@ app.config([
     }
 ]);
 
-app.run(function($rootScope, $state, StatusService) {
-    $rootScope.$state = $state;
 
+app.constant('AUTH_EVENTS', {
+    loginSuccess: 'auth-login-success',
+    loginFailed: 'auth-login-failed',
+    logoutSuccess: 'auth-logout-success',
+    sessionTimeout: 'auth-session-timeout',
+    notAuthenticated: 'auth-not-authenticated',
+    notAuthorized: 'auth-not-authorized',
+    profileLoaded: 'user-profile-loaded',
+    profileChanged: 'user-profile-changed',
+});
+
+app.constant('USER_ROLES', {
+    all: '*',
+    admin: 'admin',
+    user: 'user'
+})
+
+app.run(function($rootScope, $state, StatusService, AUTH_EVENTS, AuthService) {
+    $rootScope.$state = $state;
+    
+    AuthService.loadUser();
+    
     $rootScope.$on('$locationChangeStart', function (e, newURL, oldURL) {
 
         // if user reload page
@@ -71,11 +91,26 @@ app.run(function($rootScope, $state, StatusService) {
         }
     });
 
-    $rootScope.$on('$stateChangeSuccess', function(e, toState) {
-        if (toState.data) {
-            document.title = toState.data.title;
+    $rootScope.$on('stateChangeStart', function (event, next) {
+        var authorizedRoles = next.data.authorizedRoles;
+        if ( ! AuthService.isAuthorized(authorizedRoles)) {
+            event.preventDefault();
+            if (AuthService.isAuthenticated()) {
+                // user is not allowed
+                $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+            } else {
+                // user is not logged in
+                $state.go('login');
+                $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+            }
         }
-        $rootScope.pageTitle = toState.data.title;
-        $rootScope.pageName = toState.name;
+    });
+
+    $rootScope.$on('$stateChangeSuccess', function(e, next) {
+        if (next.data) {
+            document.title = next.data.title;
+        }
+        $rootScope.pageTitle = next.data.title;
+        $rootScope.pageName = next.name;
     });
 });

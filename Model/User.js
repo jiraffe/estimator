@@ -7,6 +7,7 @@ var util = require('util');
 
 var mongoose = require('../lib/mongoose');
 var Schema = mongoose.Schema;
+var ObjectId = Schema.Types.ObjectId;
 
 
 var schema = new Schema({
@@ -23,6 +24,11 @@ var schema = new Schema({
         type: String,
         unique: true,
         required: true
+    },
+
+    _role: {
+        type:   ObjectId,
+        ref: 'Role'
     },
 
     hashedPassword: {

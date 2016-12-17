@@ -26,7 +26,7 @@ passport.use(new LocalStrategy({
     },
     function (req, login, password, done) {
 
-        User.findOne({login: login}).select('+hashedPassword +salt').exec(function (err, user) {
+        User.findOne({login: login}).select('+hashedPassword +salt').populate('_role').exec(function (err, user) {
             if (err) {
                 done(err);
             } else if (!user) {
@@ -45,5 +45,5 @@ module.exports = passport;
 module.exports.mustAuthenticated = function (req, res, next) {
     req.isAuthenticated()
         ? next()
-        : res.json({auth: false});
+        : res.status(401).json({auth: false});
 };

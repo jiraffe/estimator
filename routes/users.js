@@ -4,24 +4,45 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../Model/User').User;
+var Role = require('../Model/Role');
 var HttpError = require('../error').HttpError;
 var passport = require('../auth');
 var path = require('path');
 var fs = require('fs');
 
+var userRole;
+var adminRole;
+
+(function () {
+
+    console.log('INIT USER ROUTING ! ! !');
+
+    Role.findOne({name:'admin'}, function (err, role) {
+        adminRole = role;
+    });
+
+    Role.findOne({name:'user'}, function (err, role) {
+        userRole = role;
+    });
+})();
+
 router.post('/login', function (req, res, next) {
+
     passport.authenticate('local', function (err, user, info) {
         if (err) {
             return next(err);
         }
         if (!user) {
-            return res.json({success: false});
+            return res.status(500).json({success: false});
         }
         req.logIn(user, function (err) {
             if (err) {
                 return next(err);
             }
-            return res.json({success: true});
+            user.hashedPassword = undefined;
+            user.salt = undefined;
+            user.role = 'admin';
+            return res.json(user);
         });
     })(req, res, next);
 });
@@ -57,9 +78,9 @@ router.post('/register', function (req, res, next) {
         login: req.body.login,
         password: req.body.password,
         name: req.body.name,
-        email: req.body.email
+        email: req.body.email,
+        _role: userRole._id
     });
-
 
     saveUserAndResponse(user, res, function (err, user) {
         var fp = path.join(__dirname, '../', 'public/users/',user.login,'/');
@@ -86,7 +107,7 @@ function saveUserAndResponse(user, res, next) {
 
 router.post('/profile/update', passport.mustAuthenticated, function (req, res, next) {
 
-    User.findOne({login: req.session.passport.user}, function (err, user) {
+    User.findOne({login: req.session.passport.user}).populate('_role').exec(function (err, user) {
         if(err) res.send(err);
 
         user.name = req.body.name;
@@ -104,7 +125,7 @@ router.get('/logout', function (req, res, next) {
 });
 
 router.get('/profile', passport.mustAuthenticated, function (req, res, next) {
-    User.findOne({login: req.session.passport.user}, function (err, user) {
+    User.findOne({login: req.session.passport.user}).populate('_role').exec(function (err, user) {
         if(!user.avatarName) user.avatarName = "../../images/blank_account.png";
 
         res.json(user);

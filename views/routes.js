@@ -9,10 +9,7 @@ app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
          }*/
 
         $stateProvider.state('base', {
-
                 templateUrl: 'views/templates/main.html',
-                controller: 'MainController',
-                controllerAs: 'ctrl'
             })
             .state('index', {
                 parent: 'base',

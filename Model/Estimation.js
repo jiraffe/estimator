@@ -14,6 +14,10 @@ var schema = new Schema({
     testing: Number,
     other: Number,
 
+    approvedDate: Date,
+    workStartDate: Date,
+    workEndDate: Date,
+
     projectKey: String,
     status: {
         name: String,

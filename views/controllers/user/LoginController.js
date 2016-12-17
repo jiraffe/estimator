@@ -3,7 +3,7 @@
 angular.module('estimator')
     .controller('LoginController',
 
-        function ($scope, $http, $toast, $state, $mdDialog) {
+        function ($scope, $http, $toast, $state, $mdDialog, AuthService, $rootScope, AUTH_EVENTS) {
 
             $scope.user = {};
             $scope.mode = 'login'; // Register, Forgot password
@@ -18,33 +18,21 @@ angular.module('estimator')
             };
 
             $scope.login = function () {
-                $http({
-                    url: 'users/login',
-                    method: 'POST',
-                    data: $scope.user
-                })
-                    .success(function (res) {
-                        if (res.success) {
-                            $toast({message: "Вы успешно вошли под ником: " + $scope.user.login, theme: 'success'});
-                            $state.go("projects");
-                        } else {
-                            $toast({message: "Пользователь не найден или пароль не верен", theme: 'warning'});
-                        }
+                AuthService.login($scope.user)
+                    .then(function (user) {
+                        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                        $toast({message: "Вы успешно вошли под ником: " + $scope.user.login, theme: 'success'});
+                        $state.go("projects");
+                    })
+                    .catch(function () {
+                        $toast({message: "Пользователь не найден или пароль не верен", theme: 'warning'});
                     });
-            };
-
-            $scope.test = function () {
-                $http.get('users/secure', {withCredentials: true})
-                    .success(function () {
-                        console.log(arguments);
-                    });
-
             };
 
             $scope.resetPassword = function () {
                 $http.get('users/password/reset', {
-                    params: {email: $scope.user.email}
-                })
+                        params: {email: $scope.user.email}
+                    })
                     .success(function (res) {
                         $toast({message: "Пароль изменён. Новый пароль: " + res.newPass, delay: 10000});
                         $scope.mode = 'login';
@@ -64,7 +52,7 @@ angular.module('estimator')
                     })
                     .error(function (res) {
                         console.log('error:', res);
-                        if(res.errors.code === 11000) {
+                        if (res.errors.code === 11000) {
                             $mdDialog.show(
                                 $mdDialog.alert()
                                     .clickOutsideToClose(true)

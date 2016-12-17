@@ -4,19 +4,8 @@
 "use strict";
 
 angular.module('estimator')
-    .controller('EstimationDetailController', [
-
-        '$scope',
-        '$state',
-        '$http',
-        'StorageService',
-        'BroadcastService',
-        '$stateParams',
-        '$toast',
-        'statuses',
-        '$q',
-
-        function ($scope, $state, $http, StorageService, BroadcastService, $stateParams, $toast, statuses, $q) {
+    .controller('EstimationDetailController',
+        function ($scope, $state, $http, $stateParams, $toast, statuses, $q) {
 
             $scope.params = angular.copy($state.params);
             $scope.estimation = {};
@@ -41,7 +30,7 @@ angular.module('estimator')
                     method: 'GET',
                 }).then(function (res) {
                     $scope.estimation = res.data[0];
-                    if(! $scope.estimation.sections ||  $scope.estimation.sections.length === 0) {
+                    if (!$scope.estimation.sections || $scope.estimation.sections.length === 0) {
                         $scope.estimation.sections = [];
                     }
                 });
@@ -50,11 +39,11 @@ angular.module('estimator')
             function prepareManagementSection() {
 
                 var mngmntModel = $scope.esModel.mngmntModel;
-                if(mngmntModel.length === 0) return;
+                if (mngmntModel.length === 0) return;
 
                 var mngmntSection = {
-                    name:'Иное',
-                    total: function() {
+                    name: 'Иное',
+                    total: function () {
                         return $scope.estimation.mngmtSection.subSections.reduce((a, b) => a + b.estimation(), 0);
                     },
                     subSections: []
@@ -62,18 +51,18 @@ angular.module('estimator')
 
                 mngmntModel.forEach(function (model) {
                     var sub = {
-                        descr : model.name,
-                        estimation: function() {
-                            var preTotal = $scope.estimation.sections.reduce((a, b) => a + b.total(), 0) * (model.percent/100);
+                        descr: model.name,
+                        estimation: function () {
+                            var preTotal = $scope.estimation.sections.reduce((a, b) => a + b.total(), 0) * (model.percent / 100);
 
                             var frac = (preTotal % 1).toFixed(2);
                             frac = frac * 100;
 
-                            if(frac < 25) frac = 0;
-                            else if(frac >= 25 && frac < 75) frac = 0.5;
+                            if (frac < 25) frac = 0;
+                            else if (frac >= 25 && frac < 75) frac = 0.5;
                             else frac = 1;
 
-                            if(preTotal < 0) return frac;
+                            if (preTotal < 0) return frac;
 
                             var total = parseInt(preTotal.toFixed(0), 10) + frac;
                             return total || 0.5;
@@ -100,7 +89,7 @@ angular.module('estimator')
                     section.idx = idx;
                     section.number = idx + 1;
                     section.subSections.forEach(processSubsection, section);
-                    section.total = function() {
+                    section.total = function () {
                         return section.subSections.reduce((a, b) => a + b.total(), 0);
                     }
                 });
@@ -126,7 +115,7 @@ angular.module('estimator')
                     method: 'POST',
                     data: $scope.estimation
                 }).success(function (res) {
-                    $toast({message: 'Статус изменён', theme:'success'});
+                    $toast({message: 'Статус изменён', theme: 'success'});
                 });
             };
 
@@ -137,7 +126,7 @@ angular.module('estimator')
                     data: $scope.estimation
                 }).success(function (res) {
                     $toast({message: 'Эстимация сохранена', theme: 'success'});
-                    if($scope.params.projectKey) {
+                    if ($scope.params.projectKey) {
                         $state.go('projectEstimations', {key: $scope.params.projectKey});
                     } else {
                         $state.go('estimations');
@@ -150,7 +139,7 @@ angular.module('estimator')
 
                     var sectionNum = ($scope.estimation.sections && $scope.estimation.sections.length > 0) ?
                     $scope.estimation.sections.length + 1 :
-                    1;
+                        1;
 
                     $scope.estimation.sections.push({
                         number: sectionNum,
@@ -205,5 +194,4 @@ angular.module('estimator')
                 WindowObject.focus();
             };
         }
-
-    ]);
+    );

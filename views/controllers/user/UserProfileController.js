@@ -4,16 +4,9 @@
 angular.module('estimator')
     .controller('UserProfileController',
 
-        function ($scope, $http, $toast, $state) {
+        function ($scope, $rootScope, $http, $toast, $state, AuthService, AUTH_EVENTS) {
 
-            $scope.user = {};
-
-            $scope.getUserProfile = function () {
-                $http.get('users/profile')
-                    .success(function (res) {
-                        $scope.user = res;
-                    })
-            };
+            $scope.user = AuthService.user;
 
             $scope.save = function () {
                 $http({
@@ -33,13 +26,12 @@ angular.module('estimator')
                 $http.post('users/changeAvatar', formData, {
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
-                }).then(function(result){
-                    console.log(result);
-                    $scope.getUserProfile();
-                    $scope.$emit('profileChanged');
+                }).then(function(){
+                    $rootScope.$broadcast(AUTH_EVENTS.profileChanged);
+                    $scope.user.avatarName = $scope.picFile.name;
                     $scope.picFile = undefined;
                 },function(err){
-                    console.log(err);
+                    console.err(err);
                 });
             };
 
