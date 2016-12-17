@@ -97,6 +97,7 @@ app.run(function($rootScope, $state, StatusService, AUTH_EVENTS, AuthService) {
             event.preventDefault();
             if (AuthService.isAuthenticated()) {
                 // user is not allowed
+                $state.go('projects');
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
             } else {
                 // user is not logged in

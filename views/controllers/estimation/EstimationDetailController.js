@@ -13,6 +13,11 @@ angular.module('estimator')
             $scope.esModel = {};
             $scope.statuses = statuses;
 
+            $scope.statusBtn = {
+                isOpen: false,
+                hidden: false
+            }
+
             $scope.init = function () {
                 $http.get("projects/" + $scope.params.projectKey)
                     .then(function (res) {
@@ -109,7 +114,10 @@ angular.module('estimator')
                 prepareEstimationTotal();
             };
 
-            $scope.changeStatus = function () {
+            $scope.changeStatus = function (status) {
+
+                $scope.estimation.status = status;
+
                 $http({
                     url: 'estimations',
                     method: 'POST',
@@ -119,19 +127,17 @@ angular.module('estimator')
                 });
             };
 
-            $scope.save = function () {
+            $scope.save = function (needExit) {
                 $http({
                     url: 'projects/' + $scope.params.projectKey + '/estimation/' + $scope.params.key,
                     method: 'POST',
                     data: $scope.estimation
                 }).success(function (res) {
                     $toast({message: 'Эстимация сохранена', theme: 'success'});
-                    if ($scope.params.projectKey) {
+                    if (needExit) {
                         $state.go('projectEstimations', {key: $scope.params.projectKey});
-                    } else {
-                        $state.go('estimations');
                     }
-                });
+                })
             };
 
             $scope.sectionMenu = [
@@ -163,9 +169,14 @@ angular.module('estimator')
             $scope.subSectionMenu = [
                 ['Добавить под-секцию', function (item) {
                     var sectionIdx = item.$parent.section.idx;
-                    $scope.estimation.sections[sectionIdx].subSections.push({
+                    var newItemIdx = item.$index + 1;
+
+                    var newSubSection = {
                         estimation: []
-                    });
+                    };
+
+                    $scope.estimation.sections[sectionIdx].subSections.splice(newItemIdx, 0, newSubSection);
+
                     reinitTotals();
                 }],
                 null,
@@ -194,4 +205,5 @@ angular.module('estimator')
                 WindowObject.focus();
             };
         }
-    );
+    )
+;

@@ -1,12 +1,30 @@
 <div ng-init="init()">
-    <div class="btn-group">
-        <label
-                ng-repeat="status in statuses"
-                class="btn btn-primary"
-                ng-model="estimation.status"
-                uib-btn-radio="{{status}}" ng-click="changeStatus()"
-        >{{status.value}}</label>
+
+    <div id="estimationStatus">
+        <div style="display: inline-block; padding: 20px;">
+            Статус: <span class="label label-{{estimation.status.style}}">{{estimation.status.value}}</span>
+        </div>
+        <div style="display: inline-block">
+            <md-fab-speed-dial ng-hide="statusBtn.hidden" md-direction="right" md-open="statusBtn.isOpen"
+                               class="md-scale" ng-mouseenter="statusBtn.isOpen=true" ng-mouseleave="statusBtn.isOpen=false">
+                <md-fab-trigger>
+                    <md-button aria-label="menu" class="md-fab md-mini" md-colors="{background: 'green'}">
+                        <md-icon md-font-set="material-icons">edit</md-icon>
+                    </md-button>
+                </md-fab-trigger>
+
+                <md-fab-actions>
+                    <div ng-repeat="status in statuses" ng-if="status.name !== estimation.status.name">
+                        <md-button aria-label="{{status.value}}" class="md-warn md-raised"
+                                   ng-click="changeStatus(status)">
+                                {{status.value}}
+                        </md-button>
+                    </div>
+                </md-fab-actions>
+            </md-fab-speed-dial>
+        </div>
     </div>
+
     <div id="estimation">
         <!-- описание -->
         <div class="divTableRow" style="display: table; width: 100%;">
@@ -92,8 +110,8 @@
     </div>
 
     <div id="estimationButtons">
-        <md-button class="md-raised md-warn" ui-sref="projectEstimations({key:project.key})">Назад</md-button>
-        <md-button class="md-raised" md-colors="{background: 'green'}" ng-click="save();">Сохранить</md-button>
+        <md-button class="md-raised" md-colors="{background: 'green'}" ng-click="save(false);">Сохранить</md-button>
+        <md-button class="md-raised" md-colors="{background: 'green'}" ng-click="save(true);">Сохранить и выйти</md-button>
         <md-button class="md-raised md-primary" ng-click="print();">Печать</md-button>
     </div>
 
