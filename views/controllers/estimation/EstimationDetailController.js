@@ -5,13 +5,14 @@
 
 angular.module('estimator')
     .controller('EstimationDetailController',
-        function ($scope, $state, $http, $stateParams, $toast, statuses, $q) {
+        function ($scope, $state, $http, $stateParams, $toast, statuses, $q, $mdSidenav, $log) {
 
             $scope.params = angular.copy($state.params);
             $scope.estimation = {};
             $scope.project = {};
             $scope.esModel = {};
             $scope.statuses = statuses;
+            $scope.newComment = '';
 
             $scope.statusBtn = {
                 isOpen: false,
@@ -143,6 +144,21 @@ angular.module('estimator')
                         $state.go('projectEstimations', {key: $scope.params.projectKey});
                     }
                 })
+            };
+
+            $scope.toggleComments = function() {
+                $mdSidenav("comments")
+                    .toggle();
+            };
+
+            $scope.closeComments = function () {
+                $scope.toggleComments();
+            };
+
+            $scope.addComment = function () {
+                if(!$scope.estimation.comments) $scope.estimation.comments = [];
+                $scope.estimation.comments.push({text: $scope.newComment});
+                $scope.newComment = '';
             };
 
             $scope.sectionMenu = [

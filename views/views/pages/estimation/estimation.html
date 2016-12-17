@@ -1,12 +1,13 @@
 <div ng-init="init()">
 
-    <div id="estimationStatus">
+    <div id="estimationStatus" class="md-toolbar-tools">
         <div style="display: inline-block; padding: 20px;">
             Статус: <span class="label label-{{estimation.status.style}}">{{estimation.status.value}}</span>
         </div>
         <div style="display: inline-block">
             <md-fab-speed-dial ng-hide="statusBtn.hidden" md-direction="right" md-open="statusBtn.isOpen"
-                               class="md-scale" ng-mouseenter="statusBtn.isOpen=true" ng-mouseleave="statusBtn.isOpen=false">
+                               class="md-scale" ng-mouseenter="statusBtn.isOpen=true"
+                               ng-mouseleave="statusBtn.isOpen=false">
                 <md-fab-trigger>
                     <md-button aria-label="menu" class="md-fab md-mini" md-colors="{background: 'green'}">
                         <md-icon md-font-set="material-icons">edit</md-icon>
@@ -17,12 +18,17 @@
                     <div ng-repeat="status in statuses" ng-if="status.name !== estimation.status.name">
                         <md-button aria-label="{{status.value}}" class="md-warn md-raised"
                                    ng-click="changeStatus(status)">
-                                {{status.value}}
+                            {{status.value}}
                         </md-button>
                     </div>
                 </md-fab-actions>
             </md-fab-speed-dial>
         </div>
+        <span flex></span>
+        <md-button aria-label="menu" class="md-fab md-mini" md-colors="{background: 'green'}"
+                   ng-click="toggleComments();">
+            <md-icon md-font-set="material-icons">comment</md-icon>
+        </md-button>
     </div>
 
     <div id="estimation">
@@ -50,7 +56,8 @@
                     <div class="divTableCell centeate-text">{{estimation.analysis.total()}}</div>
                 </div>
                 <!-- под-секции анализа и оценки -->
-                <div class="divTableRow" context-menu="analysisSubSectionMenu" ng-repeat="sub in estimation.analysis.subSections track by $index">
+                <div class="divTableRow" context-menu="analysisSubSectionMenu"
+                     ng-repeat="sub in estimation.analysis.subSections track by $index">
                     <div class="divTableCell subSection sectionNumber"></div>
                     <div class="divTableCell subSection sectionNumber">{{$index + 1}}</div>
                     <div class="divTableCell subSection" contenteditable="true" ng-model="sub.descr"></div>
@@ -102,7 +109,8 @@
                 </div>
 
                 <!-- под-секции -->
-                <div class="divTableRow" ng-repeat="sub in estimation.mngmtSection.subSections" context-menu="subSectionMenu">
+                <div class="divTableRow" ng-repeat="sub in estimation.mngmtSection.subSections"
+                     context-menu="subSectionMenu">
                     <div class="divTableCell subSection sectionNumber"></div>
                     <div class="divTableCell subSection sectionNumber">{{sub.subNum}}</div>
                     <div class="divTableCell subSection">{{sub.descr}}</div>
@@ -123,8 +131,30 @@
 
     <div id="estimationButtons">
         <md-button class="md-raised" md-colors="{background: 'green'}" ng-click="save(false);">Сохранить</md-button>
-        <md-button class="md-raised" md-colors="{background: 'green'}" ng-click="save(true);">Сохранить и выйти</md-button>
+        <md-button class="md-raised" md-colors="{background: 'green'}" ng-click="save(true);">Сохранить и выйти
+        </md-button>
         <md-button class="md-raised md-primary" ng-click="print();">Печать</md-button>
     </div>
+
+    <md-sidenav class="md-sidenav-right" md-whiteframe="-1" md-component-id="comments">
+
+        <md-toolbar class="md-theme-light">
+            <h1 class="md-toolbar-tools">Комментарии</h1>
+        </md-toolbar>
+        <md-content layout-padding>
+            <div ng-repeat="comment in estimation.comments">
+                <div>{{comment.text}}</div>
+            </div>
+            <md-input-container class="md-block" style="margin-bottom: 0px">
+                <label>Новый комментарий</label>
+                <textarea ng-model="newComment" rows="1" md-select-on-focus></textarea>
+            </md-input-container>
+            <md-button aria-label="menu" class="md-fab md-mini" md-colors="{background: 'green'}"
+                       ng-click="addComment();">
+                <md-icon md-font-set="material-icons">send</md-icon>
+            </md-button>
+        </md-content>
+
+    </md-sidenav>
 
 </div>

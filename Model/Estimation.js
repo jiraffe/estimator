@@ -7,6 +7,10 @@ var schema = new Schema({
     key: String,
     summary: String,
 
+    comments: [{
+        text: String
+    }],
+
     estimationModel: {
         fields: [String],
         estimationTimeNeeded: Boolean,
