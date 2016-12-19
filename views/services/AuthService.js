@@ -53,6 +53,9 @@ angular.module('estimator')
                         API.user = res.data;
                         initProfileImage();
                         $rootScope.$broadcast(AUTH_EVENTS.profileLoaded, API.user);
+                        if($state.current.name === 'login') {
+                            $state.go('projects');
+                        }
                     })
                     .catch(function (err) {
                         $state.go('login')

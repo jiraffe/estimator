@@ -65,7 +65,8 @@ angular.module('estimator')
                             else if (frac >= 25 && frac < 75) frac = 0.5;
                             else frac = 1;
 
-                            if (preTotal < 0) return frac;
+                            if (preTotal < 1)
+                                return frac;
 
                             var total = parseInt(preTotal.toFixed(0), 10) + frac;
                             return total || 0.5;
