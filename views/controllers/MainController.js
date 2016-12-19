@@ -8,6 +8,7 @@ angular.module('estimator')
             $scope.user = {};
             $scope.isAuthorized = AuthService.isAuthorized;
             $scope.hasAccessLevel = AuthService.hasAccessLevel;
+            $scope.host = urlPrefix;
 
             $scope.logout = function () {
                 AuthService.logout()

@@ -10,10 +10,10 @@
                         <div style="width: 25%; display: table-cell;"></div>
                         <div style="width: 50%; display: table-cell;">
                             <div ng-if="!picFile && !user.avatarName" class="userProfile"
-                                 style="background-image: url('http://localhost:3000/public/images/blank_account.png')">
+                                 style="background-image: url('{{host}}public/images/blank_account.png')">
                             </div>
                             <div ng-if="!picFile && user.avatarName" class="userProfile"
-                                 style="background-image: url('http://localhost:3000/public/users/{{user.login}}/{{user.avatarName}}')">
+                                 style="background-image: url('{{host}}public/users/{{user.login}}/{{user.avatarName}}')">
                             </div>
                             <div ng-if="!!picFile">
                                 <img ngf-src="picFile" class="userProfile">
@@ -60,7 +60,6 @@
                 </md-input-container>
             </md-content>
             <div layout="row" layout-align="center center">
-                <!--<md-button md-no-ink="md-no-ink" ng-click="changeMode('register')">Регистрация</md-button>-->
                 <div flex="flex"></div>
                 <md-button ng-click="save();">Обновить</md-button>
             </div>

@@ -26,19 +26,30 @@ angular.module('estimator')
             }];
             $scope.filter = $scope.filtrations[0];
             $scope.statuses = statuses;
+            $scope.hideDone = true;
 
             function init() {
                 getEstimations();
             }
             init();
 
+            var needed = false;
             $scope.statusFilter = function(data) {
+
+                needed = false;
+
+                if($scope.hideDone && data.status.name.toLowerCase() === 'closed') {
+                    return false;
+                }
+
                 if($scope.filter.name === 'all') return true;
                 else if($scope.filter.name === data.status.name) {
                     return true;
                 } else {
                     return false;
                 }
+
+                return needed;
             }
 
             $scope.deleteEstimation = function (key) {

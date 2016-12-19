@@ -18,33 +18,51 @@ router.get('/statuses', function (req, res, next) {
 
    res.json([
        {
-           name: 'NEW',
+           order: 1,
+           name: 'New',
            value: 'новая',
            style: 'default'
        },
        {
+           order: 2,
            name: 'InProgress',
            value: 'В работе',
            style: 'primary'
        },
        {
+           order: 3,
            name: 'Questions',
            value: 'Есть вопросы',
            style: 'warning'
        },
        {
+           order: 4,
            name: 'Done',
            value: 'Готова',
            style: 'info'
        },
        {
+           order: 5,
            name: 'Sent',
            value: 'Выслана',
            style: 'danger'
        },
        {
+           order: 6,
            name: 'Approved',
            value: 'Согласована',
+           style: 'success'
+       },
+       {
+           order: 7,
+           name: 'InDevelopment',
+           value: 'В разработке',
+           style: 'warning'
+       },
+       {
+           order: 8,
+           name: 'Closed',
+           value: 'Закрыта',
            style: 'success'
        }
    ]);

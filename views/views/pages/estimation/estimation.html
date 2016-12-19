@@ -15,7 +15,7 @@
                 </md-fab-trigger>
 
                 <md-fab-actions>
-                    <div ng-repeat="status in statuses" ng-if="status.name !== estimation.status.name">
+                    <div ng-repeat="status in statuses track by status.order" ng-if="status.name !== estimation.status.name">
                         <md-button aria-label="{{status.value}}" class="md-warn md-raised"
                                    ng-click="changeStatus(status)">
                             {{status.value}}
@@ -109,8 +109,7 @@
                 </div>
 
                 <!-- под-секции -->
-                <div class="divTableRow" ng-repeat="sub in estimation.mngmtSection.subSections"
-                     context-menu="subSectionMenu">
+                <div class="divTableRow" ng-repeat="sub in estimation.mngmtSection.subSections">
                     <div class="divTableCell subSection sectionNumber"></div>
                     <div class="divTableCell subSection sectionNumber">{{sub.subNum}}</div>
                     <div class="divTableCell subSection">{{sub.descr}}</div>
@@ -142,8 +141,8 @@
             <h1 class="md-toolbar-tools">Комментарии</h1>
         </md-toolbar>
         <md-content layout-padding>
-            <div ng-repeat="comment in estimation.comments">
-                <div>{{comment.text}}</div>
+            <div ng-repeat="comment in estimation.comments track by $index">
+                <div contenteditable="true" type="text" ng-model="estimation.comments[$index].text"></div>
             </div>
             <md-input-container class="md-block" style="margin-bottom: 0px">
                 <label>Новый комментарий</label>

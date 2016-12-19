@@ -97,8 +97,8 @@ angular.module('estimator')
                         return section.subSections.reduce((a, b) => a + b.total(), 0);
                     }
                 });
-                
-                if($scope.esModel.estimationTimeNeeded) {
+
+                if ($scope.esModel.estimationTimeNeeded) {
                     $scope.estimation.analysis.subSections.forEach((sub, idx) => sub.idx = idx);
                     $scope.estimation.analysis.total = function () {
                         return $scope.estimation.analysis.subSections.reduce((a, b) => a + b.estimation || 0, 0);
@@ -146,7 +146,7 @@ angular.module('estimator')
                 })
             };
 
-            $scope.toggleComments = function() {
+            $scope.toggleComments = function () {
                 $mdSidenav("comments")
                     .toggle();
             };
@@ -156,19 +156,19 @@ angular.module('estimator')
             };
 
             $scope.addComment = function () {
-                if(!$scope.estimation.comments) $scope.estimation.comments = [];
+                if (!$scope.estimation.comments) $scope.estimation.comments = [];
                 $scope.estimation.comments.push({text: $scope.newComment});
                 $scope.newComment = '';
             };
 
             $scope.sectionMenu = [
-                ['Добавить секцию', function () {
-
+                ['Добавить секцию', function (item) {
+                    var newItemIdx = item.$index + 1;
                     var sectionNum = ($scope.estimation.sections && $scope.estimation.sections.length > 0) ?
                     $scope.estimation.sections.length + 1 :
                         1;
 
-                    $scope.estimation.sections.push({
+                    var newSection = {
                         number: sectionNum,
                         subSections: [
                             {
@@ -176,7 +176,9 @@ angular.module('estimator')
                                 estimation: []
                             }
                         ]
-                    });
+                    };
+
+                    $scope.estimation.sections.splice(newItemIdx, 0, newSection);
 
                     reinitTotals();
                 }],

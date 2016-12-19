@@ -9,6 +9,7 @@
         Нет оценок
     </div>
 
+    <!-- Фильтрация -->
     <div ng-show="estimations.length > 0">
 
         <div layout-gt-xs="row" style="padding-left: 25px">
@@ -22,9 +23,13 @@
                 <label>Ключ:</label>
                 <input ng-model="search.key" name="keyFilter" id="keyFilter">
             </md-input-container>
+            <md-switch ng-model="hideDone" aria-label="Скрыть выполненные">
+                Скрыть выполненные
+            </md-switch>
         </div>
     </div>
 
+    <!-- таблица эстимаций -->
     <md-table-container style="padding: 0px 25px">
         <table md-table>
             <thead md-head md-order="query.order" md-on-reorder="getDesserts">
@@ -40,7 +45,7 @@
                 <td md-cell>
                     <a ui-sref="projectEstimation({key: est.key, projectKey: projectKey})">{{est.key}}</a>
                 </td>
-                <td md-cell >{{est.summary}}</td>
+                <td md-cell>{{est.summary}}</td>
                 <td md-cell>
                     <span class="label label-{{est.status.style}}">{{est.status.value}}</span>
                 </td>
@@ -51,7 +56,8 @@
                             ui-sref="editEstimation({key: est.key, projectKey: est.projectKey})"
                             uib-tooltip="Редактировать">
                         <md-icon md-font-set="material-icons"
-                                 ng-style="{color: 'green', 'font-size':'17px', height:'17px'}">mode_edit</md-icon>
+                                 ng-style="{color: 'green', 'font-size':'17px', height:'17px'}">mode_edit
+                        </md-icon>
                     </md-button>
                     <md-button
                             type="button"
@@ -64,7 +70,8 @@
                             cancel-button="Отмена"
                             confirm-method="deleteEstimation(est.key)">
                         <md-icon md-font-set="material-icons"
-                                 ng-style="{color: 'red', 'font-size':'17px', height:'17px'}">clear</md-icon>
+                                 ng-style="{color: 'red', 'font-size':'17px', height:'17px'}">clear
+                        </md-icon>
                     </md-button>
                 </td>
             </tr>
