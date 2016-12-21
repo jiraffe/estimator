@@ -31,11 +31,10 @@ var schema = new Schema({
         ]
     },
 
-    coordination: Number,
-    stabilisation: Number,
-    testing: Number,
-    other: Number,
-
+    estimationTime: Number,
+    developmentTime: Number,
+    totalTime: Number,
+    
     approvedDate: Date,
     workStartDate: Date,
     workEndDate: Date,

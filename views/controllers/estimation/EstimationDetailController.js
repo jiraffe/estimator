@@ -22,6 +22,7 @@ angular.module('estimator')
             $scope.init = function () {
                 getEstimation()
                     .then(processSections)
+                    .then(prepareDevTotal)
                     .then(prepareManagementSection)
                     .then(prepareEstimationTotal);
             };
@@ -40,7 +41,7 @@ angular.module('estimator')
             };
 
             function prepareManagementSection() {
-
+                $scope.estimation.devTotal();
                 var mngmntModel = $scope.esModel.mngmntModel;
                 if (mngmntModel.length === 0) return;
 
@@ -56,10 +57,13 @@ angular.module('estimator')
                     var sub = {
                         descr: model.name,
                         estimation: function () {
-                            var preTotal = $scope.estimation.sections.reduce((a, b) => a + b.total(), 0) * (model.percent / 100);
+                            $scope.estimation.devTotal();
+                            var preTotal = $scope.estimation.developmentTime * (model.percent / 100);
 
                             var frac = (preTotal % 1).toFixed(2);
                             frac = frac * 100;
+
+                            if(frac % 5 === 0) return preTotal;
 
                             if (frac < 25) frac = 0;
                             else if (frac >= 25 && frac < 75) frac = 0.5;
@@ -78,12 +82,22 @@ angular.module('estimator')
                 $scope.estimation.mngmtSection = mngmntSection;
             };
 
+            function prepareDevTotal() {
+                $scope.estimation.devTotal = function () {
+                    var total = $scope.estimation.sections.reduce((a, b) => a + b.total(), 0);
+                    $scope.estimation.developmentTime = total;
+                    return total;
+                }
+            }
+
             function prepareEstimationTotal() {
                 $scope.estimation.total = function () {
                     var total = 0;
                     total += $scope.estimation.mngmtSection.total();
                     total += $scope.estimation.sections.reduce((a, b) => a + b.total(), 0);
                     total += $scope.estimation.analysis.total();
+
+                    $scope.estimation.totalTime = total;
 
                     return total;
                 }
@@ -102,7 +116,9 @@ angular.module('estimator')
                 if ($scope.esModel.estimationTimeNeeded) {
                     $scope.estimation.analysis.subSections.forEach((sub, idx) => sub.idx = idx);
                     $scope.estimation.analysis.total = function () {
-                        return $scope.estimation.analysis.subSections.reduce((a, b) => a + b.estimation || 0, 0);
+                        var estimationTime = $scope.estimation.analysis.subSections.reduce((a, b) => a + b.estimation || 0, 0);
+                        $scope.estimation.estimationTime = estimationTime;
+                        return estimationTime;
                     }
                 }
             };
