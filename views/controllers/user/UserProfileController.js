@@ -8,6 +8,14 @@ angular.module('estimator')
 
             $scope.user = AuthService.user;
 
+            $scope.languages = [{
+                key: 'en',
+                value: 'English'
+            },{
+                key: 'ru',
+                value: 'Русский'
+            }];
+
             $scope.save = function () {
                 $http({
                     url: 'users/profile/update',
@@ -15,8 +23,9 @@ angular.module('estimator')
                     data: $scope.user
                 })
                     .then(function (res) {
-                        console.log(res);
-                        $toast({message:'Профайл обновлен', theme: 'success'})
+                        AuthService.user = $scope.user;
+                        $rootScope.$broadcast(AUTH_EVENTS.profileChanged);
+                        $toast({message:'Профайл обновлен', theme: 'success'});
                     })
             };
 
@@ -35,4 +44,11 @@ angular.module('estimator')
                 });
             };
 
+            $scope.init = function () {
+                $scope.languages.forEach(function (lang, idx) {
+                    if(lang.key === $scope.user.language.key) {
+                        $scope.user.language = $scope.languages[idx];
+                    }
+                })
+            }
         });

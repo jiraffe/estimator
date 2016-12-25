@@ -1,0 +1,75 @@
+{
+  "LANG": "Язык",
+  "PASS": "Пароль",
+  "NAME": "Имя",
+  "LOGIN": "Логин",
+  "EMAIL": "Почта",
+  "CHANGE": "Обновить",
+  "SAVE": "Сохранить",
+  "CHANGE_PASS_PLACEHOLDER": "Измените свой пароль",
+
+  "ACTIONS": {
+    "SAVE": "Сохранить",
+    "DELETE": "Удалить",
+    "EDIT": "Редактировать",
+    "ADD": "Добавить",
+    "CANCEL": "Отмена"
+  },
+
+  "ACTION_MSG": {
+    "CONFIRM_DELETE": "Подтвердите удаление",
+    "CONFIRM_ESTIMATION_DELETE": "Подтвердите удаление эстимации",
+    "CONFIRM_PROJECT_DELETE":  "Подтвердите удаление проекта"
+  },
+
+  "PROJECTS": {
+    "PROJECTS": "Проекты",
+    "ADD": {
+      "TITLE": "Создание проекта",
+      "KEY": "Ключ проекта",
+      "NAME": "Название проекта",
+      "ESTIMATION_MODEL": "Модель эстимации",
+      "ESTIMATION_TAKE_ACCOUNT": "Учитывание трудозатрат на оценку",
+      "ESTIMATION_FIELDS": "Поля эстимации",
+      "ESTIMATION_FIELDS_SUBTITLE": "Можно будет изменить для каждой эстимации в проекте при создании или редактировании",
+      "MANAGMENT_SECTIONS": "Секции мэнеджмента",
+      "SECTION_NAME": "Нахвание секции",
+      "SECTION_PERSENT": "Процент от разработки",
+      "MESSAGES": {
+        "NEED_PROJECT_KEY": "Нужен ключ проекта.",
+        "NEED_PROJECT_NAME": "Нужно имя проекта.",
+        "FIELDS_PLACEHOLDER": "Введите имя поля",
+        "FIELD": "Поле"
+      }
+    },
+    "EDIT": {
+      "TITLE": "Редактирование проекта"
+    }
+  },
+
+  "ESTIMATIONS": {
+    "NO_ESTIMATIONS": "У проекта пока что нет оценнок",
+    "STATUS": "Статус",
+    "KEY": "Ключ",
+    "SUMMARY": "Описание",
+    "ACTIONS": "Действия",
+    "HIDE_DONE": "Скрыть выполненные",
+    "VERSION": "Версия",
+    "COMPONENT": "Компонент",
+
+    "ESTIMATION_MODEL": "Модель эстимации",
+    "ESTIMATION_TAKE_ACCOUNT": "Учитывание трудозатрат на оценку",
+    "FIELDS": "Поля эстимации",
+
+    "FIELDS_PLACEHOLDER": "Введите имя поля",
+    "FIELD": "Поле",
+
+    "CREATE_MSG": "Создание оценки",
+    "EDIT_MSG": "Редактирование оценки"
+  },
+
+  "USER": {
+    "PROFILE": "Профиль",
+    "LOGOUT": "Выйти"
+  }
+}

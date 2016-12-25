@@ -4,7 +4,7 @@
             <span>Estimator</span>
         </h2>
         <span></span>
-        <md-button ui-sref="projects">Проекты</md-button>
+        <md-button ui-sref="projects">{{translation.PROJECTS.PROJECTS}}</md-button>
         <span flex></span>
 
         <md-menu-bar>
@@ -14,11 +14,11 @@
                 </div>
                 <md-menu-content width="2">
                     <md-menu-item>
-                        <md-button ui-sref="profile">Профиль</md-button>
+                        <md-button ui-sref="profile">{{translation.USER.PROFILE}}</md-button>
                     </md-menu-item>
                     <md-menu-divider></md-menu-divider>
                     <md-menu-item>
-                        <md-button ng-click="logout()">Выйти</md-button>
+                        <md-button ng-click="logout()">{{translation.USER.LOGOUT}}</md-button>
                     </md-menu-item>
                 </md-menu-content>
             </md-menu>

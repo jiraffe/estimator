@@ -1,4 +1,4 @@
-<md-button ui-sref="addProject" class="md-fab md-mini" md-colors="{background: 'green'}" aria-label="Добавить">
+<md-button ui-sref="addProject" class="md-fab md-mini" md-colors="{background: 'green'}" aria-label="Add">
     <md-icon md-font-set="material-icons">add</md-icon>
 </md-button>
 
@@ -16,13 +16,13 @@
             </a>
             <md-card-actions layout="row" layout-align="end center">
                 <md-button confirm-popup
-                           confirm-title="Подтвердите удаление"
-                           confirm-text="Подтвердите удаление проекта {{project.key}}"
-                           confirm-button="Удалить"
-                           cancel-button="Отмена"
-                           confirm-method="delete(project.key)">Удалить
+                           confirm-title="{{translation.ACTION_MSG.CONFIRM_DELETE}}"
+                           confirm-text="{{translation.ACTION_MSG.CONFIRM_PROJECT_DELETE}} {{project.key}}"
+                           confirm-button="{{translation.ACTIONS.DELETE}}"
+                           cancel-button="{{translation.ACTIONS.CANCEL}}"
+                           confirm-method="delete(project.key)">{{translation.ACTIONS.DELETE}}
                 </md-button>
-                <md-button ui-sref="editProject({key: project.key})">Редактировать</md-button>
+                <md-button ui-sref="editProject({key: project.key})">{{translation.ACTIONS.EDIT}}</md-button>
             </md-card-actions>
         </md-card>
 

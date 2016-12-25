@@ -34,7 +34,9 @@ var schema = new Schema({
     estimationTime: Number,
     developmentTime: Number,
     totalTime: Number,
-    
+    component:String,
+    version: String,
+
     approvedDate: Date,
     workStartDate: Date,
     workEndDate: Date,

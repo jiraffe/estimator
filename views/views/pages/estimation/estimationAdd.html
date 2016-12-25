@@ -1,11 +1,11 @@
 <div ng-init="init()">
     <md-content layout-padding>
         <form name="addEstimationForm">
-            <legend ng-hide="editMode">Создание оценки:</legend>
-            <legend ng-show="editMode">Редактирование оценки:</legend>
+            <legend ng-hide="editMode">{{translation.ESTIMATIONS.CREATE_MSG}}:</legend>
+            <legend ng-show="editMode">{{translation.ESTIMATIONS.EDIT_MSG}}:</legend>
 
             <md-input-container class="md-block">
-                <label>jira-ключ</label>
+                <label>{{translation.ESTIMATIONS.KEY}}</label>
                 <input id="key" required name="key" ng-model="estimation.key">
                 <div ng-messages="addProjectForm.key.$error">
                     <div ng-message="required">Нужен JIRA-ключ</div>
@@ -13,27 +13,38 @@
             </md-input-container>
 
             <md-input-container class="md-block">
-                <label>Описание</label>
+                <label>{{translation.ESTIMATIONS.SUMMARY}}</label>
                 <input id="summary" required name="summary" ng-model="estimation.summary">
                 <div ng-messages="addProjectForm.key.$error">
                     <div ng-message="required">Нужно описание</div>
                 </div>
             </md-input-container>
 
-            <h3>Модель эстимации:</h3>
+            <md-input-container class="md-block">
+                <label>{{translation.ESTIMATIONS.VERSION}}</label>
+                <input id="version" required name="version" ng-model="estimation.version">
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>{{translation.ESTIMATIONS.COMPONENT}}</label>
+                <input id="component" required name="component" ng-model="estimation.component">
+            </md-input-container>
+
+
+            <h3>{{translation.ESTIMATIONS.ESTIMATION_MODEL}}:</h3>
             <hr/>
 
-            <md-switch ng-model="estimation.estimationModel.estimationTimeNeeded" aria-label="Switch 1">
-                Учитывание времени эстимации
+            <md-switch ng-model="estimation.estimationModel.estimationTimeNeeded" aria-label="Use estimation time">
+                {{translation.ESTIMATIONS.ESTIMATION_TAKE_ACCOUNT}}
             </md-switch>
 
-            <h4 class="md-title">Поля эстимации:</h4>
+            <h4 class="md-title">{{translation.ESTIMATIONS.FIELDS}}:</h4>
             <md-chips
                     required
                     class="custom-chips"
                     ng-model="estimation.estimationModel.fields"
-                    placeholder="Введите имя поля"
-                    secondary-placeholder="+Поле"
+                    placeholder="{{translation.ESTIMATIONS.FIELDS_PLACEHOLDER}}"
+                    secondary-placeholder="+{{translation.ESTIMATIONS.FIELD}}"
                     md-enable-chip-edit="true">
                 <md-chip-template>
                     <span>{{$chip}}</span>
@@ -45,8 +56,8 @@
             <div class="modal-footer">
 
                 <md-button class="md-raised md-warn" ui-sref="projectEstimations({key:estimation.projectKey})">Назад</md-button>
-                <md-button class="md-raised md-primary" ng-hide="editMode" ng-click="add();">Добавить</md-button>
-                <md-button class="md-raised md-primary" ng-show="editMode" ng-click="add();">Сохранить</md-button>
+                <md-button class="md-raised md-primary" ng-hide="editMode" ng-click="add();">{{translation.ACTIONS.ADD}}</md-button>
+                <md-button class="md-raised md-primary" ng-show="editMode" ng-click="add();">{{translation.ACTIONS.SAVE}}</md-button>
             </div>
         </form>
     </md-content>

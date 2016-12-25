@@ -9,7 +9,16 @@ var express = require('express')
     , util = require('util')
     , LocalStrategy = require('passport-local').Strategy;
 
-var app = express();
+// var app = express();
+
+
+var mongoose = require('./lib/mongoose');
+var Estimation = require('./Model/Estimation');
+
+
+console.log(Estimation.schema.paths);
+
+
 
 var users = [
     {
@@ -21,7 +30,7 @@ var users = [
         id: 2,
         login: 'test2',
         password: 'pass2'
-    }
+    } 
 ];
 
 // passport setup
@@ -62,26 +71,26 @@ passport.use(new LocalStrategy({
 
 // express setup
 
-var session = require('express-session');
-var sessionOpts = {secret: 'keyboard cat', resave: true, saveUninitialized: true};
+// var session = require('express-session');
+// var sessionOpts = {secret: 'keyboard cat', resave: true, saveUninitialized: true};
+//
+// app.use(cookieParser());
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended: true}));
+// app.use(session(sessionOpts));
+// // Initialize Passport!  Also use passport.session() middleware, to support
+// // persistent login sessions (recommended).
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(session(sessionOpts));
-// Initialize Passport!  Also use passport.session() middleware, to support
-// persistent login sessions (recommended).
-app.use(passport.initialize());
-app.use(passport.session());
+// var router = express.Router();
+// router.post('/login',
+//     passport.authenticate('local', {failureRedirect: '/login'}),
+//     function (req, res) {
+//         res.json({success: true});
+//     });
+// app.use('/', router);
 
-var router = express.Router();
-router.post('/login',
-    passport.authenticate('local', {failureRedirect: '/login'}),
-    function (req, res) {
-        res.json({success: true});
-    });
-app.use('/', router);
-
-app.listen(3000, function () {
-    console.log('server running');
-});
+// app.listen(3000, function () {
+//     console.log('server running');
+// });

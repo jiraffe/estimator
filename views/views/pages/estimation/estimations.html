@@ -1,30 +1,30 @@
 <div>
 
     <md-button ui-sref="addEstimation({projectKey: projectKey})" class="md-fab md-mini"
-               md-colors="{background: 'green'}" aria-label="Добавить">
+               md-colors="{background: 'green'}" aria-label="Add">
         <md-icon md-font-set="material-icons">add</md-icon>
     </md-button>
 
     <div ng-show="estimations.length === 0" style="margin: 10px">
-        Нет оценок
+        {{translation.ESTIMATIONS.NO_ESTIMATIONS}}
     </div>
 
-    <!-- Фильтрация -->
+    <!-- Filtration -->
     <div ng-show="estimations.length > 0">
 
         <div layout-gt-xs="row" style="padding-left: 25px">
             <md-input-container class="md-block">
-                <label>Статус:</label>
+                <label>{{translation.ESTIMATIONS.STATUS}}:</label>
                 <md-select ng-model="filter">
                     <md-option ng-value="item" ng-repeat="item in filtrations">{{ item.value }}</md-option>
                 </md-select>
             </md-input-container>
             <md-input-container class="md-block">
-                <label>Ключ:</label>
+                <label>{{translation.ESTIMATIONS.KEY}}:</label>
                 <input ng-model="search.key" name="keyFilter" id="keyFilter">
             </md-input-container>
-            <md-switch ng-model="hideDone" aria-label="Скрыть выполненные">
-                Скрыть выполненные
+            <md-switch ng-model="hideDone" aria-label="Hide done">
+                {{translation.ESTIMATIONS.HIDE_DONE}}
             </md-switch>
         </div>
     </div>
@@ -32,12 +32,12 @@
     <!-- таблица эстимаций -->
     <md-table-container style="padding: 0px 25px">
         <table md-table>
-            <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+            <thead md-head md-order="query.order">
             <tr md-row>
-                <th>Ключ</th>
-                <th>Описание</th>
-                <th>Статус</th>
-                <th>Действия</th>
+                <th>{{translation.ESTIMATIONS.KEY}}</th>
+                <th>{{translation.ESTIMATIONS.SUMMARY}}</th>
+                <th>{{translation.ESTIMATIONS.STATUS}}</th>
+                <th>{{translation.ESTIMATIONS.ACTIONS}}</th>
             </tr>
             </thead>
             <tbody md-body>
@@ -54,7 +54,7 @@
                             type="button"
                             class="md-icon-button"
                             ui-sref="editEstimation({key: est.key, projectKey: est.projectKey})"
-                            uib-tooltip="Редактировать">
+                            uib-tooltip="{{translation.ACTIONS.EDIT}}">
                         <md-icon md-font-set="material-icons"
                                  ng-style="{color: 'green', 'font-size':'17px', height:'17px'}">mode_edit
                         </md-icon>
@@ -62,12 +62,12 @@
                     <md-button
                             type="button"
                             class="md-icon-button"
-                            uib-tooltip="Удалить"
+                            uib-tooltip="{{translation.ACTIONS.DELETE}}"
                             confirm-popup
-                            confirm-title="Подтвердите удаление"
-                            confirm-text="Подтвердите удаление эстимации"
-                            confirm-button="Удалить"
-                            cancel-button="Отмена"
+                            confirm-title="{{translation.ACTION_MSG.CONFIRM_DELETE}}"
+                            confirm-text="{{translation.ACTION_MSG.CONFIRM_ESTIMATION_DELETE}}"
+                            confirm-button="{{translation.ACTIONS.DELETE}}"
+                            cancel-button="{{translation.ACTIONS.CANCEL}}"
                             confirm-method="deleteEstimation(est.key)">
                         <md-icon md-font-set="material-icons"
                                  ng-style="{color: 'red', 'font-size':'17px', height:'17px'}">clear

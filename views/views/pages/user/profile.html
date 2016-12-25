@@ -1,5 +1,4 @@
-<div ng-init="getUserProfile()">
-
+<div ng-init="init()">
 
     <div layout="row" style="padding-top: 5%">
         <div flex="50" flex-offset="25" class="profileCard">
@@ -42,26 +41,32 @@
             </div>
             <md-content class="md-padding" style="background-color: white" layout="column">
                 <md-input-container>
-                    <label>Имя</label>
+                    <label>{{translation.NAME}}</label>
                     <input type="text" name="name" ng-model="user.name" autocomplete="off"/>
                 </md-input-container>
                 <md-input-container>
-                    <label>email</label>
+                    <label>{{translation.EMAIL}}</label>
                     <input type="email" name="email" ng-model="user.email" autocomplete="off" disabled/>
                 </md-input-container>
                 <md-input-container>
-                    <label>Логин</label>
+                    <label>{{translation.LOGIN}}</label>
                     <input type="text" name="login" ng-model="user.login" autocomplete="off" disabled/>
                 </md-input-container>
                 <md-input-container>
-                    <label>Пароль</label>
+                    <label>{{translation.PASS}}</label>
                     <input type="password" name="login" ng-model="user.password" autocomplete="off"
-                           placeholder="Измените свой пароль"/>
+                           placeholder="{{translate.CHANGE_PASS_PLACEHOLDER}}"/>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>{{translation.LANG}}</label>
+                    <md-select ng-model="user.language" placeholder="{{translation.LANG}}" aria-label="Language">
+                        <md-option ng-value="item" ng-repeat="item in languages">{{ item.value }}</md-option>
+                    </md-select>
                 </md-input-container>
             </md-content>
             <div layout="row" layout-align="center center">
                 <div flex="flex"></div>
-                <md-button ng-click="save();">Обновить</md-button>
+                <md-button ng-click="save();">{{translation.CHANGE}}</md-button>
             </div>
         </div>
     </div>

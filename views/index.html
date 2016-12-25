@@ -30,6 +30,7 @@
         <script src="libs/angular-material-data-table/dist/md-data-table.min.js"></script>
         <script src="libs/angular-ui-router-styles/ui-router-styles.js"></script>
         <script src="libs/ng-file-upload/ng-file-upload.min.js"></script>
+        <script src="libs/angular-resource/angular-resource.min.js"></script>
 
         <!-- main -->
         <script src="app.js"></script>
@@ -65,11 +66,12 @@
         <script src="services/$toast.js"></script>
         <script src="services/AuthService.js"></script>
         <script src="services/Session.js"></script>
+        <script src="services/TranslationService.js"></script>
 
 
 
     </head>
-    <body ng-controller="MainController" ng-init="init()">
+    <body ng-controller="MainController">
         <div ui-view=''></div>
     </body>
 </html>

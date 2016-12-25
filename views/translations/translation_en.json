@@ -1,0 +1,75 @@
+{
+  "LANG": "Language",
+  "PASS": "Password",
+  "NAME": "Name",
+  "LOGIN": "Login",
+  "EMAIL": "email",
+  "CHANGE": "Change",
+  "SAVE": "Save",
+  "CHANGE_PASS_PLACEHOLDER": "Change your password",
+
+  "ACTIONS": {
+    "SAVE": "Save",
+    "DELETE": "Delete",
+    "EDIT": "Edit",
+    "ADD": "Add",
+    "CANCEL": "Cancel"
+  },
+
+  "ACTION_MSG": {
+    "CONFIRM_DELETE": "Confirm delete",
+    "CONFIRM_ESTIMATION_DELETE": "Confirm estimation deletion",
+    "CONFIRM_PROJECT_DELETE":  "Confirm project deletion"
+  },
+
+  "PROJECTS": {
+    "PROJECTS": "Projects",
+    "ADD": {
+      "TITLE": "Project creation",
+      "KEY": "Project key",
+      "NAME": "Project name",
+      "ESTIMATION_MODEL": "Estimation model",
+      "ESTIMATION_TAKE_ACCOUNT": "Take account of time to estimation",
+      "ESTIMATION_FIELDS": "Estimation fields",
+      "ESTIMATION_FIELDS_SUBTITLE": "Can be changed for each estimation during creation or edit",
+      "MANAGMENT_SECTIONS": "Managment sections",
+      "SECTION_NAME": "Section name",
+      "SECTION_PERSENT": "Percentage of development",
+      "MESSAGES": {
+        "NEED_PROJECT_KEY": "Need project key.",
+        "NEED_PROJECT_NAME": "Need project name.",
+        "FIELDS_PLACEHOLDER": "Enter field name",
+        "FIELD": "Field"
+      }
+    },
+    "EDIT": {
+      "TITLE": "Project modification"
+    }
+  },
+
+  "ESTIMATIONS": {
+    "NO_ESTIMATIONS": "Project doesn't have estimations",
+    "STATUS": "Status",
+    "KEY": "Key",
+    "SUMMARY": "Summary",
+    "ACTIONS": "Actions",
+    "HIDE_DONE": "Hide done",
+    "VERSION": "Version",
+    "COMPONENT": "Component",
+
+    "ESTIMATION_MODEL": "Estimation model",
+    "ESTIMATION_TAKE_ACCOUNT": "Take account of time to estimation",
+    "FIELDS": "Estimation fields",
+
+    "FIELDS_PLACEHOLDER": "Enter field name",
+    "FIELD": "Field",
+
+    "CREATE_MSG": "Create estimation",
+    "EDIT_MSG": "Edit estimation"
+  },
+
+  "USER": {
+    "PROFILE": "Profile",
+    "LOGOUT": "Logout"
+  }
+}

@@ -3,41 +3,41 @@
     <md-content layout-padding>
 
         <form name="addProjectForm">
-            <legend>Создание проекта:</legend>
+            <legend>{{translation.PROJECTS.ADD.TITLE}}:</legend>
 
 
             <md-input-container class="md-block">
-                <label>jira-ключ</label>
+                <label>{{translation.PROJECTS.ADD.KEY}}</label>
                 <input id="key" required name="key" ng-model="project.key">
                 <div ng-messages="addProjectForm.key.$error">
-                    <div ng-message="required">Нужен ключ проекта.</div>
+                    <div ng-message="required">{{translation.PROJECTS.ADD.MESSAGES.NEED_PROJECT_KEY}}</div>
                 </div>
             </md-input-container>
 
             <md-input-container class="md-block">
-                <label>Имя</label>
+                <label>{{translation.PROJECTS.ADD.NAME}}</label>
                 <input required id="name" name="name" ng-model="project.name">
                 <div ng-messages="addProjectForm.name.$error">
-                    <div ng-message="required">Нужно имя проекта.</div>
+                    <div ng-message="required">{{translation.PROJECTS.ADD.MESSAGES.NEED_PROJECT_KEY}}</div>
                 </div>
             </md-input-container>
 
-            <h3>Модель эстимации:</h3>
+            <h3>{{translation.PROJECTS.ADD.ESTIMATION_MODEL}}:</h3>
             <hr/>
 
             <md-switch ng-model="project.estimationModel.estimationTimeNeeded" aria-label="Switch 1">
-                Учитывание времени эстимации
+                {{translation.PROJECTS.ADD.ESTIMATION_TAKE_ACCOUNT}}
             </md-switch>
 
-            <h4 class="md-title">Поля эстимации:</h4>
-            <h6>Можно будет изменить для каждой эстимации в проекте</h6>
+            <h4 class="md-title">{{translation.PROJECTS.ADD.ESTIMATION_FIELDS}}:</h4>
+            <h6>{{translation.PROJECTS.ADD.ESTIMATION_FIELDS_SUBTITLE}}</h6>
 
             <md-chips
                     required
                     class="custom-chips"
                     ng-model="project.estimationModel.fields"
-                    placeholder="Введите имя поля"
-                    secondary-placeholder="+Поле"
+                    placeholder="{{translation.PROJECTS.ADD.MESSAGES.FIELDS_PLACEHOLDER}}"
+                    secondary-placeholder="+{{translation.PROJECTS.ADD.MESSAGES.FIELD}}"
                     md-enable-chip-edit="true">
                 <md-chip-template>
                     <span>{{$chip}}</span>
@@ -47,29 +47,29 @@
                 </button>
             </md-chips>
 
-            <h4 class="md-title">Секции меджмента:</h4>
+            <h4 class="md-title">{{translation.PROJECTS.ADD.MANAGMENT_SECTIONS}}:</h4>
 
             <div layout-gt-xs="row" ng-repeat="field in project.estimationModel.mngmntModel track by $index">
                 <md-input-container>
-                    <label>Название секции</label>
+                    <label>{{translation.PROJECTS.ADD.SECTION_NAME}}</label>
                     <input type="text" required id="{{'fieldName' + $index}}" name="{{'field' + $index}}"
                            ng-model="project.estimationModel.mngmntModel[$index].name">
                 </md-input-container>
                 <md-input-container>
-                    <label>Процент от разработки</label>
+                    <label>{{translation.PROJECTS.ADD.SECTION_PERSENT}}</label>
                     <input type="number" required id="{{'fieldValue' + $index}}" name="{{'fieldValue' + $index}}"
                            ng-model="project.estimationModel.mngmntModel[$index].percent">
                 </md-input-container>
                 <md-input-container>
                     <md-button class="md-icon-button" ng-click="removeMngmntField($index)">
-                        <md-tooltip>Удалить</md-tooltip>
+                        <md-tooltip>{{translation.ACTIONS.DELETE}}</md-tooltip>
                         <md-icon md-font-set="material-icons" style="color:#c00;">close</md-icon>
                     </md-button>
                 </md-input-container>
             </div>
 
             <md-button ng-click="addMngmntField();" class="md-fab md-mini" md-colors="{background: 'green'}"
-                       aria-label="Добавить">
+                       aria-label="Add">
                 <md-icon md-font-set="material-icons">add</md-icon>
             </md-button>
         </form>
@@ -77,11 +77,11 @@
         <div class="modal-footer">
             <md-button ng-show="projectKey === undefined" type="submit" class="md-raised md-primary"
                        ng-click="upsert();"
-                       ng-disabled="addProjectForm.$invalid"> Добавить
+                       ng-disabled="addProjectForm.$invalid"> {{translation.ACTIONS.ADD}}
             </md-button>
             <md-button ng-show="projectKey !== undefined" type="submit" class="md-raised md-primary"
                        ng-click="upsert();"
-                       ng-disabled="addProjectForm.$invalid"> Сохранить
+                       ng-disabled="addProjectForm.$invalid"> {{translation.ACTIONS.SAVE}}
             </md-button>
         </div>
     </md-content>

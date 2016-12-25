@@ -46,6 +46,11 @@ var schema = new Schema({
     created: {
         type: Date,
         default: Date.now
+    },
+
+    language: {
+        key:String,
+        value: String
     }
 });
 schema.methods.encryptPassword = function(password) {

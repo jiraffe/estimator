@@ -27,6 +27,7 @@ angular.module('estimator')
             $scope.filter = $scope.filtrations[0];
             $scope.statuses = statuses;
             $scope.hideDone = true;
+            var defaultFields = ['key', 'summary', 'status', 'actions'];
 
             function init() {
                 getEstimations();

@@ -40,14 +40,16 @@ angular.module('estimator')
             };
 
             $scope.register = function () {
+
+                prepareNewUser();
+
                 $http({
                     url: 'users/register',
                     method: 'POST',
                     data: $scope.user
                 })
                     .success(function (res) {
-                        console.log(res);
-                        $toast({message: "Вы успешно зарегистрировались!", theme: 'success'});
+                        $toast({message: "Registration successful!", theme: 'success'});
                         $scope.mode = 'login';
                     })
                     .error(function (res) {
@@ -63,5 +65,12 @@ angular.module('estimator')
                         }
                     });
             };
+
+            function prepareNewUser() {
+                $scope.user.language = {
+                    key: 'en',
+                    value: 'English'
+                }
+            }
         }
     );

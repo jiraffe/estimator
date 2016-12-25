@@ -111,6 +111,7 @@ router.post('/profile/update', passport.mustAuthenticated, function (req, res, n
         if(req.body.password) {
             user.password = req.body.password;
         }
+        user.language = req.body.language;
 
         saveUserAndResponse(user, res);
     });
