@@ -60,19 +60,22 @@ angular.module('estimator')
                             $scope.estimation.devTotal();
                             var preTotal = $scope.estimation.developmentTime * (model.percent / 100);
 
+                            //check if preTotal doesn't need to be rounded
+                            if(preTotal % 0.5 === 0) return preTotal;
+
                             var frac = (preTotal % 1).toFixed(2);
                             frac = frac * 100;
-
-                            if(frac % 5 === 0) return preTotal;
 
                             if (frac < 25) frac = 0;
                             else if (frac >= 25 && frac < 75) frac = 0.5;
                             else frac = 1;
-
+                            // frac can be 0, 0.5 and 1.
+                            // So if preTotal < 1 and we add frac - too big value obtained
                             if (preTotal < 1)
                                 return frac;
 
-                            var total = parseInt(preTotal.toFixed(0), 10) + frac;
+                            // otherwise just add rounded fractional part(via frac) to floored preTotal
+                            var total = Math.floor(preTotal) + frac;
                             return total || 0.5;
                         }
                     };
