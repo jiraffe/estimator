@@ -13,7 +13,8 @@
     "DELETE": "Удалить",
     "EDIT": "Редактировать",
     "ADD": "Добавить",
-    "CANCEL": "Отмена"
+    "CANCEL": "Отмена",
+    "BACK": "Назад"
   },
 
   "ACTION_MSG": {
@@ -35,6 +36,7 @@
       "MANAGMENT_SECTIONS": "Секции мэнеджмента",
       "SECTION_NAME": "Нахвание секции",
       "SECTION_PERSENT": "Процент от разработки",
+      "ITS": "Ссылка на баг-трекер",
       "MESSAGES": {
         "NEED_PROJECT_KEY": "Нужен ключ проекта.",
         "NEED_PROJECT_NAME": "Нужно имя проекта.",

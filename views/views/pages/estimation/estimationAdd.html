@@ -55,7 +55,7 @@
             </md-chips>
             <div class="modal-footer">
 
-                <md-button class="md-raised md-warn" ui-sref="projectEstimations({key:estimation.projectKey})">Назад</md-button>
+                <md-button class="md-raised md-warn" ui-sref="projectEstimations({key:estimation.projectKey})">{{translation.ACTIONS.BACK}}</md-button>
                 <md-button class="md-raised md-primary" ng-hide="editMode" ng-click="add();">{{translation.ACTIONS.ADD}}</md-button>
                 <md-button class="md-raised md-primary" ng-show="editMode" ng-click="add();">{{translation.ACTIONS.SAVE}}</md-button>
             </div>

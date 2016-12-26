@@ -8,6 +8,7 @@ var Schema = mongoose.Schema;
 var schema = new Schema({
     name: String,
     key: String,
+    itsLink: String,
     estimationModel: {
         fields: [String],
         estimationTimeNeeded: Boolean,

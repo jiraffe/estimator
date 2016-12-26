@@ -13,7 +13,8 @@
     "DELETE": "Delete",
     "EDIT": "Edit",
     "ADD": "Add",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "BACK": "Back"
   },
 
   "ACTION_MSG": {
@@ -35,6 +36,7 @@
       "MANAGMENT_SECTIONS": "Managment sections",
       "SECTION_NAME": "Section name",
       "SECTION_PERSENT": "Percentage of development",
+      "ITS": "Issue tracking system link",
       "MESSAGES": {
         "NEED_PROJECT_KEY": "Need project key.",
         "NEED_PROJECT_NAME": "Need project name.",
