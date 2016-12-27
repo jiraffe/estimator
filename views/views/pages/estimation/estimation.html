@@ -2,7 +2,7 @@
 
     <div id="estimationStatus" class="md-toolbar-tools">
         <div style="display: inline-block; padding: 20px;">
-            Статус: <span class="label label-{{estimation.status.style}}">{{estimation.status.value}}</span>
+            Статус: <span class="label label-{{estimation.status.style}}">{{translation.STATUSES[estimation.status.value]}}</span>
         </div>
         <div style="display: inline-block">
             <md-fab-speed-dial ng-hide="statusBtn.hidden" md-direction="right" md-open="statusBtn.isOpen"
@@ -13,12 +13,11 @@
                         <md-icon md-font-set="material-icons">edit</md-icon>
                     </md-button>
                 </md-fab-trigger>
-
                 <md-fab-actions>
                     <div ng-repeat="status in statuses track by status.order" ng-if="status.name !== estimation.status.name">
                         <md-button aria-label="{{status.value}}" class="md-warn md-raised"
                                    ng-click="changeStatus(status)">
-                            {{status.value}}
+                            {{translation.STATUSES[status.value]}}
                         </md-button>
                     </div>
                 </md-fab-actions>
@@ -30,6 +29,8 @@
             <md-icon md-font-set="material-icons">comment</md-icon>
         </md-button>
     </div>
+
+    <div ng-repeat="status in statuses"></div>
 
     <div style="padding: 20px;">Ссылка на тикет: <a href="https://jira.lanit.ru/browse/{{estimation.key}}">{{estimation.key}}</a></div>
     <div>Время на разработку: {{estimation.developmentTime}}</div>

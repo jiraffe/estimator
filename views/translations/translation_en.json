@@ -8,6 +8,17 @@
   "SAVE": "Save",
   "CHANGE_PASS_PLACEHOLDER": "Change your password",
 
+  "STATUSES": {
+    "NEW": "New",
+    "IN_PROGRESS": "In progress",
+    "QUESTIONS": "Questions",
+    "DONE": "Done",
+    "SENT": "Sent",
+    "APPROVED": "Approved",
+    "IN_DEVELOPMENT": "In development",
+    "CLOSED": "Closed"
+  },
+
   "ACTIONS": {
     "SAVE": "Save",
     "DELETE": "Delete",

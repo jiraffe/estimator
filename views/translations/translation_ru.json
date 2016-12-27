@@ -7,6 +7,16 @@
   "CHANGE": "Обновить",
   "SAVE": "Сохранить",
   "CHANGE_PASS_PLACEHOLDER": "Измените свой пароль",
+  "STATUSES": {
+    "NEW": "новая",
+    "IN_PROGRESS": "В работе",
+    "QUESTIONS": "Есть вопросы",
+    "DONE": "Готова",
+    "SENT": "Выслана",
+    "APPROVED": "Согласована",
+    "IN_DEVELOPMENT": "В разработке",
+    "CLOSED": "Закрыта"
+  },
   "ACTIONS": {
     "SAVE": "Сохранить",
     "DELETE": "Удалить",

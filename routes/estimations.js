@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Estimation = require('../Model/Estimation');
+var statusStorage = require('../db/StatusStorage')
 
 router.get('/', function(req, res, next) {
 
@@ -15,57 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/statuses', function (req, res, next) {
-
-   res.json([
-       {
-           order: 1,
-           name: 'New',
-           value: 'новая',
-           style: 'default'
-       },
-       {
-           order: 2,
-           name: 'InProgress',
-           value: 'В работе',
-           style: 'primary'
-       },
-       {
-           order: 3,
-           name: 'Questions',
-           value: 'Есть вопросы',
-           style: 'warning'
-       },
-       {
-           order: 4,
-           name: 'Done',
-           value: 'Готова',
-           style: 'info'
-       },
-       {
-           order: 5,
-           name: 'Sent',
-           value: 'Выслана',
-           style: 'danger'
-       },
-       {
-           order: 6,
-           name: 'Approved',
-           value: 'Согласована',
-           style: 'success'
-       },
-       {
-           order: 7,
-           name: 'InDevelopment',
-           value: 'В разработке',
-           style: 'warning'
-       },
-       {
-           order: 8,
-           name: 'Closed',
-           value: 'Закрыта',
-           style: 'success'
-       }
-   ]);
+   res.json(statusStorage.statuses);
 });
 
 router.get('/:key', function (req, res, next) {
