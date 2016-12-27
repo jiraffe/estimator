@@ -149,7 +149,7 @@ angular.module('estimator')
                     method: 'POST',
                     data: $scope.estimation
                 }).success(function (res) {
-                    $toast({message: 'Статус изменён', theme: 'success'});
+                    $toast({message: $scope.translation.ESTIMATIONS.MSGS.STATUS_CHANGED, theme: 'success'});
                 });
             };
 
@@ -159,7 +159,7 @@ angular.module('estimator')
                     method: 'POST',
                     data: $scope.estimation
                 }).success(function (res) {
-                    $toast({message: 'Эстимация сохранена', theme: 'success'});
+                    $toast({message: $scope.translation.ESTIMATIONS.MSGS.SAVED, theme: 'success'});
                     if (needExit) {
                         $state.go('projectEstimations', {key: $scope.params.projectKey});
                     }

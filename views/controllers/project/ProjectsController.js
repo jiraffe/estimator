@@ -34,7 +34,7 @@ angular.module('estimator')
                     url: 'projects/' + projectKey
                 }).success(function (res) {
                     if(res.success) {
-                        $toast({message: 'Проект удалён', theme:'success'});
+                        $toast({message: $scope.translation.PROJECTS.MSGS.DELETED, theme:'success'});
                         getProjects();
                     }
                 })

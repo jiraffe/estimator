@@ -14,7 +14,7 @@ angular.module('estimator')
                 AuthService.logout()
                     .then(function () {
                         $state.go('login');
-                        $toast({message: 'Заходите ещё!', theme: 'success'})
+                        $toast({message: $scope.translation.USER.MSGS.LOGOUT, theme: 'success'})
                     });
             };
 

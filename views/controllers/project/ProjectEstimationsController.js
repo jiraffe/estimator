@@ -58,7 +58,7 @@ angular.module('estimator')
                     url: 'estimations/' + key,
                     method: 'DELETE',
                 }).success(function (res) {
-                    $toast({message: 'Эстимация удалена', theme:'success'});
+                    $toast({message: $scope.translation.ESTIMATIONS.MSGS.DELETED, theme:'success'});
                     getEstimations();
                 });
             };

@@ -25,7 +25,7 @@ angular.module('estimator')
                     .then(function (res) {
                         AuthService.user = $scope.user;
                         $rootScope.$broadcast(AUTH_EVENTS.profileChanged);
-                        $toast({message:'Профайл обновлен', theme: 'success'});
+                        $toast({message:$scope.translation.USER.MSGS.PROFILE_CHANGED, theme: 'success'});
                     })
             };
 

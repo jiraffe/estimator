@@ -7,7 +7,6 @@
   "CHANGE": "Обновить",
   "SAVE": "Сохранить",
   "CHANGE_PASS_PLACEHOLDER": "Измените свой пароль",
-
   "ACTIONS": {
     "SAVE": "Сохранить",
     "DELETE": "Удалить",
@@ -16,13 +15,11 @@
     "CANCEL": "Отмена",
     "BACK": "Назад"
   },
-
   "ACTION_MSG": {
     "CONFIRM_DELETE": "Подтвердите удаление",
     "CONFIRM_ESTIMATION_DELETE": "Подтвердите удаление эстимации",
-    "CONFIRM_PROJECT_DELETE":  "Подтвердите удаление проекта"
+    "CONFIRM_PROJECT_DELETE": "Подтвердите удаление проекта"
   },
-
   "PROJECTS": {
     "PROJECTS": "Проекты",
     "ADD": {
@@ -42,13 +39,16 @@
         "NEED_PROJECT_NAME": "Нужно имя проекта.",
         "FIELDS_PLACEHOLDER": "Введите имя поля",
         "FIELD": "Поле"
+      },
+      "MSGS": {
+        "SAVED": "Проект сохранён",
+        "DELETED": "Проект удалён"
       }
     },
     "EDIT": {
       "TITLE": "Редактирование проекта"
     }
   },
-
   "ESTIMATIONS": {
     "NO_ESTIMATIONS": "У проекта пока что нет оценнок",
     "STATUS": "Статус",
@@ -58,20 +58,26 @@
     "HIDE_DONE": "Скрыть выполненные",
     "VERSION": "Версия",
     "COMPONENT": "Компонент",
-
     "ESTIMATION_MODEL": "Модель эстимации",
     "ESTIMATION_TAKE_ACCOUNT": "Учитывание трудозатрат на оценку",
     "FIELDS": "Поля эстимации",
-
     "FIELDS_PLACEHOLDER": "Введите имя поля",
     "FIELD": "Поле",
-
     "CREATE_MSG": "Создание оценки",
-    "EDIT_MSG": "Редактирование оценки"
+    "EDIT_MSG": "Редактирование оценки",
+    "MSGS": {
+      "SAVED": "Эстимация сохранена",
+      "ADDED": "Эстимация добавлена",
+      "STATUS_CHANGED": "Статус изменён",
+      "DELETED": "Эстимация удалена"
+    }
   },
-
   "USER": {
     "PROFILE": "Профиль",
-    "LOGOUT": "Выйти"
+    "LOGOUT": "Выйти",
+    "MSGS": {
+      "LOGOUT": "Заходите ещё!",
+      "PROFILE_CHANGED": "Профайл обновлен"
+    }
   }
 }

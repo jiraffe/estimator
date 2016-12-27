@@ -44,6 +44,10 @@
         "FIELD": "Field"
       }
     },
+    "MSGS": {
+      "SAVED": "Project saved",
+      "DELETED": "Project deleted"
+    },
     "EDIT": {
       "TITLE": "Project modification"
     }
@@ -67,11 +71,21 @@
     "FIELD": "Field",
 
     "CREATE_MSG": "Create estimation",
-    "EDIT_MSG": "Edit estimation"
+    "EDIT_MSG": "Edit estimation",
+    "MSGS": {
+      "SAVED": "Estimation saved",
+      "ADDED": "Estimation added",
+      "STATUS_CHANGED": "Status changed",
+      "DELETED": "Estimation deleted"
+    }
   },
 
   "USER": {
     "PROFILE": "Profile",
-    "LOGOUT": "Logout"
+    "LOGOUT": "Logout",
+    "MSGS": {
+      "LOGOUT": "Welcome!",
+      "PROFILE_CHANGED": "Profile changed"
+    }
   }
 }

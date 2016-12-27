@@ -91,7 +91,9 @@ angular.module('estimator')
                     method: 'POST',
                     data: $scope.estimation
                 }).success(function (res) {
-                    var message = $scope.editMode ? 'Эстимация сохранена' : 'Эстимация добавлена';
+                    var message = $scope.editMode ?
+                        $scope.translation.ESTIMATIONS.MSGS.SAVED :
+                        $scope.translation.ESTIMATIONS.MSGS.ADDED;
                     $toast({message: message, theme: 'success'});
                     $state.go('projectEstimations', {key: $scope.params.projectKey});
                 });

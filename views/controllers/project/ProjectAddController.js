@@ -35,7 +35,7 @@ angular.module('estimator')
                     method: 'POST',
                     data: $scope.project
                 }).success(function (res) {
-                    $toast({message: 'Проект сохранён', theme:'success'});
+                    $toast({message: $scope.translation.PROJECTS.MSGS.SAVED, theme:'success'});
                     $state.go('projects');
                 });
             };
