@@ -5,7 +5,8 @@
 
 angular.module('estimator')
     .controller('EstimationDetailController',
-        function ($scope, $state, $http, $stateParams, $toast, statuses, $q, $mdSidenav, $log) {
+        function ($scope, $state, $http, $stateParams, $toast, statuses, $q, $mdSidenav, translation) {
+
 
             $scope.params = angular.copy($state.params);
             $scope.estimation = {};
@@ -17,7 +18,7 @@ angular.module('estimator')
             $scope.statusBtn = {
                 isOpen: false,
                 hidden: false
-            }
+            };
 
             $scope.init = function () {
                 getEstimation()
@@ -180,9 +181,8 @@ angular.module('estimator')
                 $scope.estimation.comments.push({text: $scope.newComment});
                 $scope.newComment = '';
             };
-
             $scope.sectionMenu = [
-                ['Добавить секцию', function (item) {
+                [translation.ESTIMATIONS.ACTIONS.ADD_SECTION, function (item) {
                     var newItemIdx = item.$index + 1;
                     var sectionNum = ($scope.estimation.sections && $scope.estimation.sections.length > 0) ?
                     $scope.estimation.sections.length + 1 :
@@ -203,14 +203,14 @@ angular.module('estimator')
                     reinitTotals();
                 }],
                 null,
-                ['Удалить секцию', function (item) {
+                [translation.ESTIMATIONS.ACTIONS.DELETE_SECTION, function (item) {
                     $scope.estimation.sections.splice(item.section.idx, 1);
                     reinitTotals();
                 }]
             ];
 
             $scope.subSectionMenu = [
-                ['Добавить под-секцию', function (item) {
+                [translation.ESTIMATIONS.ACTIONS.ADD_SUBSECTION, function (item) {
                     var sectionIdx = item.$parent.section.idx;
                     var newItemIdx = item.$index + 1;
 
@@ -223,7 +223,7 @@ angular.module('estimator')
                     reinitTotals();
                 }],
                 null,
-                ['Удалить под-секцию', function (item) {
+                [translation.ESTIMATIONS.ACTIONS.DELETE_SUBSECTION, function (item) {
                     var sectionIdx = item.$parent.section.idx;
                     var subSectionIdx = item.sub.idx;
 
@@ -233,7 +233,7 @@ angular.module('estimator')
             ];
 
             $scope.analysisSubSectionMenu = [
-                ['Добавить под-секцию', function (item) {
+                [translation.ESTIMATIONS.ACTIONS.ADD_SUBSECTION, function (item) {
                     var newItemIdx = item.$index + 1;
 
                     var newSubSection = {
@@ -245,7 +245,7 @@ angular.module('estimator')
                     reinitTotals();
                 }],
                 null,
-                ['Удалить под-секцию', function (item) {
+                [translation.ESTIMATIONS.ACTIONS.DELETE_SUBSECTION, function (item) {
                     var subSectionIdx = item.sub.idx;
 
                     $scope.estimation.analysis.subSections.splice(subSectionIdx, 1);

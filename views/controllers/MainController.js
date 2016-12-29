@@ -31,7 +31,7 @@ angular.module('estimator')
             });
 
             $scope.translate = function(){
-                TranslationService.getTranslation($scope, $scope.selectedLanguage);
+                TranslationService.getTranslation($scope);
             };
 
             /*
@@ -41,7 +41,6 @@ angular.module('estimator')
              */
             $scope.init = function () {
                 $scope.user = AuthService.user;
-                $scope.selectedLanguage = $scope.user.language.key || 'en';
                 $scope.translate();
             }
         });

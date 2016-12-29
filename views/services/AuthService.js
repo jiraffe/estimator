@@ -3,7 +3,7 @@
  */
 angular.module('estimator')
     .factory('AuthService',
-        function ($http, Session, $q, $state, $rootScope, AUTH_EVENTS) {
+        function ($http, Session, $q, $state, $rootScope, AUTH_EVENTS, TranslationService) {
 
             var API = {};
 
@@ -51,6 +51,7 @@ angular.module('estimator')
                 return $http.get('users/profile')
                     .then(function (res) {
                         API.user = res.data;
+                        TranslationService.currentLang = API.user.language.key;
                         initProfileImage();
                         $rootScope.$broadcast(AUTH_EVENTS.profileLoaded, API.user);
                         if($state.current.name === 'login') {

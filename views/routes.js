@@ -62,6 +62,9 @@ app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
                 resolve: {
                     'statuses': function (StatusService) {
                         return StatusService.promise;
+                    },
+                    'translation':  function (TranslationService) {
+                        return TranslationService.promise;
                     }
                 }
             })

@@ -2,12 +2,32 @@
  * Created by dzmitry_dubrovin on 25-Dec-16.
  */
 angular.module('estimator')
-    .service('TranslationService', function($resource) {
+    .service('TranslationService', function ($resource, $http) {
 
-    this.getTranslation = function($scope, language) {
-        var languageFilePath = 'translations/translation_' + language + '.json';
-        $resource(languageFilePath).get(function (data) {
-            $scope.translation = data;
+        var API = {};
+        API.translation = {};
+        API.currentLang = 'en';
+
+        var getLangPath = function (lang) {
+            return 'translations/translation_' + API.currentLang + '.json';
+        };
+
+        API.getTranslation = function ($scope) {
+            $resource(getLangPath()).get(function (data) {
+                self.translation = data;
+                $scope.translation = data;
+            });
+        };
+
+        // API.promise = $http({method:'GET', url:getLangPath()}).then(function (res) {
+        //     API.translation = res.data;
+        //     return res.data;
+        // });
+
+        API.promise = $http({method:'GET', url:'translations/translation_' + API.currentLang + '.json'}).then(function (res) {
+            API.translation = res.data;
+            return res.data;
         });
-    };
-});
+
+        return API;
+    });

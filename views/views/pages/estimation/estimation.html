@@ -32,33 +32,33 @@
 
     <div ng-repeat="status in statuses"></div>
 
-    <div style="padding: 20px;">Ссылка на тикет: <a href="https://jira.lanit.ru/browse/{{estimation.key}}">{{estimation.key}}</a></div>
+    <div style="padding: 20px;">{{translation.ESTIMATIONS.TICKET_LINK}}: <a href="https://jira.lanit.ru/browse/{{estimation.key}}">{{estimation.key}}</a></div>
     <div>Время на разработку: {{estimation.developmentTime}}</div>
     <div id="estimation">
-        <!-- описание -->
+        <!-- summary -->
         <div class="divTableRow" style="display: table; width: 100%;">
             <div class="divTableCell summary">{{estimation.summary}}</div>
         </div>
-        <!-- таблица -->
+        <!-- table -->
         <div class="divTable">
             <div class="divTableHeading">
-                <!-- шапка -->
+                <!-- header -->
                 <div class="divTableRow" context-menu="sectionMenu">
-                    <div class="divTableHead sectionNumber">№П</div>
-                    <div class="divTableHead sectionNumber">№П/П</div>
-                    <div class="divTableHead">Описание</div>
+                    <div class="divTableHead sectionNumber">{{translation.ESTIMATIONS.ITEM_NO}}</div>
+                    <div class="divTableHead sectionNumber">{{translation.ESTIMATIONS.SUBITEM_NO}}</div>
+                    <div class="divTableHead">{{translation.ESTIMATIONS.SUMMARY}}</div>
                     <div ng-repeat="model in esModel.fields" class="divTableHead estVal">{{model}}</div>
-                    <div class="divTableHead estVal">Total</div>
+                    <div class="divTableHead estVal">{{translation.ESTIMATIONS.TOTAL}}</div>
                 </div>
-                <!-- Анализ и оценка -->
+                <!-- Analysis and estimation -->
                 <div class="divTableRow divEstimation">
                     <div class="divTableCell"></div>
                     <div class="divTableCell">&nbsp;</div>
-                    <div class="divTableCell">Анализ и оценка</div>
+                    <div class="divTableCell">{{translation.ESTIMATIONS.ANALYSIS_SECTION_HEADER}}</div>
                     <div ng-repeat="model in esModel.fields" class="divTableCell">&nbsp;</div>
                     <div class="divTableCell centeate-text">{{estimation.analysis.total()}}</div>
                 </div>
-                <!-- под-секции анализа и оценки -->
+                <!-- sub-sections of Analysis and estimation -->
                 <div class="divTableRow" context-menu="analysisSubSectionMenu"
                      ng-repeat="sub in estimation.analysis.subSections track by $index">
                     <div class="divTableCell subSection sectionNumber"></div>
@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="divTableBody" ng-repeat="section in estimation.sections">
-                <!-- Секции -->
+                <!-- sections -->
                 <div class="divTableRow" context-menu="sectionMenu">
                     <div class="divTableCell section sectionNumber">{{section.number}}</div>
                     <div class="divTableCell section sectionNumber">&nbsp;</div>
@@ -83,7 +83,7 @@
                     <div class="divTableCell section estVal centeate-text">{{section.total();}}</div>
                 </div>
 
-                <!-- под-секции -->
+                <!-- sub-sections -->
                 <div class="divTableRow" ng-repeat="sub in section.subSections" context-menu="subSectionMenu">
                     <div class="divTableCell subSection sectionNumber"></div>
                     <div class="divTableCell subSection sectionNumber">{{sub.subNum}}</div>
@@ -102,7 +102,7 @@
 
             <div class="divTableFoot">
 
-                <!-- Секция менеджмента -->
+                <!-- management section -->
                 <div class="divTableRow">
                     <div class="divTableCell section sectionNumber">{{estimation.mngmtSection.number}}</div>
                     <div class="divTableCell section sectionNumber">&nbsp;</div>
@@ -111,7 +111,7 @@
                     <div class="divTableCell section estVal centeate-text">{{estimation.mngmtSection.total()}}</div>
                 </div>
 
-                <!-- под-секции -->
+                <!-- sub-sections -->
                 <div class="divTableRow" ng-repeat="sub in estimation.mngmtSection.subSections">
                     <div class="divTableCell subSection sectionNumber"></div>
                     <div class="divTableCell subSection sectionNumber">{{sub.subNum}}</div>
@@ -123,7 +123,7 @@
                 <div class="divTableRow">
                     <div class="divTableHead sectionNumber">&nbsp;</div>
                     <div class="divTableHead sectionNumber">&nbsp;</div>
-                    <div class="divTableHead floatRight">Итого</div>
+                    <div class="divTableHead floatRight">{{translation.ESTIMATIONS.TOTAL}}</div>
                     <div ng-repeat="model in esModel.fields" class="divTableHead estVal">&nbsp;</div>
                     <div class="divTableHead estVal centeate-text">{{estimation.total();}}</div>
                 </div>
@@ -141,14 +141,14 @@
     <md-sidenav class="md-sidenav-right" md-whiteframe="-1" md-component-id="comments">
 
         <md-toolbar class="md-theme-light">
-            <h1 class="md-toolbar-tools">Комментарии</h1>
+            <h1 class="md-toolbar-tools">{{translation.ESTIMATIONS.COMMENTS.TITLE}}</h1>
         </md-toolbar>
         <md-content layout-padding>
             <div ng-repeat="comment in estimation.comments track by $index">
                 <div contenteditable="true" type="text" ng-model="estimation.comments[$index].text"></div>
             </div>
             <md-input-container class="md-block" style="margin-bottom: 0px">
-                <label>Новый комментарий</label>
+                <label>{{translation.ESTIMATIONS.COMMENTS.NEW_COMMENT}}</label>
                 <textarea ng-model="newComment" rows="1" md-select-on-focus></textarea>
             </md-input-container>
             <md-button aria-label="menu" class="md-fab md-mini" md-colors="{background: 'green'}"

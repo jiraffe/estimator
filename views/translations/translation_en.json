@@ -7,7 +7,6 @@
   "CHANGE": "Change",
   "SAVE": "Save",
   "CHANGE_PASS_PLACEHOLDER": "Change your password",
-
   "STATUSES": {
     "NEW": "New",
     "IN_PROGRESS": "In progress",
@@ -18,7 +17,6 @@
     "IN_DEVELOPMENT": "In development",
     "CLOSED": "Closed"
   },
-
   "ACTIONS": {
     "SAVE": "Save",
     "DELETE": "Delete",
@@ -27,13 +25,11 @@
     "CANCEL": "Cancel",
     "BACK": "Back"
   },
-
   "ACTION_MSG": {
     "CONFIRM_DELETE": "Confirm delete",
     "CONFIRM_ESTIMATION_DELETE": "Confirm estimation deletion",
-    "CONFIRM_PROJECT_DELETE":  "Confirm project deletion"
+    "CONFIRM_PROJECT_DELETE": "Confirm project deletion"
   },
-
   "PROJECTS": {
     "PROJECTS": "Projects",
     "ADD": {
@@ -63,7 +59,6 @@
       "TITLE": "Project modification"
     }
   },
-
   "ESTIMATIONS": {
     "NO_ESTIMATIONS": "Project doesn't have estimations",
     "STATUS": "Status",
@@ -73,16 +68,29 @@
     "HIDE_DONE": "Hide done",
     "VERSION": "Version",
     "COMPONENT": "Component",
-
     "ESTIMATION_MODEL": "Estimation model",
     "ESTIMATION_TAKE_ACCOUNT": "Take account of time to estimation",
     "FIELDS": "Estimation fields",
-
     "FIELDS_PLACEHOLDER": "Enter field name",
     "FIELD": "Field",
-
     "CREATE_MSG": "Create estimation",
     "EDIT_MSG": "Edit estimation",
+    "TICKET_LINK": "Link to ticket",
+    "ANALYSIS_SECTION_HEADER": "Analysis and estimation",
+    "TOTAL": "Total",
+    "ITEM_NO": "#",
+    "SUBITEM_NO": "#.#",
+    "ACTIONS": {
+      "TITLE": "Actions",
+      "ADD_SECTION": "Add section",
+      "DELETE_SECTION": "Delete section",
+      "ADD_SUBSECTION": "Add sub-section",
+      "DELETE_SUBSECTION": "Delete sub-section"
+    },
+    "COMMENTS": {
+      "TITLE": "Comments",
+      "NEW_COMMENT": "New comment"
+    },
     "MSGS": {
       "SAVED": "Estimation saved",
       "ADDED": "Estimation added",
@@ -90,7 +98,6 @@
       "DELETED": "Estimation deleted"
     }
   },
-
   "USER": {
     "PROFILE": "Profile",
     "LOGOUT": "Logout",

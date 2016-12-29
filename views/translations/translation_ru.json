@@ -75,6 +75,22 @@
     "FIELD": "Поле",
     "CREATE_MSG": "Создание оценки",
     "EDIT_MSG": "Редактирование оценки",
+    "TICKET_LINK": "Ссылка на тикет",
+    "ANALYSIS_SECTION_HEADER": "Анализ и оценка",
+    "TOTAL": "Сумма",
+    "ITEM_NO": "№П",
+    "SUBITEM_NO": "№П/П",
+    "ACTIONS": {
+      "TITLE": "Действия",
+      "ADD_SECTION": "Добавить секцию",
+      "DELETE_SECTION": "Удалить секцию",
+      "ADD_SUBSECTION": "Добавить под-секцию",
+      "DELETE_SUBSECTION": "Удалить под-секцию"
+    },
+    "COMMENTS": {
+      "TITLE": "Комментарии",
+      "NEW_COMMENT": "Новый комментарий"
+    },
     "MSGS": {
       "SAVED": "Эстимация сохранена",
       "ADDED": "Эстимация добавлена",
