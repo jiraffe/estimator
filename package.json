@@ -6,7 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "async": "^2.1.2",
+    "async": "^2.1.4",
     "body-parser": "~1.13.2",
     "connect-ensure-login": "^0.1.1",
     "connect-mongodb-session": "^1.3.0",

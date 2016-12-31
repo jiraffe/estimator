@@ -62,12 +62,14 @@ var routes = require('./routes/index');
 var estimations = require('./routes/estimations');
 var projects = require('./routes/projects');
 var users = require('./routes/users');
+var estimationModels = require('./routes/estimationModels');
 
 
 app.use('/', routes);
 app.use('/estimations', estimations);
 app.use('/projects', projects);
 app.use('/users', users);
+app.use('/estimationModels', estimationModels);
 
 
 

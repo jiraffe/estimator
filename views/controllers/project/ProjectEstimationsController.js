@@ -27,10 +27,15 @@ angular.module('estimator')
             $scope.filter = $scope.filtrations[0];
             $scope.statuses = statuses;
             $scope.hideDone = true;
-            var defaultFields = ['key', 'summary', 'status', 'actions'];
+            $scope.selectedFields = [];
+            $scope.estFields = [];
 
             function init() {
                 getEstimations();
+                $http.get('estimationModels')
+                    .then(function (res) {
+                        $scope.estFields = res.data;
+                    })
             }
             init();
 
@@ -67,8 +72,8 @@ angular.module('estimator')
                 $http({
                     url: 'projects/estimations/' + $scope.params.key,
                     method: 'GET',
-                }).success(function (res) {
-                    $scope.estimations = res;
+                }).then(function (res) {
+                    $scope.estimations = res.data;
                     prepareFiltrations();
                 });
             }

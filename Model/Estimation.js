@@ -59,10 +59,7 @@ var schema = new Schema({
                 }
             ]
         }
-    ],
-
-    stabilization: Number,
-    coordination: Number
+    ]
 });
 
 

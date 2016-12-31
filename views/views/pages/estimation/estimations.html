@@ -28,6 +28,14 @@
             </md-switch>
         </div>
     </div>
+    <div layout-gt-xs="row" style="padding: 0px 25px">
+        <span flex></span>
+        <span>
+            <md-select ng-model="selectedFields" multiple="true" md-selected-text="translation.ESTIMATIONS.COLUMNS">
+                <md-option ng-value="field" ng-repeat="field in estFields">{{ translation.ESTIMATIONS[field.fieldKey] }}</md-option>
+            </md-select>
+        </span>
+    </div>
 
     <!-- таблица эстимаций -->
     <md-table-container style="padding: 0px 25px">
