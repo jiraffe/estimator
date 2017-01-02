@@ -8,6 +8,12 @@ angular.module('estimator')
 
         function ($mdToast) {
 
+            /**
+             * @param opts apply
+             * @code theme - style for toast. From md-colors
+             * @code delay - how long toast stays at page. Default 2 sec.
+             * @code message - toast message
+             */
             var API = function (opts) {
 
                 theme = (opts.theme || 'default') + '-toast-theme';

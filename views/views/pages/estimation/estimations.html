@@ -31,7 +31,7 @@
     <div layout-gt-xs="row" style="padding: 0px 25px">
         <span flex></span>
         <span>
-            <md-select ng-model="selectedFields" multiple="true" md-selected-text="translation.ESTIMATIONS.COLUMNS">
+            <md-select ng-model="selectedFields" multiple="true" md-selected-text="translation.ESTIMATIONS.COLUMNS" aria-label="Columns">
                 <md-option ng-value="field" ng-repeat="field in estFields">{{ translation.ESTIMATIONS[field.fieldKey] }}</md-option>
             </md-select>
         </span>
@@ -59,7 +59,10 @@
                             {{translation.STATUSES[est[field.fieldName].value]}}
                         </div>
                     </div>
-                    <div ng-if="field.fieldName !== 'status'">{{est[field.fieldName]}}</div>
+                    <div ng-if="field.fieldType === 'Date'">
+                        {{est[field.fieldName] | date : 'dd-mm-yyyy'}}
+                    </div>
+                    <div ng-if="field.fieldName !== 'status' && field.fieldType !== 'Date'">{{est[field.fieldName]}}</div>
                 </td>
                 <td md-cell>
                     <md-button

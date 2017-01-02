@@ -19,11 +19,6 @@ angular.module('estimator')
             });
         };
 
-        // API.promise = $http({method:'GET', url:getLangPath()}).then(function (res) {
-        //     API.translation = res.data;
-        //     return res.data;
-        // });
-
         API.promise = $http({method:'GET', url:'translations/translation_' + API.currentLang + '.json'}).then(function (res) {
             API.translation = res.data;
             return res.data;

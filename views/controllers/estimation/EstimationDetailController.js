@@ -145,6 +145,14 @@ angular.module('estimator')
 
                 $scope.estimation.status = status;
 
+                if(status.name === 'Approved') {
+                    $scope.estimation.approvedDate = Date.now();
+                } else if(status.name === 'InDevelopment') {
+                    $scope.estimation.workStartDate = Date.now();
+                } else if(status.name === 'Closed') {
+                    $scope.estimation.workEndDate = Date.now();
+                }
+
                 $http({
                     url: 'estimations',
                     method: 'POST',
