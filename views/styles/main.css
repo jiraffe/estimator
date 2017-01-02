@@ -149,3 +149,11 @@ body {
     border: 2px solid white;
     border-radius: 50%
 }
+
+.statusLabel {
+    border-radius: 3px;
+    width:100%;
+    max-width: 140px;
+    text-align: center;
+    margin: 0px 10px;
+}

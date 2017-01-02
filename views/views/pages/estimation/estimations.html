@@ -43,19 +43,23 @@
             <thead md-head md-order="query.order">
             <tr md-row>
                 <th>{{translation.ESTIMATIONS.KEY}}</th>
-                <th>{{translation.ESTIMATIONS.SUMMARY}}</th>
-                <th>{{translation.ESTIMATIONS.STATUS}}</th>
+                <th ng-repeat="field in selectedFields">{{translation.ESTIMATIONS[field.fieldKey]}}</th>
                 <th>{{translation.ESTIMATIONS.ACTIONS.TITLE}}</th>
             </tr>
             </thead>
             <tbody md-body>
+
             <tr md-row ng-repeat="est in estimations | filter:search | filter:statusFilter">
                 <td md-cell>
                     <a ui-sref="projectEstimation({key: est.key, projectKey: projectKey})">{{est.key}}</a>
                 </td>
-                <td md-cell>{{est.summary}}</td>
-                <td md-cell>
-                    <span class="label label-{{est.status.style}}">{{translation.STATUSES[est.status.value]}}</span>
+                <td md-cell ng-repeat="field in selectedFields">
+                    <div ng-if="field.fieldName === 'status'">
+                        <div md-colors="{background: '{{est[field.fieldName].style}}'}" class="statusLabel">
+                            {{translation.STATUSES[est[field.fieldName].value]}}
+                        </div>
+                    </div>
+                    <div ng-if="field.fieldName !== 'status'">{{est[field.fieldName]}}</div>
                 </td>
                 <td md-cell>
                     <md-button

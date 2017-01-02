@@ -29,12 +29,19 @@ angular.module('estimator')
             $scope.hideDone = true;
             $scope.selectedFields = [];
             $scope.estFields = [];
+            $scope.primary = 'purple';
+            var baseFieldNames = ['summary', 'status'];
 
             function init() {
                 getEstimations();
                 $http.get('estimationModels')
                     .then(function (res) {
                         $scope.estFields = res.data;
+                        $scope.estFields.forEach((el) => {
+                            if(baseFieldNames.indexOf(el.fieldName) !== -1) {
+                                $scope.selectedFields.push(el);
+                            }
+                        });
                     })
             }
             init();

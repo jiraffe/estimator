@@ -1,9 +1,10 @@
 <div ng-init="init()">
 
     <div id="estimationStatus" class="md-toolbar-tools">
-        <div style="display: inline-block; padding: 20px;">
-            Статус: <span class="label label-{{estimation.status.style}}">{{translation.STATUSES[estimation.status.value]}}</span>
-        </div>
+        {{translation.ESTIMATIONS.STATUS}}:
+        <span md-colors="{background: '{{estimation.status.style}}'}" class="statusLabel">
+            {{translation.STATUSES[estimation.status.value]}}
+        </span>
         <div style="display: inline-block">
             <md-fab-speed-dial ng-hide="statusBtn.hidden" md-direction="right" md-open="statusBtn.isOpen"
                                class="md-scale" ng-mouseenter="statusBtn.isOpen=true"
