@@ -26,11 +26,11 @@ angular.module('estimator')
             }];
             $scope.filter = $scope.filtrations[0];
             $scope.statuses = statuses;
-            $scope.hideDone = false; // true
+            $scope.hideDone = true;
             $scope.selectedFields = [];
             $scope.estFields = [];
             $scope.primary = 'purple';
-            var baseFieldNames = ['summary', 'status', 'workEndDate'];
+            var baseFieldNames = ['summary', 'status'];
 
             function init() {
                 getEstimations();
