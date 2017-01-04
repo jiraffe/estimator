@@ -8,6 +8,7 @@
   "SAVE": "Сохранить",
   "CHANGE_PASS_PLACEHOLDER": "Измените свой пароль",
   "STATUSES": {
+    "ALL": "Все статусы",
     "NEW": "новая",
     "IN_PROGRESS": "В работе",
     "QUESTIONS": "Есть вопросы",

@@ -21,8 +21,8 @@ angular.module('estimator')
             $scope.projectKey = $state.params.key;
             $scope.estimations = [];
             $scope.filtrations = [{
-                value: 'Все',
-                name: 'all'
+                name: 'All',
+                value: 'ALL'
             }];
             $scope.filter = $scope.filtrations[0];
             $scope.statuses = statuses;

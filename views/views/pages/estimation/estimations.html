@@ -16,7 +16,7 @@
             <md-input-container class="md-block">
                 <label>{{translation.ESTIMATIONS.STATUS}}:</label>
                 <md-select ng-model="filter">
-                    <md-option ng-value="item" ng-repeat="item in filtrations">{{ item.value }}</md-option>
+                    <md-option ng-value="item" ng-repeat="item in filtrations">{{ translation.STATUSES[item.value]}}</md-option>
                 </md-select>
             </md-input-container>
             <md-input-container class="md-block">

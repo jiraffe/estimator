@@ -8,6 +8,7 @@
   "SAVE": "Save",
   "CHANGE_PASS_PLACEHOLDER": "Change your password",
   "STATUSES": {
+    "ALL": "All statuses",
     "NEW": "New",
     "IN_PROGRESS": "In progress",
     "QUESTIONS": "Questions",
