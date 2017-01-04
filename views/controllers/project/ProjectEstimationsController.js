@@ -15,7 +15,7 @@ angular.module('estimator')
         '$toast',
         'statuses',
 
-        function($scope, $state, $http, $toast, statuses) {
+        function ($scope, $state, $http, $toast, statuses) {
 
             $scope.params = angular.copy($state.params);
             $scope.projectKey = $state.params.key;
@@ -38,25 +38,26 @@ angular.module('estimator')
                     .then(function (res) {
                         $scope.estFields = res.data;
                         $scope.estFields.forEach((el) => {
-                            if(baseFieldNames.indexOf(el.fieldName) !== -1) {
+                            if (baseFieldNames.indexOf(el.fieldName) !== -1) {
                                 $scope.selectedFields.push(el);
                             }
                         });
                     })
             }
+
             init();
 
             var needed = false;
-            $scope.statusFilter = function(data) {
+            $scope.statusFilter = function (est) {
 
                 needed = false;
 
-                if($scope.hideDone && data.status.name.toLowerCase() === 'closed') {
+                if ($scope.hideDone && est.status.name.toLowerCase() === 'closed') {
                     return false;
                 }
 
-                if($scope.filter.name === 'all') return true;
-                else if($scope.filter.name === data.status.name) {
+                if ($scope.filter.name === 'All') return true;
+                else if ($scope.filter.name === est.status.name) {
                     return true;
                 } else {
                     return false;
@@ -70,7 +71,7 @@ angular.module('estimator')
                     url: 'estimations/' + key,
                     method: 'DELETE',
                 }).success(function (res) {
-                    $toast({message: $scope.translation.ESTIMATIONS.MSGS.DELETED, theme:'success'});
+                    $toast({message: $scope.translation.ESTIMATIONS.MSGS.DELETED, theme: 'success'});
                     getEstimations();
                 });
             };
@@ -89,15 +90,26 @@ angular.module('estimator')
                 $scope.estimations.forEach(function (est) {
 
                     var found = false;
-                    for(var i = 0; i < $scope.filtrations.length; i++) {
+                    for (var i = 0; i < $scope.filtrations.length; i++) {
                         if ($scope.filtrations[i].name == est.status.name) {
                             found = true;
                             break;
                         }
                     }
 
-                    if(!found) $scope.filtrations.push(est.status);
+                    if (!found) $scope.filtrations.push(est.status);
                 });
             }
+
+            $scope.$watch(
+                'filter',
+                function (newVal, oldVal) {
+                    if (newVal.name === 'Closed') {
+                        $scope.hideDone = false;
+                    } else {
+                        $scope.hideDone = true;
+                    }
+                }
+            );
         }
     ]);
