@@ -15,7 +15,8 @@
                     </md-button>
                 </md-fab-trigger>
                 <md-fab-actions>
-                    <div ng-repeat="status in statuses track by status.order" ng-if="status.name !== estimation.status.name">
+                    <div ng-repeat="status in statuses track by status.order"
+                         ng-if="status.name !== estimation.status.name">
                         <md-button aria-label="{{status.value}}" class="md-warn md-raised"
                                    ng-click="changeStatus(status)">
                             {{translation.STATUSES[status.value]}}
@@ -31,10 +32,17 @@
         </md-button>
     </div>
 
-    <div ng-repeat="status in statuses"></div>
+    <md-list>
+        <md-subheader class="md-no-sticky">Об оценке</md-subheader>
+        <md-list-item>
+            {{translation.ESTIMATIONS.TICKET_LINK}}:<a
+                href="https://jira.lanit.ru/browse/{{estimation.key}}">{{estimation.key}}</a>
+        </md-list-item>
+        <md-list-item>
+            Время на разработку:{{estimation.developmentTime}}
+        </md-list-item>
+    </md-list>
 
-    <div style="padding: 20px;">{{translation.ESTIMATIONS.TICKET_LINK}}: <a href="https://jira.lanit.ru/browse/{{estimation.key}}">{{estimation.key}}</a></div>
-    <div>Время на разработку: {{estimation.developmentTime}}</div>
     <div id="estimation">
         <!-- summary -->
         <div class="divTableRow" style="display: table; width: 100%;">
@@ -52,7 +60,7 @@
                     <div class="divTableHead estVal">{{translation.ESTIMATIONS.TOTAL}}</div>
                 </div>
                 <!-- Analysis and estimation -->
-                <div class="divTableRow divEstimation">
+                <div class="divTableRow divEstimation" ng-if="esModel.estimationTimeNeeded">
                     <div class="divTableCell"></div>
                     <div class="divTableCell">&nbsp;</div>
                     <div class="divTableCell">{{translation.ESTIMATIONS.ANALYSIS_SECTION_HEADER}}</div>
@@ -60,7 +68,7 @@
                     <div class="divTableCell centeate-text">{{estimation.analysis.total()}}</div>
                 </div>
                 <!-- sub-sections of Analysis and estimation -->
-                <div class="divTableRow" context-menu="analysisSubSectionMenu"
+                <div ng-if="esModel.estimationTimeNeeded" class="divTableRow" context-menu="analysisSubSectionMenu"
                      ng-repeat="sub in estimation.analysis.subSections track by $index">
                     <div class="divTableCell subSection sectionNumber"></div>
                     <div class="divTableCell subSection sectionNumber">{{$index + 1}}</div>

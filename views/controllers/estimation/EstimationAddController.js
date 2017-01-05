@@ -19,9 +19,9 @@ angular.module('estimator')
                 key: undefined,
                 projectKey: $scope.params.projectKey,
                 status: {
-                    name: 'NEW',
-                    value: 'новая',
-                    style: 'default'
+                    name: 'New',
+                    value: 'NEW',
+                    style: 'blue-grey'
                 }
             };
 
@@ -67,23 +67,18 @@ angular.module('estimator')
                 'projects/' + $scope.params.projectKey + '/estimation/' + $scope.params.key :
                     'estimations';
 
-                $scope.estimation.sections = [{
-                    name: undefined,
-                    subSections: [
-                        {
-                            descr: undefined,
-                            estimation: []
-                        }
-                    ]
-                }];
+                if (!$scope.editMode) {
+                    initDefaultSections();
+                }
 
-                $scope.estimation.analysis = {
-                    subSections: [
-                        {
-                            descr: undefined,
-                            estimation: undefined
-                        }
-                    ]
+                if ( ! $scope.estimation.estimationModel.estimationTimeNeeded && $scope.editMode) {
+                    $scope.estimation.analysis = undefined;
+                }
+
+                if (
+                    $scope.estimation.estimationModel.estimationTimeNeeded &&
+                    $scope.editMode && $scope.estimation.analysis.subSections.length === 0) {
+                    setAnalysisSection();
                 }
 
                 $http({
@@ -97,6 +92,35 @@ angular.module('estimator')
                     $toast({message: message, theme: 'success'});
                     $state.go('projectEstimations', {key: $scope.params.projectKey});
                 });
+            }
+
+            function initDefaultSections() {
+                $scope.estimation.sections = [{
+                    name: undefined,
+                    subSections: [
+                        {
+                            descr: undefined,
+                            estimation: []
+                        }
+                    ]
+                }];
+
+                if ($scope.estimation.estimationModel.estimationTimeNeeded) {
+                    setAnalysisSection();
+                } else {
+                    $scope.estimation.analysis = undefined;
+                }
+            }
+
+            function setAnalysisSection() {
+                $scope.estimation.analysis = {
+                    subSections: [
+                        {
+                            descr : null,
+                            estimation: null
+                        }
+                    ]
+                }
             }
         }
 

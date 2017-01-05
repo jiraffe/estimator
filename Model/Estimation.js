@@ -60,7 +60,7 @@ var schema = new Schema({
             ]
         }
     ]
-});
+}, { minimize: false });
 
 
 var Estimation = mongoose.model('Estimation', schema);

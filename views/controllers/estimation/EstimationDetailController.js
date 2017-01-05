@@ -99,7 +99,10 @@ angular.module('estimator')
                     var total = 0;
                     total += $scope.estimation.mngmtSection.total();
                     total += $scope.estimation.sections.reduce((a, b) => a + b.total(), 0);
-                    total += $scope.estimation.analysis.total();
+
+                    if ($scope.esModel.estimationTimeNeeded) {
+                        total += $scope.estimation.analysis.total();
+                    }
 
                     $scope.estimation.totalTime = total;
 
