@@ -215,6 +215,13 @@ angular.module('estimator')
                 }],
                 null,
                 [translation.ESTIMATIONS.ACTIONS.DELETE_SECTION, function (item) {
+
+                    // block delete last section
+                    if($scope.estimation.sections.length === 1) {
+                        $toast({message: $scope.translation.ESTIMATIONS.MSGS.LAST_SECTION, theme: 'warning'});
+                        return;
+                    }
+
                     $scope.estimation.sections.splice(item.section.idx, 1);
                     reinitTotals();
                 }]
@@ -235,6 +242,13 @@ angular.module('estimator')
                 }],
                 null,
                 [translation.ESTIMATIONS.ACTIONS.DELETE_SUBSECTION, function (item) {
+
+                    // block delete last sub-section
+                    if($scope.estimation.sections.length === 1) {
+                        $toast({message: $scope.translation.ESTIMATIONS.MSGS.LAST_SUBSECTION, theme: 'warning'});
+                        return;
+                    }
+
                     var sectionIdx = item.$parent.section.idx;
                     var subSectionIdx = item.sub.idx;
 

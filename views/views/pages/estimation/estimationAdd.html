@@ -1,6 +1,9 @@
-<div ng-init="init()">
+<div ng-init="init()" layout="column" ng-cloak>
+
     <md-content layout-padding>
+
         <form name="addEstimationForm">
+
             <legend ng-hide="editMode">{{translation.ESTIMATIONS.CREATE_MSG}}:</legend>
             <legend ng-show="editMode">{{translation.ESTIMATIONS.EDIT_MSG}}:</legend>
 
@@ -18,6 +21,11 @@
                 <div ng-messages="addProjectForm.key.$error">
                     <div ng-message="required">Нужно описание</div>
                 </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>{{translation.ESTIMATIONS.ITS}}</label>
+                <input id="itsLink" name="itsLink" ng-model="estimation.itsLink">
             </md-input-container>
 
             <md-input-container class="md-block">

@@ -7,6 +7,8 @@ var schema = new Schema({
     key: String,
     summary: String,
 
+    itsLink: String,
+
     comments: [{
         text: String
     }],

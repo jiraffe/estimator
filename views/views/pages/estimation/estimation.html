@@ -36,7 +36,7 @@
         <md-subheader class="md-no-sticky">Об оценке</md-subheader>
         <md-list-item>
             {{translation.ESTIMATIONS.TICKET_LINK}}:<a
-                href="https://jira.lanit.ru/browse/{{estimation.key}}">{{estimation.key}}</a>
+                href="{{estimation.itsLink}}{{estimation.key}}">{{estimation.key}}</a>
         </md-list-item>
         <md-list-item>
             Время на разработку:{{estimation.developmentTime}}
@@ -154,7 +154,7 @@
         </md-toolbar>
         <md-content layout-padding>
             <div ng-repeat="comment in estimation.comments track by $index">
-                <div contenteditable="true" type="text" ng-model="estimation.comments[$index].text"></div>
+                <div class="comment" contenteditable="true" type="text" ng-model="estimation.comments[$index].text"></div>
             </div>
             <md-input-container class="md-block" style="margin-bottom: 0px">
                 <label>{{translation.ESTIMATIONS.COMMENTS.NEW_COMMENT}}</label>

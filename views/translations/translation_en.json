@@ -67,6 +67,7 @@
     "STATUS": "Status",
     "KEY": "Key",
     "SUMMARY": "Summary",
+    "ITS": "Issue tracking system link",
     "ESTIMATION_TIME": "Estimation time",
     "DEVELOPMENT_TIME": "Development time",
     "TOTAL_TIME": "Total time",
@@ -104,7 +105,9 @@
       "SAVED": "Estimation saved",
       "ADDED": "Estimation added",
       "STATUS_CHANGED": "Status changed",
-      "DELETED": "Estimation deleted"
+      "DELETED": "Estimation deleted",
+      "LAST_SECTION": "Cannot delete last section",
+      "LAST_SUBSECTION": "Cannot delete last sub-section"
     }
   },
   "USER": {

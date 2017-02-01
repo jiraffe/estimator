@@ -44,7 +44,9 @@ angular.module('estimator')
             function initForCreate() {
                 $http.get('projects/' + $scope.params.projectKey)
                     .then(function (res) {
-                        $scope.estimation.estimationModel = res.data[0].estimationModel;
+                        let proj = res.data[0]
+                        $scope.estimation.estimationModel = proj.estimationModel;
+                        $scope.estimation.itsLink = proj.itsLink;
                     });
             };
 

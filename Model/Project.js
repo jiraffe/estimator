@@ -18,7 +18,10 @@ var schema = new Schema({
                 percent: Number
             }
         ]
-    }
+    },
+
+    versions: [String],
+    components: [String]
 });
 
 var Project = mongoose.model('Project', schema);

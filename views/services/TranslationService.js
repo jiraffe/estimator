@@ -6,7 +6,7 @@ angular.module('estimator')
 
         var API = {};
         API.translation = {};
-        API.currentLang = 'en';
+        API.currentLang = 'ru';
 
         var getLangPath = function (lang) {
             return 'translations/translation_' + API.currentLang + '.json';

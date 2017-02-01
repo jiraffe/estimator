@@ -68,8 +68,8 @@ angular.module('estimator')
 
             function prepareNewUser() {
                 $scope.user.language = {
-                    key: 'en',
-                    value: 'English'
+                    key: 'ru',
+                    value: 'Русский'
                 }
             }
         }
