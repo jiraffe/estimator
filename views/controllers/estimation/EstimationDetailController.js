@@ -15,6 +15,8 @@ angular.module('estimator')
             $scope.statuses = statuses;
             $scope.newComment = '';
 
+            // Mongo Express Angular Node
+
             $scope.statusBtn = {
                 isOpen: false,
                 hidden: false
@@ -39,6 +41,26 @@ angular.module('estimator')
                         $scope.estimation.sections = [];
                     }
                 });
+            };
+
+            function processSections() {
+                $scope.estimation.sections.forEach(function (section, idx) {
+                    section.idx = idx;
+                    section.number = idx + 1;
+                    section.subSections.forEach(processSubsection, section);
+                    section.total = function () {
+                        return section.subSections.reduce((a, b) => a + b.total(), 0);
+                    }
+                });
+
+                if ($scope.esModel.estimationTimeNeeded) {
+                    $scope.estimation.analysis.subSections.forEach((sub, idx) => sub.idx = idx);
+                    $scope.estimation.analysis.total = function () {
+                        var estimationTime = $scope.estimation.analysis.subSections.reduce((a, b) => a + b.estimation || 0, 0);
+                        $scope.estimation.estimationTime = estimationTime;
+                        return estimationTime;
+                    }
+                }
             };
 
             function prepareManagementSection() {
@@ -107,26 +129,6 @@ angular.module('estimator')
                     $scope.estimation.totalTime = total;
 
                     return total;
-                }
-            };
-
-            function processSections() {
-                $scope.estimation.sections.forEach(function (section, idx) {
-                    section.idx = idx;
-                    section.number = idx + 1;
-                    section.subSections.forEach(processSubsection, section);
-                    section.total = function () {
-                        return section.subSections.reduce((a, b) => a + b.total(), 0);
-                    }
-                });
-
-                if ($scope.esModel.estimationTimeNeeded) {
-                    $scope.estimation.analysis.subSections.forEach((sub, idx) => sub.idx = idx);
-                    $scope.estimation.analysis.total = function () {
-                        var estimationTime = $scope.estimation.analysis.subSections.reduce((a, b) => a + b.estimation || 0, 0);
-                        $scope.estimation.estimationTime = estimationTime;
-                        return estimationTime;
-                    }
                 }
             };
 

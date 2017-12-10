@@ -46,8 +46,15 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 
 app.use(function (req, res, next) {
+
+    var allowedOrigins = ["http://localhost:3000", "http://estimator.senla.eu", "http://192.168.1.60"];
+
+    var origin = req.headers.origin;
+    if(allowedOrigins.indexOf(origin) > -1){
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+
     res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
     next();
@@ -58,12 +65,13 @@ var passport = require('./auth');
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+// routing
 var routes = require('./routes/index');
 var estimations = require('./routes/estimations');
 var projects = require('./routes/projects');
 var users = require('./routes/users');
 var estimationModels = require('./routes/estimationModels');
-
 
 app.use('/', routes);
 app.use('/estimations', estimations);
